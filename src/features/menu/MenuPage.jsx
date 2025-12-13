@@ -37,8 +37,9 @@ const GAMES = [
     title: 'Legacy', 
     icon: MessageCircle, 
     color: '#ffffff', // white
-    path: '/legacy',
-    isExternal: true 
+    path: 'https://questionary-9c8b1.web.app/',
+    isExternal: true,
+    spanCols: true
   },
 ];
 
@@ -54,6 +55,7 @@ export default function MenuPage() {
           <GameCard 
             key={game.id}
             {...game}
+            className={game.spanCols ? styles.fullWidth : ''}
           />
         ))}
       </nav>
