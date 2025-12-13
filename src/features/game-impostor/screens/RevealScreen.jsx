@@ -42,10 +42,13 @@ export default function RevealScreen() {
   // Removed handlePointerUp as it is handled by effect
 
   return (
+
     <div className={styles.container}>
       <div className={styles.instruction}>
         Turno de:
-        <strong>{currentPlayer.name}</strong>
+        <strong style={{ color: currentPlayer.color || '#fff' }}>
+          {currentPlayer.name}
+        </strong>
       </div>
 
       <div className={styles.revealArea}>
@@ -77,7 +80,11 @@ export default function RevealScreen() {
               className={styles.holdButton}
               onPointerDown={handlePointerDown}
               onContextMenu={(e) => e.preventDefault()} // Prevent right click
-              style={{ touchAction: 'none' }} // Critical for touch devices
+              style={{ 
+                touchAction: 'none',
+                borderColor: currentPlayer.color || undefined,
+                boxShadow: currentPlayer.color ? `0 0 20px ${currentPlayer.color}` : undefined
+              }}
               whileTap={{ scale: 0.95 }}
               key="reveal-btn"
               initial={{ opacity: 0, scale: 0.8 }}

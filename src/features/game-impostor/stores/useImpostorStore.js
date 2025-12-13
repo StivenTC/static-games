@@ -8,11 +8,22 @@ const WORDS = [
   'Elon Musk', 'Mess', 'Minecraft', 'Navidad', 'Tiburón'
 ];
 
+const PLAYER_COLORS = [
+  '#00ffea', // Neon Blue
+  '#ff0055', // Neon Red
+  '#00ff00', // Neon Green
+  '#ff00ff', // Neon Purple
+  '#ffff00', // Neon Yellow
+  '#ff9900', // Neon Orange
+  '#00ccff', // Cyan
+  '#ff3399', // Pink
+];
+
 export const useImpostorStore = create(
   persist(
     (set, get) => ({
       // State
-      players: [], // { id, name, role }
+      players: [], // { id, name, role, color }
       phase: 'SETUP', // SETUP, REVEAL, DEBATE, VOTING, RESULT
       currentPlayerIndex: 0,
       secretWord: '',
@@ -25,9 +36,15 @@ export const useImpostorStore = create(
       mostVotedId: null,
 
       // Actions
-      addPlayer: (name) => set((state) => ({
-        players: [...state.players, { id: Date.now(), name, role: null }]
-      })),
+      addPlayer: (name) => set((state) => {
+        // Assign a color based on the number of players (cycle through available colors)
+        const colorIndex = state.players.length % PLAYER_COLORS.length;
+        const color = PLAYER_COLORS[colorIndex];
+        
+        return {
+          players: [...state.players, { id: Date.now(), name, role: null, color }]
+        };
+      }),
 
       removePlayer: (id) => set((state) => ({
         players: state.players.filter(p => p.id !== id)
@@ -37,14 +54,21 @@ export const useImpostorStore = create(
         const { players } = get();
         if (players.length < 3) return;
 
+        // Shuffle Players (Fisher-Yates)
+        const shuffledPlayers = [...players];
+        for (let i = shuffledPlayers.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffledPlayers[i], shuffledPlayers[j]] = [shuffledPlayers[j], shuffledPlayers[i]];
+        }
+
         // Select Impostor
-        const impostorIdx = Math.floor(Math.random() * players.length);
+        const impostorIdx = Math.floor(Math.random() * shuffledPlayers.length);
         
         // Select Word
         const word = WORDS[Math.floor(Math.random() * WORDS.length)];
 
         // Assign Roles
-        const newPlayers = players.map((p, index) => ({
+        const newPlayers = shuffledPlayers.map((p, index) => ({
           ...p,
           role: index === impostorIdx ? 'IMPOSTOR' : 'CITIZEN'
         }));

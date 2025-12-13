@@ -6,7 +6,8 @@ export default function Timer({
   initialSeconds = 30, 
   isRunning = true,
   onComplete,
-  onTick, // New prop
+  onTick,
+  color // New prop
 }) {
   const [seconds, setSeconds] = useState(initialSeconds);
   
@@ -57,9 +58,14 @@ export default function Timer({
           className={classNames(styles.circleProgress, styles[variant])}
           cx="70" cy="70" r={radius}
           strokeDasharray={circumference}
-          strokeDashoffset={strokeDashoffset} />
+          strokeDashoffset={strokeDashoffset} 
+          style={{ stroke: color }} // Override with custom color
+        />
       </svg>
-      <div className={classNames(styles.timeDisplay, styles[variant])}>
+      <div 
+        className={classNames(styles.timeDisplay, styles[variant])}
+        style={{ color: color }} // Override with custom color
+      >
         {seconds}
       </div>
     </div>

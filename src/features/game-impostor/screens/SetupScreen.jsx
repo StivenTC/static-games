@@ -45,7 +45,7 @@ export default function SetupScreen() {
 
       <div className={styles.playerList}>
         {players.map((p) => (
-          <div key={p.id} className={styles.playerItem}>
+          <div key={p.id} className={styles.playerItem} style={{ borderLeft: `4px solid ${p.color || '#fff'}` }}>
             <span>{p.name}</span>
             <button type="button" className={styles.removeBtn} onClick={() => removePlayer(p.id)}>
               <X size={20} />

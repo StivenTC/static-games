@@ -47,7 +47,9 @@ export default function ResultScreen() {
       <div className={styles.resultBox}>
         <div className={styles.mostVoted}>
           El más votado fue:
-          <strong>{mostVotedPlayer ? mostVotedPlayer.name : 'Nadie'}</strong>
+          <strong style={{ color: mostVotedPlayer?.color || '#fff' }}>
+            {mostVotedPlayer ? mostVotedPlayer.name : 'Nadie'}
+          </strong>
         </div>
 
         {mostVotedPlayer && (
@@ -59,7 +61,9 @@ export default function ResultScreen() {
         {!isImpostor && (
             <div style={{ marginTop: '2rem', fontSize: '1.25rem', color: '#ff0055' }}>
                 El verdadero Impostor era: <br/>
-                <strong style={{ fontSize: '2rem' }}>{actualImpostor?.name}</strong>
+                <strong style={{ fontSize: '2rem', color: actualImpostor?.color }}>
+                    {actualImpostor?.name}
+                </strong>
             </div>
         )}
 

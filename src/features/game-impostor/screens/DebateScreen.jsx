@@ -10,10 +10,13 @@ export default function DebateScreen() {
   const currentPlayer = players[currentPlayerIndex];
 
   return (
+
     <div className={styles.container}>
       <div className={styles.header}>
         <h3>Turno de</h3>
-        <div className={styles.currentPlayer}>{currentPlayer.name}</div>
+        <div className={styles.currentPlayer} style={{ color: currentPlayer.color || '#fff' }}>
+          {currentPlayer.name}
+        </div>
       </div>
 
       <div className={styles.centerContent}>
@@ -21,6 +24,7 @@ export default function DebateScreen() {
           initialSeconds={30} 
           key={`${round}-${currentPlayerIndex}`} // Reset timer on new turn
           onComplete={nextTurn}
+          color={currentPlayer.color}
         />
         
         <div className={styles.roundIndicator}>

@@ -44,14 +44,22 @@ export default function VotingScreen() {
       <div className={styles.container}>
         <div className={styles.instruction}>
           Pasa el dispositivo a:
-          <strong>{voter.name}</strong>
+          <strong style={{ color: voter.color || '#fff' }}>{voter.name}</strong>
         </div>
         
         <div className={styles.readyArea}>
             <Button 
                 variant="primary" 
                 onClick={() => setIsReady(true)}
-                style={{ width: '200px', height: '200px', borderRadius: '50%', fontSize: '1.5rem' }}
+                style={{ 
+                  width: '200px', 
+                  height: '200px', 
+                  borderRadius: '50%', 
+                  fontSize: '1.5rem',
+                  borderColor: voter.color || undefined,
+                  boxShadow: voter.color ? `0 0 20px ${voter.color}` : undefined,
+                  color: voter.color || undefined
+                }}
             >
                 SOY <br/> {voter.name}
             </Button>
@@ -88,6 +96,7 @@ export default function VotingScreen() {
               type="button"
               className={`${styles.candidateCard} ${selectedId === candidate.id ? styles.selected : ''}`}
               onClick={() => setSelectedId(candidate.id)}
+              style={{ borderLeft: `4px solid ${candidate.color || '#fff'}` }}
             >
               <ScanFace size={32} style={{ opacity: 0.8 }} />
               <div style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{candidate.name}</div>
