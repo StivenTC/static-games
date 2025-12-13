@@ -61,7 +61,7 @@ export default function RevealScreen() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.2 }}
-            >
+              style={{ userSelect: 'none', WebkitUserSelect: 'none' }}>
               {isImpostor ? (
                 <>
                   <h3 className={styles.impostor}>IMPOSTOR</h3>
