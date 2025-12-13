@@ -1,0 +1,93 @@
+@use '../../../styles/variables' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 2rem;
+  text-align: center;
+}
+
+.instruction {
+  font-size: 1.5rem;
+  color: rgba($white, 0.8);
+
+  strong {
+    color: $neon-blue;
+    display: block;
+    font-size: 2.5rem;
+    margin-top: 0.5rem;
+  }
+}
+
+.revealArea {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.holdButton {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba($bg-card, 0.5);
+  border: 4px solid $neon-purple;
+  color: $white;
+  font-weight: 700;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba($neon-purple, 0.3);
+  user-select: none;
+  touch-action: none; // Prevent scroll while holding
+  transition: transform 0.1s;
+
+  &:active {
+    transform: scale(0.95);
+    background: rgba($neon-purple, 0.2);
+  }
+}
+
+.roleCard {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: $bg-dark;
+  z-index: 10;
+  pointer-events: none; // Let clicks pass through if needed, but usually this overlays button
+
+  h3 {
+    font-size: 3rem;
+    text-transform: uppercase;
+  }
+
+  p {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    color: rgba($white, 0.7);
+  }
+}
+
+.impostor {
+  color: $neon-red;
+  text-shadow: 0 0 15px $neon-red;
+}
+
+.citizen {
+  color: $neon-green;
+  text-shadow: 0 0 15px $neon-green;
+}

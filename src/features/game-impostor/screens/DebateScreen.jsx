@@ -1,0 +1,56 @@
+import { useImpostorStore } from '../stores/useImpostorStore';
+import styles from './DebateScreen.module.scss';
+import Button from '../../../shared/ui/Button';
+import Timer from '../../../shared/ui/Timer';
+import { Play, Vote } from 'lucide-react';
+
+export default function DebateScreen() {
+  const { players, currentPlayerIndex, round, nextTurn, startVoting } = useImpostorStore();
+  
+  const currentPlayer = players[currentPlayerIndex];
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h3>Turno de</h3>
+        <div className={styles.currentPlayer}>{currentPlayer.name}</div>
+      </div>
+
+      <div className={styles.centerContent}>
+        <Timer 
+          initialSeconds={30} 
+          key={`${round}-${currentPlayerIndex}`} // Reset timer on new turn
+          onComplete={() => {
+            // Optional: Auto-next? Or just ring?
+            // For now, let user click next
+          }}
+        />
+        
+        <div className={styles.roundIndicator}>
+          Ronda {round}
+        </div>
+      </div>
+
+      <div className={styles.controls}>
+        <Button 
+            variant="primary" 
+            onClick={nextTurn}
+        >
+            <Play size={20} />
+            Siguiente Turno
+        </Button>
+
+        <div className={styles.divider}></div>
+
+        <Button 
+          variant="outline" 
+          onClick={startVoting}
+          className={styles.voteBtn}
+        >
+          <Vote size={20} style={{ marginRight: '8px' }} />
+          Ir a Votar
+        </Button>
+      </div>
+    </div>
+  );
+}

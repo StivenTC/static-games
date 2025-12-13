@@ -1,0 +1,74 @@
+import { useState } from 'react';
+import { useImpostorStore } from '../stores/useImpostorStore';
+import styles from './SetupScreen.module.scss';
+import Button from '../../../shared/ui/Button';
+import Input from '../../../shared/ui/Input';
+import { X, UserPlus, Play } from 'lucide-react';
+
+export default function SetupScreen() {
+  const [name, setName] = useState('');
+  const { players, addPlayer, removePlayer, startGame } = useImpostorStore();
+
+  const handleAdd = (e) => {
+    e.preventDefault();
+    if (name.trim()) {
+      addPlayer(name.trim());
+      setName('');
+    }
+  };
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h2>Impostor</h2>
+        <p>Agrega jugadores (Mínimo 3)</p>
+      </div>
+
+      <form onSubmit={handleAdd} className={styles.form}>
+        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-end' }}>
+            <Input 
+                value={name} 
+                onChange={(e) => setName(e.target.value)} 
+                placeholder="Nombre del jugador"
+                className={styles.input}
+            />
+            <Button 
+                type="submit" 
+                variant="outline" 
+                disabled={!name.trim()}
+                style={{ width: 'auto', padding: '0.75rem' }}
+            >
+                <UserPlus size={20} />
+            </Button>
+        </div>
+      </form>
+
+      <div className={styles.playerList}>
+        {players.map((p) => (
+          <div key={p.id} className={styles.playerItem}>
+            <span>{p.name}</span>
+            <button type="button" className={styles.removeBtn} onClick={() => removePlayer(p.id)}>
+              <X size={20} />
+            </button>
+          </div>
+        ))}
+        {players.length === 0 && (
+            <div style={{ textAlign: 'center', opacity: 0.5, marginTop: '2rem' }}>
+                No hay jugadores aún.
+            </div>
+        )}
+      </div>
+
+      <div className={styles.footer}>
+        <Button 
+          variant="primary" 
+          onClick={startGame}
+          disabled={players.length < 3}
+        >
+          <Play size={20} style={{ marginRight: '8px' }} />
+          Comenzar Juego
+        </Button>
+      </div>
+    </div>
+  );
+}

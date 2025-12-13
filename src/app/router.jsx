@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import MenuPage from '../features/menu/MenuPage';
+import ImpostorGame from '../features/game-impostor/ImpostorGame';
 
 export const router = createBrowserRouter([
   {
@@ -8,7 +9,7 @@ export const router = createBrowserRouter([
   },
   {
     path: '/impostor',
-    element: <div style={{ color: 'white' }}>Impostor Game (Coming Soon)</div>,
+    element: <ImpostorGame />,
   },
   {
     path: '/basta',

@@ -1,0 +1,57 @@
+@use '../../styles/variables' as *;
+
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+}
+
+.svg {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+
+.circleBackground {
+  fill: none;
+  stroke: rgba($white, 0.1);
+  stroke-width: 8;
+}
+
+.circleProgress {
+  fill: none;
+  stroke: $neon-blue;
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
+
+  &.warning {
+    stroke: $neon-purple;
+  }
+
+  &.danger {
+    stroke: $neon-red;
+  }
+}
+
+.timeDisplay {
+  position: absolute;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: $white;
+  text-shadow: 0 0 10px rgba($neon-blue, 0.5);
+
+  &.warning {
+    color: $neon-purple;
+    text-shadow: 0 0 10px rgba($neon-purple, 0.5);
+  }
+
+  &.danger {
+    color: $neon-red;
+    text-shadow: 0 0 10px rgba($neon-red, 0.5);
+  }
+}

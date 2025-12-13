@@ -1,0 +1,68 @@
+@use '../../../styles/variables' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 1.5rem;
+}
+
+.header {
+  text-align: center;
+
+  h2 {
+    color: $neon-red;
+    text-transform: uppercase;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba($neon-red, 0.4);
+  }
+
+  p {
+    color: rgba($white, 0.7);
+  }
+}
+
+.playerList {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.5rem;
+
+  // Custom scrollbar could be added here
+}
+
+.playerItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba($white, 0.05);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba($white, 0.1);
+
+  span {
+    font-weight: 500;
+  }
+}
+
+.removeBtn {
+  background: none;
+  border: none;
+  color: rgba($white, 0.4);
+  cursor: pointer;
+  padding: 0.25rem;
+
+  &:hover {
+    color: $neon-red;
+  }
+}
+
+.footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

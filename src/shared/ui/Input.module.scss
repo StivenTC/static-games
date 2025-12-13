@@ -1,0 +1,44 @@
+@use '../../styles/variables' as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.label {
+  font-size: 0.875rem;
+  color: rgba($white, 0.7);
+  margin-left: 0.25rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: rgba($bg-card, 0.5);
+  border: none;
+  border-bottom: 2px solid rgba($white, 0.1);
+  border-radius: 8px 8px 0 0;
+  color: $white;
+  font-size: 1.125rem;
+  font-family: inherit;
+  transition: all $transition-fast;
+
+  &::placeholder {
+    color: rgba($white, 0.3);
+  }
+
+  &:focus {
+    outline: none;
+    background-color: rgba($bg-card, 0.8);
+    border-bottom-color: $neon-blue;
+    box-shadow: 0 4px 12px -4px rgba($neon-blue, 0.2);
+  }
+
+  // Error state
+  &.error {
+    border-bottom-color: $neon-red;
+    color: $neon-red;
+  }
+}

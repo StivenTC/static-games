@@ -1,0 +1,74 @@
+@use '../../styles/variables' as *;
+
+.button {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all $transition-fast;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(1);
+  }
+}
+
+// Variants
+.primary {
+  background-color: transparent;
+  color: $white;
+  border: 1px solid $neon-blue;
+  box-shadow: 0 0 10px rgba($neon-blue, 0.3);
+
+  &:hover:not(:disabled) {
+    background-color: rgba($neon-blue, 0.1);
+    box-shadow: 0 0 20px rgba($neon-blue, 0.5);
+  }
+}
+
+.danger {
+  background-color: transparent;
+  color: $white;
+  border: 1px solid $neon-red;
+  box-shadow: 0 0 10px rgba($neon-red, 0.3);
+
+  &:hover:not(:disabled) {
+    background-color: rgba($neon-red, 0.1);
+    box-shadow: 0 0 20px rgba($neon-red, 0.5);
+  }
+}
+
+.outline {
+  background-color: transparent;
+  border: 1px solid rgba($white, 0.2);
+  color: rgba($white, 0.8);
+
+  &:hover:not(:disabled) {
+    border-color: $white;
+    color: $white;
+    background-color: rgba($white, 0.05);
+  }
+}
+
+.ghost {
+  background-color: transparent;
+  color: rgba($white, 0.6);
+  padding: 0.5rem;
+
+  &:hover:not(:disabled) {
+    color: $white;
+    text-decoration: underline;
+  }
+}

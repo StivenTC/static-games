@@ -1,0 +1,100 @@
+@use '../../../styles/variables' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  gap: 2rem;
+}
+
+.countdown {
+  font-size: 8rem;
+  font-weight: 900;
+  color: $white;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.resultBox {
+  padding: 2rem;
+  background: rgba($bg-card, 0.5);
+  border-radius: 20px;
+  width: 100%;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.mostVoted {
+  font-size: 1.5rem;
+  color: rgba($white, 0.8);
+  margin-bottom: 2rem;
+
+  strong {
+    display: block;
+    font-size: 3rem;
+    color: $neon-purple;
+    margin-top: 0.5rem;
+  }
+}
+
+.roleReveal {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 4px;
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: 12px;
+
+  &.impostor {
+    color: $white;
+    background: $neon-red;
+    box-shadow: 0 0 30px $neon-red;
+  }
+
+  &.citizen {
+    color: $white;
+    background: $neon-green;
+    box-shadow: 0 0 30px $neon-green;
+  }
+}
+
+.secretWordResult {
+  font-size: 1.25rem;
+  color: rgba($white, 0.6);
+  margin-top: 1rem;
+
+  span {
+    color: $neon-blue;
+    font-weight: bold;
+  }
+}
