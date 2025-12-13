@@ -168,19 +168,17 @@ export const useImpostorStore = create(
 
         // Find max
         let maxVotes = 0;
-        let mostVoted = null;
         
-        // Simple tie-breaking: first one found (can be improved)
-        Object.entries(voteCounts).forEach(([id, count]) => {
-          if (count > maxVotes) {
-            maxVotes = count;
-            mostVoted = id; // string id
-          }
+        Object.values(voteCounts).forEach(count => {
+          if (count > maxVotes) maxVotes = count;
         });
         
-        // If tie or no votes (unlikely), handle? Assume valid vote.
-        // Ensure ID is number if stored as number, but keys are strings
-        const mostVotedId = mostVoted ? Number(mostVoted) : null;
+        // Find all candidates with maxVotes
+        const winners = Object.keys(voteCounts).filter(id => voteCounts[id] === maxVotes);
+        
+        // Tie handling: if multiple winners, no single winner
+        // Ensure ID is number if there is a single winner
+        const mostVotedId = winners.length === 1 ? Number(winners[0]) : null;
 
         set({
           votes: finalVotes,
