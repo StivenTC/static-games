@@ -1,8 +1,8 @@
-# PROYECTO: Arcade Fiesta (Mobile Web Suite)
+# PROYECTO: STATIC (Party Game Suite)
 
 ## 1. RESUMEN DEL PROYECTO
-Desarrollo de una "Suite de Juegos Sociales" (PWA) diseñada para jugarse en reuniones presenciales utilizando un **único dispositivo móvil** (mecánica "Pass-and-Play").
-El objetivo es una UX premium, fluida ("Juicy") y visualmente atractiva con modo oscuro y acentos neón.
+Desarrollo de una "Suite de Juegos Sociales" (PWA) llamada **STATIC**. Diseñada para jugarse en reuniones presenciales utilizando un **único dispositivo móvil** (mecánica "Pass-and-Play").
+La estética es "Cyberpunk Minimalista": Fondo oscuro, efectos de ruido/glitch, y acentos neón para diferenciar los juegos.
 
 ## 2. TECH STACK (ESTRICTO)
 * **Core:** React 18+ (Vite con template \`react-swc\`).
@@ -39,31 +39,42 @@ src/
 │   └── layouts/          # MainLayout (con botón Salir/Home)
 │
 └── styles/               # Configuración SASS Global
-    ├── _variables.scss   # Colores, mixins, breakpoints
+    ├── _variables.scss   # Paleta: $neon-red, $neon-blue, $bg-dark
+    ├── _mixins.scss      # Efectos de cristal, ruido
     └── main.scss         # Reset y estilos base
 \`\`\`
 
-## 4. CATÁLOGO DE JUEGOS (MVP)
+## 4. DESIGN SYSTEM: "STATIC AESTHETIC"
+* **Fondo:** \`#121212\` o \`#0a0a0a\` (Casi negro).
+* **Tipografía:**
+    * *Títulos:* Sans-serif condensada y bold (ej. 'Oswald', 'Bebas Neue').
+    * *Cuerpo:* Legible y técnica (ej. 'Roboto', 'Inter').
+* **Efectos Clave:**
+    * **Noise Overlay:** Una capa sutil de ruido blanco sobre el fondo.
+    * **Glow:** Sombras de colores neón en botones activos (\`box-shadow: 0 0 10px $neon-red\`).
+    * **Haptics:** El celular debe sentirse "vivo" (vibrar) al interactuar.
 
-### A. Impostor (The Spy)
+## 5. CATÁLOGO DE JUEGOS (MVP)
+
+### A. Impostor (Red Signal)
 * **Mecánica:** Roles ocultos. Se pasa el celular, se mantiene presionado para ver rol.
 * **Estado:** Lista de jugadores, rol asignado, palabra secreta.
 * **Vibe:** Misterio, Rojo/Negro.
 
-### B. Basta / Stop (El Rosco)
+### B. Basta / Stop (Blue Spark)
 * **Mecánica:** Categoría + Grilla de alfabeto. Tap para eliminar letra y reiniciar timer.
-* **Estado:** Letras disponibles, Tiempo restante (10s), Turno actual.
+* **Estado:** Letras disponibles, Tiempo restante, Turno actual.
 * **Vibe:** Velocidad, Azul Eléctrico.
 
-### C. Tabú
-* **Mecánica:** Jugador describe palabra clave evitando las prohibidas. Gestos Swipe (Derecha=Acierto, Izquierda=Pass).
+### C. Tabú (Purple Haze)
+* **Mecánica:** Jugador describe palabra clave evitando las prohibidas.
 * **Vibe:** Fiesta, Amarillo/Violeta.
 
-### D. Memoria Musical
+### D. Memoria Musical (Green Echo)
 * **Mecánica:** Secuencia de 4 botones con sonidos graciosos (no tonos puros). La secuencia crece cada turno.
 * **Vibe:** Caos, Multicolor/Neón.
 
-## 5. REGLAS DE UI/UX (MOBILE FIRST)
+## 6. REGLAS DE UI/UX (MOBILE FIRST)
 1.  **Cero Scroll:** Los juegos deben caber en el viewport (100vh). Evitar scrollbars.
 2.  **Touch Targets:** Botones grandes (mínimo 48px).
 3.  **Feedback:**
@@ -71,7 +82,7 @@ src/
     * **Háptico:** Usar \`navigator.vibrate\` para errores, aciertos y cambios de turno.
 4.  **Estética:** Fondo oscuro (\`#1a1a2e\`). Tipografías Sans-Serif Bold para títulos.
 
-## 6. CONVENCIONES DE CÓDIGO
+## 7. CONVENCIONES DE CÓDIGO
 * **Componentes:** Funcionales con Arrow Functions. \`export default function ComponentName() {}\`.
 * **SASS Modules:** Usar \`camelCase\` para clases.
     * *Correcto:* \`.cardContainer\` -> \`styles.cardContainer\`
@@ -79,7 +90,7 @@ src/
 * **Imports:** Ordenar imports: React -> Librerías -> Componentes -> Estilos.
 * **Zustand:** Crear un store independiente dentro de la carpeta de cada feature (\`features/game-impostor/logic/store.js\`).
 
-## 7. COMANDOS ÚTILES
+## 8. COMANDOS ÚTILES
 * \`npm run dev\`: Servidor desarrollo.
 * \`npm run build\`: Producción.
 `;
