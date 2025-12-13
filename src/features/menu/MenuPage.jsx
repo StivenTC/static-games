@@ -49,14 +49,14 @@ export default function MenuPage() {
         <h1 className={styles.title}>STATIC</h1>
       </header>
       
-      <div className={styles.grid}>
+      <nav className={styles.grid} aria-label="Selección de juegos">
         {GAMES.map((game) => (
           <GameCard 
             key={game.id}
             {...game}
           />
         ))}
-      </div>
+      </nav>
     </MainLayout>
   );
 }

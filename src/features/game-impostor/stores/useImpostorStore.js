@@ -26,6 +26,17 @@ const PLAYER_COLORS = [
   '#eb4d4b', // Salmon
 ];
 
+const INITIAL_ROUND_STATE = {
+  phase: 'SETUP',
+  currentPlayerIndex: 0,
+  secretWord: '',
+  impostorIndex: -1,
+  round: 1,
+  votes: {},
+  votingPlayerIndex: 0,
+  mostVotedId: null
+};
+
 export const useImpostorStore = create(
   persist(
     (set, get) => ({
@@ -178,28 +189,17 @@ export const useImpostorStore = create(
         });
       },
 
+
+
+// ... inside Actions
       resetGame: () => set({
-        // players: [], // KEEP PLAYERS
-        phase: 'SETUP',
-        currentPlayerIndex: 0,
-        secretWord: '',
-        impostorIndex: -1,
-        round: 1,
-        votes: {},
-        votingPlayerIndex: 0,
-        mostVotedId: null
+        // Keep players
+        ...INITIAL_ROUND_STATE
       }),
 
       restartGame: () => {
         set({
-          phase: 'SETUP',
-          currentPlayerIndex: 0,
-          secretWord: '',
-          impostorIndex: -1,
-          round: 1,
-          votes: {},
-          votingPlayerIndex: 0,
-          mostVotedId: null
+          ...INITIAL_ROUND_STATE
         })
       }
     }),

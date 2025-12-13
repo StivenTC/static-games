@@ -55,14 +55,19 @@
 }
 
 .mostVoted {
-  font-size: 1.5rem;
   color: rgba($white, 0.8);
   margin-bottom: 2rem;
 
+  h2 {
+    font-size: 1rem;
+    font-weight: normal;
+    margin: 0;
+  }
+
   strong {
     display: block;
-    font-size: 3rem;
-    color: $neon-purple;
+    font-size: 2rem;
+    color: $white; // Default color, overridden by inline style
     margin-top: 0.5rem;
   }
 }
@@ -96,5 +101,24 @@
   span {
     color: $neon-blue;
     font-weight: bold;
+  }
+}
+
+.actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.impostorReveal {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+  color: $neon-red;
+
+  strong {
+    font-size: 2rem;
+    display: block;
+    // Color handled inline
   }
 }

@@ -16,21 +16,23 @@ export default function VotingScreen() {
   // Filter out self from candidates
   const candidates = players.filter(p => p.id !== voter.id);
 
+  const resetLocalState = () => {
+    setIsReady(false);
+    setSelectedId(null);
+    setShowWarning(false);
+  };
+
   const handleVote = () => {
     if (selectedId) {
       castVote(selectedId);
-      setIsReady(false);
-      setSelectedId(null);
-      setShowWarning(false);
+      resetLocalState();
     }
   };
 
   const handleTimeout = () => {
       // Timeout: Vote for self
       castVote(voter.id);
-      setIsReady(false);
-      setSelectedId(null);
-      setShowWarning(false);
+      resetLocalState();
   };
 
   const handleTick = (secondsLeft) => {
@@ -71,10 +73,10 @@ export default function VotingScreen() {
 
 
   return (
-    <div className={styles.container}>
-      <div className={styles.instruction}>
+    <main className={styles.container}>
+      <h2 className={styles.instruction}>
         ¿Quién es el Impostor?
-      </div>
+      </h2>
 
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
         <Timer 
@@ -84,29 +86,30 @@ export default function VotingScreen() {
             onComplete={handleTimeout}
         />
         {showWarning && (
-            <div style={{ color: '#ff0055', fontWeight: 'bold', animation: 'pulse 1s infinite' }}>
+            <div role="alert" className={styles.alert}>
                 ¡Si no votas, el voto será para ti!
             </div>
         )}
       </div>
 
       <div className={styles.votingArea}>
-        <div className={styles.candidateList}>
+        <ul className={styles.candidateList} style={{ listStyle: 'none', padding: 0 }}>
           {candidates.map(candidate => (
-            <button 
-              key={candidate.id}
-              type="button"
-              className={`${styles.candidateCard} ${selectedId === candidate.id ? styles.selected : ''}`}
-              onClick={() => setSelectedId(candidate.id)}
-              style={{ 
-                borderLeft: `4px solid ${candidate.color || '#fff'}`,
-              }}
-            >
-              <ScanFace size={32} style={{ opacity: 0.8 }} />
-              <div style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{candidate.name}</div>
-            </button>
+            <li key={candidate.id}>
+              <button 
+                type="button"
+                className={`${styles.candidateCard} ${selectedId === candidate.id ? styles.selected : ''}`}
+                onClick={() => setSelectedId(candidate.id)}
+                style={{ 
+                  borderLeft: `4px solid ${candidate.color || '#fff'}`,
+                }}
+              >
+                <ScanFace size={32} style={{ opacity: 0.8 }} />
+                <div style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{candidate.name}</div>
+              </button>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
 
       <div style={{ marginTop: 'auto' }}>
@@ -119,6 +122,6 @@ export default function VotingScreen() {
             Confirmar Voto
         </Button>
       </div>
-    </div>
+      </main>
   );
 }

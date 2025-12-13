@@ -14,16 +14,19 @@ export default function GameCard({ title, icon: Icon, color, path, isExternal })
   };
 
   return (
-    <motion.div 
+    <motion.button 
+      type="button"
       className={styles.card}
       whileTap={{ scale: 0.95 }}
       whileHover={{ scale: 1.02 }}
       onClick={handleClick}
-      style={{ borderColor: color }}>
+      style={{ borderColor: color, color: 'inherit' }}
+      aria-label={`Jugar ${title}`}
+    >
       <div className={styles.iconWrapper} style={{ color: color }}>
         <Icon size={48} />
       </div>
       <span className={styles.title}>{title}</span>
-    </motion.div>
+    </motion.button>
   );
 }

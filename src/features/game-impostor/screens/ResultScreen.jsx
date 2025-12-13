@@ -46,11 +46,11 @@ export default function ResultScreen() {
   }
 
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <div className={styles.resultBox}>
         <div className={styles.mostVoted}>
-          El más votado fue:
-          <strong style={{ color: mostVotedPlayer?.color || '#fff' }}>
+          <h2>El más votado fue:</h2>
+          <strong style={{ color: mostVotedPlayer?.color }}>
             {mostVotedPlayer ? mostVotedPlayer.name : 'Nadie'}
           </strong>
         </div>
@@ -63,14 +63,9 @@ export default function ResultScreen() {
         )}
 
         {!isImpostor && (
-          <div
-            style={{
-              marginTop: '2rem',
-              fontSize: '1.25rem',
-              color: '#ff0055',
-            }}>
+          <div className={styles.impostorReveal}>
             El verdadero Impostor era: <br />
-            <strong style={{ fontSize: '2rem', color: actualImpostor?.color }}>
+            <strong style={{ color: actualImpostor?.color }}>
               {actualImpostor?.name}
             </strong>
           </div>
@@ -81,13 +76,7 @@ export default function ResultScreen() {
         </div>
       </div>
 
-      <div
-        style={{
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1rem',
-        }}>
+      <nav className={styles.actions}>
         <Button variant="primary" onClick={handleRestart}>
           <RotateCw size={20} />
           Jugar de Nuevo
@@ -96,7 +85,7 @@ export default function ResultScreen() {
           <Home size={20} />
           Ir al Inicio
         </Button>
-      </div>
-    </div>
+      </nav>
+    </main>
   );
 }

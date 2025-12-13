@@ -78,3 +78,9 @@
     font-size: 1.1rem;
   }
 }
+
+.alert {
+  color: $neon-red;
+  font-weight: bold;
+  animation: pulse 1s infinite;
+}
