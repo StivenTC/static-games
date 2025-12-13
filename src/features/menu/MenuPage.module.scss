@@ -1,0 +1,28 @@
+@use '../../styles/variables' as *;
+
+.header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: $white;
+  text-transform: uppercase;
+
+  // Static Glitchy Text Effect (Simple CSS Shadow)
+  text-shadow:
+    2px 2px 0px $neon-red,
+    -2px -2px 0px $neon-blue;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); // 2 columns mobile
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px; // Limit width on tablet/desktop
+  margin: 0 auto;
+}

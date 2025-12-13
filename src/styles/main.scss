@@ -1,0 +1,32 @@
+@use 'variables' as *;
+
+// Reset basic
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden; // Prevent global scroll
+}
+
+body {
+  font-family: $font-family-base;
+  background-color: $bg-dark;
+  color: $white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
