@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
 import classNames from 'classnames';
+import { useEffect, useState } from 'react';
 import styles from './Timer.module.scss';
 
 export default function Timer({ 
   initialSeconds = 30, 
+  isRunning = true,
   onComplete,
   onTick, // New prop
-  isRunning = true
 }) {
   const [seconds, setSeconds] = useState(initialSeconds);
   
@@ -36,7 +36,7 @@ export default function Timer({
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [isRunning, seconds, onComplete, onTick]);
+  }, [isRunning, onComplete, onTick, seconds]);
 
   // Determine variant based on time left
   const getVariant = () => {
@@ -52,14 +52,12 @@ export default function Timer({
       <svg className={styles.svg} viewBox="0 0 140 140">
         <circle 
           className={styles.circleBackground}
-          cx="70" cy="70" r={radius}
-        />
+          cx="70" cy="70" r={radius} />
         <circle 
           className={classNames(styles.circleProgress, styles[variant])}
           cx="70" cy="70" r={radius}
           strokeDasharray={circumference}
-          strokeDashoffset={strokeDashoffset}
-        />
+          strokeDashoffset={strokeDashoffset} />
       </svg>
       <div className={classNames(styles.timeDisplay, styles[variant])}>
         {seconds}

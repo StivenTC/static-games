@@ -20,10 +20,7 @@ export default function DebateScreen() {
         <Timer 
           initialSeconds={30} 
           key={`${round}-${currentPlayerIndex}`} // Reset timer on new turn
-          onComplete={() => {
-            // Optional: Auto-next? Or just ring?
-            // For now, let user click next
-          }}
+          onComplete={nextTurn}
         />
         
         <div className={styles.roundIndicator}>

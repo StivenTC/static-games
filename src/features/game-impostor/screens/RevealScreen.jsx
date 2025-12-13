@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 import Button from '../../../shared/ui/Button';
@@ -48,32 +49,48 @@ export default function RevealScreen() {
       </div>
 
       <div className={styles.revealArea}>
-        {isRevealing ? (
-          <div className={styles.roleCard}>
-            {isImpostor ? (
-              <>
-                <h3 className={styles.impostor}>IMPOSTOR</h3>
-                <p>Engaña a los demás</p>
-              </>
-            ) : (
-              <>
-                <h3 className={styles.citizen}>{secretWord}</h3>
-                <p>Palabra Secreta</p>
-              </>
-            )}
-          </div>
-        ) : (
-          <button 
-            type="button"
-            className={styles.holdButton}
-            onPointerDown={handlePointerDown}
-            onContextMenu={(e) => e.preventDefault()} // Prevent right click
-            style={{ touchAction: 'none' }} // Critical for touch devices
-          >
-            MANTÉN <br/> PRESIONADO
-          </button>
-        )}
+        <AnimatePresence>
+          {isRevealing ? (
+            <motion.div 
+              className={styles.roleCard}
+              key="role-card"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+              transition={{ duration: 0.2 }}
+            >
+              {isImpostor ? (
+                <>
+                  <h3 className={styles.impostor}>IMPOSTOR</h3>
+                  <p>Engaña a los demás</p>
+                </>
+              ) : (
+                <>
+                  <h3 className={styles.citizen}>{secretWord}</h3>
+                  <p>Palabra Secreta</p>
+                </>
+              )}
+            </motion.div>
+          ) : (
+            <motion.button 
+              type="button"
+              className={styles.holdButton}
+              onPointerDown={handlePointerDown}
+              onContextMenu={(e) => e.preventDefault()} // Prevent right click
+              style={{ touchAction: 'none' }} // Critical for touch devices
+              whileTap={{ scale: 0.95 }}
+              key="reveal-btn"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.8 }}
+            >
+              MANTÉN <br/> PRESIONADO
+            </motion.button>
+          )}
+        </AnimatePresence>
       </div>
+
+
 
       {readyToPass && !isRevealing && (
         <Button variant="primary" onClick={nextPlayer}>

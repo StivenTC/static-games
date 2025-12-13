@@ -12,7 +12,9 @@ export default function SetupScreen() {
   const handleAdd = (e) => {
     e.preventDefault();
     if (name.trim()) {
-      addPlayer(name.trim());
+      const trimmedName = name.trim();
+      const capitalized = trimmedName.charAt(0).toUpperCase() + trimmedName.slice(1).toLowerCase();
+      addPlayer(capitalized);
       setName('');
     }
   };
@@ -25,19 +27,17 @@ export default function SetupScreen() {
       </div>
 
       <form onSubmit={handleAdd} className={styles.form}>
-        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'flex-end' }}>
+        <div className={styles.inputGroup}>
             <Input 
                 value={name} 
                 onChange={(e) => setName(e.target.value)} 
                 placeholder="Nombre del jugador"
-                className={styles.input}
-            />
+                className={styles.input}/>
             <Button 
                 type="submit" 
                 variant="outline" 
                 disabled={!name.trim()}
-                style={{ width: 'auto', padding: '0.75rem' }}
-            >
+                className={styles.addButton}>
                 <UserPlus size={20} />
             </Button>
         </div>
@@ -63,8 +63,7 @@ export default function SetupScreen() {
         <Button 
           variant="primary" 
           onClick={startGame}
-          disabled={players.length < 3}
-        >
+          disabled={players.length < 3}>
           <Play size={20} style={{ marginRight: '8px' }} />
           Comenzar Juego
         </Button>

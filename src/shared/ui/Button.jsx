@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
 import classNames from 'classnames';
+import { motion } from 'framer-motion';
 import styles from './Button.module.scss';
 
 export default function Button({ 
@@ -8,7 +8,9 @@ export default function Button({
   variant = 'primary', 
   className,
   disabled = false,
-  type = 'button'
+  type = 'button',
+  style,
+  ...props
 }) {
   const btnClass = classNames(
     styles.button, 
@@ -24,7 +26,8 @@ export default function Button({
       disabled={disabled}
       whileTap={!disabled ? { scale: 0.98 } : {}}
       whileHover={!disabled ? { scale: 1.02 } : {}}
-    >
+      style={style}
+      {...props}>
       {children}
     </motion.button>
   );
