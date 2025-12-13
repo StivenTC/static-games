@@ -82,6 +82,8 @@ export default function RevealScreen() {
               onContextMenu={(e) => e.preventDefault()} // Prevent right click
               style={{ 
                 touchAction: 'none',
+                userSelect: 'none',
+                WebkitUserSelect: 'none',
                 borderColor: currentPlayer.color || undefined,
                 boxShadow: currentPlayer.color ? `0 0 20px ${currentPlayer.color}` : undefined
               }}
@@ -89,8 +91,7 @@ export default function RevealScreen() {
               key="reveal-btn"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-            >
+              exit={{ opacity: 0, scale: 0.8 }}>
               MANTÉN <br/> PRESIONADO
             </motion.button>
           )}
