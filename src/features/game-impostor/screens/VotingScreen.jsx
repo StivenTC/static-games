@@ -68,6 +68,8 @@ export default function VotingScreen() {
     );
   }
 
+
+
   return (
     <div className={styles.container}>
       <div className={styles.instruction}>
@@ -96,7 +98,9 @@ export default function VotingScreen() {
               type="button"
               className={`${styles.candidateCard} ${selectedId === candidate.id ? styles.selected : ''}`}
               onClick={() => setSelectedId(candidate.id)}
-              style={{ borderLeft: `4px solid ${candidate.color || '#fff'}` }}
+              style={{ 
+                borderLeft: `4px solid ${candidate.color || '#fff'}`,
+              }}
             >
               <ScanFace size={32} style={{ opacity: 0.8 }} />
               <div style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{candidate.name}</div>
@@ -107,7 +111,7 @@ export default function VotingScreen() {
 
       <div style={{ marginTop: 'auto' }}>
         <Button 
-            variant="danger" 
+            variant="primary"
             disabled={!selectedId}
             onClick={handleVote}
         >

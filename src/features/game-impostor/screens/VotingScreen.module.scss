@@ -67,9 +67,10 @@
   outline: none;
 
   &.selected {
-    border-color: $neon-red;
-    background: rgba($neon-red, 0.1);
-    box-shadow: 0 0 15px rgba($neon-red, 0.3);
+    border-color: $white;
+    background: rgba($white, 0.15);
+    box-shadow: 0 0 15px rgba($white, 0.5);
+    transform: scale(1.02);
   }
 
   span {

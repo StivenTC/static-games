@@ -17,6 +17,13 @@ const PLAYER_COLORS = [
   '#ff9900', // Neon Orange
   '#00ccff', // Cyan
   '#ff3399', // Pink
+  '#e056fd', // Lavender
+  '#55efc4', // Mint
+  '#f1c40f', // Gold
+  '#4834d4', // Indigo
+  '#be2edd', // Orchid
+  '#22a6b3', // Teal
+  '#eb4d4b', // Salmon
 ];
 
 export const useImpostorStore = create(

@@ -62,15 +62,15 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  top: 0;
+  top: 10rem;
   left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: top;
   background: $bg-dark;
   z-index: 10;
-  pointer-events: none; // Let clicks pass through if needed, but usually this overlays button
+  pointer-events: none;
 
   h3 {
     font-size: 3rem;
