@@ -19,8 +19,7 @@ export default function GameCard({ title, icon: Icon, color, path, isExternal })
       whileTap={{ scale: 0.95 }}
       whileHover={{ scale: 1.02 }}
       onClick={handleClick}
-      style={{ borderColor: color }} // Dynamic border color
-    >
+      style={{ borderColor: color }}>
       <div className={styles.iconWrapper} style={{ color: color }}>
         <Icon size={48} />
       </div>
