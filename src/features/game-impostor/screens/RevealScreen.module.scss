@@ -7,6 +7,9 @@
   justify-content: center;
   height: 100%;
   text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .instruction {

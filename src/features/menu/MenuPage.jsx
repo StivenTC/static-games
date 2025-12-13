@@ -46,7 +46,7 @@ export default function MenuPage() {
   return (
     <MainLayout>
       <header className={styles.header}>
-        <h1 className={styles.title}>STATIC</h1>
+        <h1 className={styles.title}>STATIC v2</h1>
       </header>
       
       <div className={styles.grid}>

@@ -61,7 +61,8 @@ export default function RevealScreen() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.2 }}
-              style={{ userSelect: 'none', WebkitUserSelect: 'none' }}>
+              style={{ pointerEvents: 'auto' }} // Re-enable pointer events for specific content if needed, strictly to block pass-through
+            >
               {isImpostor ? (
                 <>
                   <h3 className={styles.impostor}>IMPOSTOR</h3>
@@ -82,8 +83,6 @@ export default function RevealScreen() {
               onContextMenu={(e) => e.preventDefault()} // Prevent right click
               style={{ 
                 touchAction: 'none',
-                userSelect: 'none',
-                WebkitUserSelect: 'none',
                 borderColor: currentPlayer.color || undefined,
                 boxShadow: currentPlayer.color ? `0 0 20px ${currentPlayer.color}` : undefined
               }}
