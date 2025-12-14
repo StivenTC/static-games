@@ -1,0 +1,105 @@
+export const WORD_CATEGORIES = {
+  movies: {
+    id: 'movies',
+    label: 'Películas',
+    words: ['Titanic', 'Avatar', 'Shrek', 'Harry Potter', 'Matrix', 'El Padrino', 'Frozen', 'Joker', 'Barbie', 'Oppenheimer', 'Coco', 'El Rey León']
+  },
+  gameCharacters: {
+    id: 'gameCharacters',
+    label: 'Personajes de juegos',
+    words: ['Mario', 'Luigi', 'Pikachu', 'Kratos', 'Link', 'Zelda', 'Sonic', 'Steve (Minecraft)', 'Master Chief', 'Lara Croft', 'Pac-Man', 'Crash Bandicoot']
+  },
+  anime: {
+    id: 'anime',
+    label: 'Anime',
+    words: ['Goku', 'Naruto', 'Luffy', 'Pikachu', 'Sailor Moon', 'Totoro', 'Vegeta', 'Eren Yeager', 'Tanjiro', 'Saitama', 'Light Yagami']
+  },
+  menSayings: {
+    id: 'menSayings',
+    label: 'Cosas que dicen los hombres',
+    words: ['"No es lo que parece"', '"Estoy llegando"', '"La última y nos vamos"', '"Estás loca"', '"No tengo nada"', '"El lunes empiezo"', '"Tranquila"', '"Yo te aviso"']
+  },
+  horrorMonsters: {
+    id: 'horrorMonsters',
+    label: 'Monstruos de terror',
+    words: ['Drácula', 'Frankenstein', 'Pennywise', 'Chucky', 'Jason', 'Freddy Krueger', 'La Llorona', 'Alien', 'Depredador', 'Zombie', 'Momia']
+  },
+  waterAnimals: {
+    id: 'waterAnimals',
+    label: 'Animales de agua',
+    words: ['Tiburón', 'Ballena', 'Delfín', 'Pulpo', 'Medusa', 'Cangrejo', 'Tortuga marina', 'Caballito de mar', 'Estrella de mar', 'Pez Payaso']
+  },
+  landAnimals: {
+    id: 'landAnimals',
+    label: 'Animales terrestres',
+    words: ['León', 'Elefante', 'Jirafa', 'Perro', 'Gato', 'Tigre', 'Oso', 'Caballo', 'Vaca', 'Mono', 'Canguro', 'Panda']
+  },
+  fantasyCreatures: {
+    id: 'fantasyCreatures',
+    label: 'Criaturas fantásticas',
+    words: ['Dragón', 'Unicornio', 'Hada', 'Sirena', 'Centauro', 'Grifo', 'Fénix', 'Hombre Lobo', 'Elfo', 'Ogro', 'Gnomo']
+  },
+  countries: {
+    id: 'countries',
+    label: 'Países',
+    words: ['México', 'España', 'Argentina', 'Colombia', 'Japón', 'Francia', 'Italia', 'Brasil', 'Estados Unidos', 'China', 'Alemania', 'Perú']
+  },
+  rainyDay: {
+    id: 'rainyDay',
+    label: 'Día de lluvia',
+    words: ['Dormir', 'Ver películas', 'Leer', 'Tomar café', 'Jugar juegos de mesa', 'Cocinar', 'Escuchar música', 'Limpiar', 'Mirar la lluvia']
+  },
+  pickMe: {
+    id: 'pickMe',
+    label: 'Frases Pick Me',
+    words: ['"No soy como las otras"', '"Prefiero juntarme con hombres"', '"No me gusta el maquillaje"', '"Soy muy bajita"', '"Solo tomo cerveza"', '"Odio el drama"']
+  },
+  bodyParts: {
+    id: 'bodyParts',
+    label: 'Partes del cuerpo',
+    words: ['Ojo', 'Nariz', 'Boca', 'Mano', 'Pie', 'Corazón', 'Cerebro', 'Rodilla', 'Codo', 'Oreja', 'Dedo', 'Estómago']
+  },
+  famousArtists: {
+    id: 'famousArtists',
+    label: 'Artistas famosas',
+    words: ['Shakira', 'Taylor Swift', 'Beyoncé', 'Dua Lipa', 'Karol G', 'Rosalía', 'Madonna', 'Lady Gaga', 'Ariana Grande', 'Rihanna', 'Selena Gomez']
+  },
+  fears: {
+    id: 'fears',
+    label: 'Miedos',
+    words: ['Arañas', 'Altura', 'Oscuridad', 'Muerte', 'Payasos', 'Volar', 'Agujas', 'Serpientes', 'Soledad', 'Fuego', 'Fantasmas']
+  },
+  historicalMoments: {
+    id: 'historicalMoments',
+    label: 'Momentos históricos',
+    words: ['Llegada a la Luna', 'Caída del Muro de Berlín', 'Descubrimiento de América', 'Independencia', 'Segunda Guerra Mundial', 'Revolución Francesa']
+  },
+  medicines: {
+    id: 'medicines',
+    label: 'Medicamentos',
+    words: ['Aspirina', 'Paracetamol', 'Ibuprofeno', 'Antibiótico', 'Jarabe', 'Vacuna', 'Pastillas', 'Gotas', 'Inyección', 'Vitamina']
+  },
+  healthyFood: {
+    id: 'healthyFood',
+    label: 'Comida saludable',
+    words: ['Ensalada', 'Fruta', 'Avena', 'Pollo a la plancha', 'Agua', 'Yogur', 'Nueces', 'Pescado', 'Vegetales', 'Batido verde']
+  },
+  professions: {
+    id: 'professions',
+    label: 'Profesiones',
+    words: ['Doctor', 'Profesor', 'Ingeniero', 'Abogado', 'Policía', 'Bombero', 'Astronauta', 'Chef', 'Músico', 'Programador', 'Piloto']
+  },
+  insects: {
+    id: 'insects',
+    label: 'Insectos',
+    words: ['Hormiga', 'Abeja', 'Mariposa', 'Mosca', 'Mosquito', 'Escarabajo', 'Saltamontes', 'Libélula', 'Cucaracha', 'Araña']
+  },
+  essentials: {
+    id: 'essentials',
+    label: 'Cosas esenciales',
+    words: ['Celular', 'Llaves', 'Billetera', 'Dinero', 'Agua', 'Comida', 'Ropa', 'Casa', 'Familia', 'Amigos', 'Internet']
+  }
+};
+
+// Flattened list for backward compatibility or simplistic random mode
+export const ALL_WORDS = Object.values(WORD_CATEGORIES).flatMap(cat => cat.words);

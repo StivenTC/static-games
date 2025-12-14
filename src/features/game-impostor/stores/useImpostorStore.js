@@ -1,12 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-// MVP Word Bank
-const WORDS = [
-  'Pizza', 'Facebook', 'Playa', 'Hospital', 'Escuela', 
-  'Guitarra', 'Vampiro', 'Titanic', 'Pokemon', 'Python',
-  'Elon Musk', 'Mess', 'Minecraft', 'Navidad', 'Tiburón'
-];
+import { WORD_CATEGORIES } from '../data/words';
 
 const PLAYER_COLORS = [
   '#00ffea', // Neon Blue
@@ -30,6 +25,7 @@ const INITIAL_ROUND_STATE = {
   phase: 'SETUP',
   currentPlayerIndex: 0,
   secretWord: '',
+  secretCategory: '', // New state
   impostorIndex: -1,
   round: 1,
   votes: {},
@@ -45,6 +41,7 @@ export const useImpostorStore = create(
       phase: 'SETUP', // SETUP, REVEAL, DEBATE, VOTING, RESULT
       currentPlayerIndex: 0,
       secretWord: '',
+      secretCategory: '',
       impostorIndex: -1,
       
       // New State for Complex Flow
@@ -82,8 +79,10 @@ export const useImpostorStore = create(
         // Select Impostor
         const impostorIdx = Math.floor(Math.random() * shuffledPlayers.length);
         
-        // Select Word
-        const word = WORDS[Math.floor(Math.random() * WORDS.length)];
+        // Select Category and Word
+        const categories = Object.values(WORD_CATEGORIES);
+        const selectedCategory = categories[Math.floor(Math.random() * categories.length)];
+        const word = selectedCategory.words[Math.floor(Math.random() * selectedCategory.words.length)];
 
         // Assign Roles
         const newPlayers = shuffledPlayers.map((p, index) => ({
@@ -95,6 +94,7 @@ export const useImpostorStore = create(
           players: newPlayers,
           impostorIndex: impostorIdx,
           secretWord: word,
+          secretCategory: selectedCategory.label,
           currentPlayerIndex: 0,
           phase: 'REVEAL'
         });
