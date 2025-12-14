@@ -9,14 +9,21 @@ export default function Input({
   id,
   type = 'text',
   className,
-  error = false
+  error = false,
+  focusColor,
   // helperText, etc can be added later
 }) {
   const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
-  
+
   return (
-    <div className={classNames(styles.wrapper, className)}>
-      {label && <label htmlFor={inputId} className={styles.label}>{label}</label>}
+    <div
+      className={classNames(styles.wrapper, className)}
+      style={focusColor ? { '--focus-color': focusColor } : undefined}>
+      {label && (
+        <label htmlFor={inputId} className={styles.label}>
+          {label}
+        </label>
+      )}
       <input
         id={inputId}
         type={type}

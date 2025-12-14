@@ -5,7 +5,7 @@ import Button from '../../../shared/ui/Button';
 import Input from '../../../shared/ui/Input';
 import { X, UserPlus, Play } from 'lucide-react';
 
-export default function SetupScreen() {
+export default function SetupScreen({ themeColor }) {
   const [name, setName] = useState('');
   const { players, addPlayer, removePlayer, startGame } = useImpostorStore();
 
@@ -13,7 +13,9 @@ export default function SetupScreen() {
     e.preventDefault();
     if (name.trim()) {
       const trimmedName = name.trim();
-      const capitalized = trimmedName.charAt(0).toUpperCase() + trimmedName.slice(1).toLowerCase();
+      const capitalized =
+        trimmedName.charAt(0).toUpperCase() +
+        trimmedName.slice(1).toLowerCase();
       addPlayer(capitalized);
       setName('');
     }
@@ -28,42 +30,56 @@ export default function SetupScreen() {
 
       <form onSubmit={handleAdd} className={styles.form}>
         <div className={styles.inputGroup}>
-            <Input 
-                value={name} 
-                onChange={(e) => setName(e.target.value)} 
-                placeholder="Nombre del jugador"
-                className={styles.input}/>
-            <Button 
-                type="submit" 
-                variant="outline" 
-                disabled={!name.trim()}
-                className={styles.addButton}>
-                <UserPlus size={20} />
-            </Button>
+          <Input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Nombre del jugador"
+            className={styles.input}
+            style={{ borderColor: themeColor }}
+            focusColor={themeColor}
+          />
+          <Button
+            type="submit"
+            variant="outline"
+            disabled={!name.trim()}
+            className={styles.addButton}
+            style={{ borderColor: themeColor, color: themeColor }}>
+            <UserPlus size={20} />
+          </Button>
         </div>
       </form>
 
       <div className={styles.playerList}>
         {players.map((p) => (
-          <div key={p.id} className={styles.playerItem} style={{ borderLeft: `4px solid ${p.color || '#fff'}` }}>
+          <div
+            key={p.id}
+            className={styles.playerItem}
+            style={{ borderLeft: `4px solid ${p.color || '#fff'}` }}>
             <span>{p.name}</span>
-            <button type="button" className={styles.removeBtn} onClick={() => removePlayer(p.id)}>
+            <button
+              type="button"
+              className={styles.removeBtn}
+              onClick={() => removePlayer(p.id)}>
               <X size={20} />
             </button>
           </div>
         ))}
         {players.length === 0 && (
-            <div style={{ textAlign: 'center', opacity: 0.5, marginTop: '2rem' }}>
-                No hay jugadores aún.
-            </div>
+          <div style={{ textAlign: 'center', opacity: 0.5, marginTop: '2rem' }}>
+            No hay jugadores aún.
+          </div>
         )}
       </div>
 
       <div className={styles.footer}>
-        <Button 
-          variant="primary" 
+        <Button
+          variant="primary"
           onClick={startGame}
-          disabled={players.length < 3}>
+          disabled={players.length < 3}
+          style={{
+            backgroundColor: players.length >= 3 ? themeColor : undefined,
+            borderColor: themeColor,
+          }}>
           <Play size={20} style={{ marginRight: '8px' }} />
           Comenzar Juego
         </Button>

@@ -5,7 +5,7 @@ import Button from '../../../shared/ui/Button';
 import { useImpostorStore } from '../stores/useImpostorStore';
 import styles from './ResultScreen.module.scss';
 
-export default function ResultScreen() {
+export default function ResultScreen({ themeColor }) {
   const { players, mostVotedId, secretWord, restartGame, resetGame } =
     useImpostorStore();
   const navigate = useNavigate();
@@ -77,11 +77,17 @@ export default function ResultScreen() {
       </div>
 
       <nav className={styles.actions}>
-        <Button variant="primary" onClick={handleRestart}>
+        <Button
+          variant="primary"
+          onClick={handleRestart}
+          style={{ backgroundColor: themeColor, borderColor: themeColor }}>
           <RotateCw size={20} />
           Jugar de Nuevo
         </Button>
-        <Button variant="outline" onClick={handleHome}>
+        <Button
+          variant="outline"
+          onClick={handleHome}
+          style={{ borderColor: themeColor, color: themeColor }}>
           <Home size={20} />
           Ir al Inicio
         </Button>

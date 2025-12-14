@@ -5,8 +5,9 @@ import Button from '../../../shared/ui/Button';
 import { useImpostorStore } from '../stores/useImpostorStore';
 import styles from './RevealScreen.module.scss';
 
-export default function RevealScreen() {
-  const { players, currentPlayerIndex, secretWord, nextPlayer } = useImpostorStore();
+export default function RevealScreen({ themeColor }) {
+  const { players, currentPlayerIndex, secretWord, nextPlayer } =
+    useImpostorStore();
   const [isRevealing, setIsRevealing] = useState(false);
   const [readyToPass, setReadyToPass] = useState(false);
 
@@ -17,7 +18,7 @@ export default function RevealScreen() {
 
   const handlePointerDown = () => {
     // Prevent default to avoid scrolling/context menu issues
-    //e.preventDefault(); 
+    //e.preventDefault();
     setIsRevealing(true);
     setReadyToPass(true);
   };
@@ -25,12 +26,12 @@ export default function RevealScreen() {
   useEffect(() => {
     if (isRevealing) {
       const handleEnd = () => setIsRevealing(false);
-      
+
       // Listen globally to catch release anywhere
       window.addEventListener('pointerup', handleEnd);
       window.addEventListener('pointercancel', handleEnd);
       window.addEventListener('touchend', handleEnd);
-      
+
       return () => {
         window.removeEventListener('pointerup', handleEnd);
         window.removeEventListener('pointercancel', handleEnd);
@@ -42,7 +43,6 @@ export default function RevealScreen() {
   // Removed handlePointerUp as it is handled by effect
 
   return (
-
     <div className={styles.container}>
       <div className={styles.instruction}>
         Turno de:
@@ -54,7 +54,7 @@ export default function RevealScreen() {
       <div className={styles.revealArea}>
         <AnimatePresence>
           {isRevealing ? (
-            <motion.div 
+            <motion.div
               className={styles.roleCard}
               key="role-card"
               initial={{ opacity: 0, scale: 0.8 }}
@@ -76,37 +76,42 @@ export default function RevealScreen() {
               )}
             </motion.div>
           ) : (
-            <motion.button 
+            <motion.button
               type="button"
               className={styles.holdButton}
               onPointerDown={handlePointerDown}
               onContextMenu={(e) => e.preventDefault()} // Prevent right click
-              style={{ 
+              style={{
                 touchAction: 'none',
                 borderColor: currentPlayer.color || undefined,
-                boxShadow: currentPlayer.color ? `0 0 20px ${currentPlayer.color}` : undefined
+                boxShadow: currentPlayer.color
+                  ? `0 0 20px ${currentPlayer.color}`
+                  : undefined,
               }}
               whileTap={{ scale: 0.95 }}
               key="reveal-btn"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}>
-              MANTÉN <br/> PRESIONADO
+              MANTÉN <br /> PRESIONADO
             </motion.button>
           )}
         </AnimatePresence>
       </div>
 
-
-
       {readyToPass && !isRevealing && (
-        <Button variant="primary" onClick={nextPlayer}>
+        <Button
+          variant="primary"
+          onClick={nextPlayer}
+          style={{ backgroundColor: themeColor, borderColor: themeColor }}>
           Listo / Siguiente
         </Button>
       )}
-      
+
       {!readyToPass && (
-          <p style={{ opacity: 0.5, fontSize: '0.8rem' }}>Presiona para ver tu rol</p>
+        <p style={{ opacity: 0.5, fontSize: '0.8rem' }}>
+          Presiona para ver tu rol
+        </p>
       )}
     </div>
   );

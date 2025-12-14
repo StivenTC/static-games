@@ -21,21 +21,35 @@ export default function ImpostorGame() {
   return (
     <MainLayout>
       {/* Top Bar */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-        <button type="button" onClick={handleBack} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}>
-            <ArrowLeft />
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: '1rem',
+        }}>
+        <button
+          type="button"
+          onClick={handleBack}
+          style={{
+            background: 'none',
+            border: 'none',
+            color: 'white',
+            cursor: 'pointer',
+          }}>
+          <ArrowLeft />
         </button>
         <span style={{ fontWeight: 'bold', color: '#ff0055' }}>
-            IMPOSTOR {phase !== 'SETUP' && `• ${players.length} Jugadores`}
+          IMPOSTOR {phase !== 'SETUP' && `• ${players.length} Jugadores`}
         </span>
         <div style={{ width: 24 }}></div> {/* Spacer */}
       </div>
 
-      {phase === 'SETUP' && <SetupScreen />}
-      {phase === 'REVEAL' && <RevealScreen />}
-      {phase === 'DEBATE' && <DebateScreen />}
-      {phase === 'VOTING' && <VotingScreen />}
-      {phase === 'RESULT' && <ResultScreen />}
+      {phase === 'SETUP' && <SetupScreen themeColor="#ff0055" />}
+      {phase === 'REVEAL' && <RevealScreen themeColor="#ff0055" />}
+      {phase === 'DEBATE' && <DebateScreen themeColor="#ff0055" />}
+      {phase === 'VOTING' && <VotingScreen themeColor="#ff0055" />}
+      {phase === 'RESULT' && <ResultScreen themeColor="#ff0055" />}
     </MainLayout>
   );
 }
