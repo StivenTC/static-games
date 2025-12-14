@@ -1,6 +1,6 @@
 import { Play, Vote } from 'lucide-react';
-import Button from '../../../../shared/ui/Button';
-import Timer from '../../../../shared/ui/Timer';
+import Button from '../../../../shared/ui/Button/Button';
+import Timer from '../../../../shared/ui/Timer/Timer';
 import { useImpostorStore } from '../../stores/useImpostorStore';
 import styles from './DebateScreen.module.scss';
 

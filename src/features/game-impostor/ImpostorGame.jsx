@@ -1,7 +1,7 @@
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import MainLayout from '../../shared/layouts/MainLayout';
-import GameSetup from '../../shared/ui/GameSetup';
+import MainLayout from '../../shared/layouts/MainLayout/MainLayout';
+import GameSetup from '../../shared/ui/GameSetup/GameSetup';
 import DebateScreen from './screens/DebateScreen/DebateScreen';
 import ResultScreen from './screens/ResultScreen/ResultScreen';
 import RevealScreen from './screens/RevealScreen/RevealScreen';

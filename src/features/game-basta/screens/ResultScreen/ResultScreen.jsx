@@ -1,5 +1,5 @@
 import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
-import Button from '../../../../shared/ui/Button';
+import Button from '../../../../shared/ui/Button/Button';
 import { useBastaStore } from '../../stores/useBastaStore';
 import styles from './ResultScreen.module.scss';
 

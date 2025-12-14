@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
-import MenuPage from '../features/menu/MenuPage';
 import BastaGame from '../features/game-basta/BastaGame';
 import ImpostorGame from '../features/game-impostor/ImpostorGame';
+import MenuPage from '../features/menu/MenuPage/MenuPage';
 
 export const router = createBrowserRouter(
   [

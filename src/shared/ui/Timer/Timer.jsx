@@ -2,15 +2,15 @@ import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import styles from './Timer.module.scss';
 
-export default function Timer({ 
-  initialSeconds = 30, 
+export default function Timer({
+  initialSeconds = 30,
   isRunning = true,
   onComplete,
   onTick,
-  color // New prop
+  color, // New prop
 }) {
   const [seconds, setSeconds] = useState(initialSeconds);
-  
+
   // Calculate SVG stroke offset for progress circle
   const radius = 60;
   const circumference = 2 * Math.PI * radius;
@@ -29,7 +29,7 @@ export default function Timer({
     }
 
     const interval = setInterval(() => {
-      setSeconds(prev => {
+      setSeconds((prev) => {
         const next = Math.max(0, prev - 1);
         if (onTick) onTick(next); // Call tick with next value
         return next;
@@ -51,18 +51,23 @@ export default function Timer({
   return (
     <div className={styles.container}>
       <svg className={styles.svg} viewBox="0 0 140 140">
-        <circle 
+        <circle
           className={styles.circleBackground}
-          cx="70" cy="70" r={radius} />
-        <circle 
+          cx="70"
+          cy="70"
+          r={radius}
+        />
+        <circle
           className={classNames(styles.circleProgress, styles[variant])}
-          cx="70" cy="70" r={radius}
+          cx="70"
+          cy="70"
+          r={radius}
           strokeDasharray={circumference}
-          strokeDashoffset={strokeDashoffset} 
+          strokeDashoffset={strokeDashoffset}
           style={{ stroke: color }} // Override with custom color
         />
       </svg>
-      <div 
+      <div
         className={classNames(styles.timeDisplay, styles[variant])}
         style={{ color: color }} // Override with custom color
       >

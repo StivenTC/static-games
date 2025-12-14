@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'; // eslint-disable-line no-unused-vars
 import { useEffect, useState } from 'react';
 
-import Button from '../../../../shared/ui/Button';
+import Button from '../../../../shared/ui/Button/Button';
 import { useImpostorStore } from '../../stores/useImpostorStore';
 import styles from './RevealScreen.module.scss';
 

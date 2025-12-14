@@ -1,45 +1,46 @@
+import { Ban, Brain, Ghost, MessageCircle, Zap } from 'lucide-react';
+
+import MainLayout from '../../../shared/layouts/MainLayout/MainLayout';
+import GameCard from '../GameCard/GameCard';
 import styles from './MenuPage.module.scss';
-import MainLayout from '../../shared/layouts/MainLayout';
-import GameCard from './GameCard';
-import { Ghost, Zap, Ban, Brain, MessageCircle } from 'lucide-react';
 
 const GAMES = [
-  { 
-    id: 'impostor', 
-    title: 'Impostor', 
-    icon: Ghost, 
+  {
+    id: 'impostor',
+    title: 'Impostor',
+    icon: Ghost,
     color: '#ff0055', // neon-red
-    path: '/impostor' 
+    path: '/impostor',
   },
-  { 
-    id: 'basta', 
-    title: 'Basta', 
-    icon: Zap, 
+  {
+    id: 'basta',
+    title: 'Basta',
+    icon: Zap,
     color: '#00f3ff', // neon-blue
-    path: '/basta' 
+    path: '/basta',
   },
-  { 
-    id: 'tabu', 
-    title: 'Tabú', 
-    icon: Ban, 
+  {
+    id: 'tabu',
+    title: 'Tabú',
+    icon: Ban,
     color: '#bd00ff', // neon-purple
-    path: '/tabu' 
+    path: '/tabu',
   },
-  { 
-    id: 'memory', 
-    title: 'Memoria', 
-    icon: Brain, 
+  {
+    id: 'memory',
+    title: 'Memoria',
+    icon: Brain,
     color: '#00ff9f', // neon-green
-    path: '/memory' 
+    path: '/memory',
   },
-  { 
-    id: 'legacy', 
-    title: 'Legacy', 
-    icon: MessageCircle, 
+  {
+    id: 'legacy',
+    title: 'Legacy',
+    icon: MessageCircle,
     color: '#ffffff', // white
     path: 'https://questionary-9c8b1.web.app/',
     isExternal: true,
-    spanCols: true
+    spanCols: true,
   },
 ];
 
@@ -49,10 +50,10 @@ export default function MenuPage() {
       <header className={styles.header}>
         <h1 className={styles.title}>STATIC</h1>
       </header>
-      
+
       <nav className={styles.grid} aria-label="Selección de juegos">
         {GAMES.map((game) => (
-          <GameCard 
+          <GameCard
             key={game.id}
             {...game}
             className={game.spanCols ? styles.fullWidth : ''}

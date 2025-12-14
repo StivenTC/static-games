@@ -1,7 +1,7 @@
 import { Play, UserPlus, X } from 'lucide-react';
 import { useState } from 'react';
-import Button from '../../../../shared/ui/Button';
-import Input from '../../../../shared/ui/Input';
+import Button from '../../../../shared/ui/Button/Button';
+import Input from '../../../../shared/ui/Input/Input';
 import { useImpostorStore } from '../../stores/useImpostorStore';
 import styles from './SetupScreen.module.scss';
 

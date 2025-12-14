@@ -1,7 +1,7 @@
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import MainLayout from '../../shared/layouts/MainLayout';
-import GameSetup from '../../shared/ui/GameSetup';
+import MainLayout from '../../shared/layouts/MainLayout/MainLayout';
+import GameSetup from '../../shared/ui/GameSetup/GameSetup';
 import styles from './BastaGame.module.scss';
 import PlayScreen from './screens/PlayScreen/PlayScreen';
 import ResultScreen from './screens/ResultScreen/ResultScreen';

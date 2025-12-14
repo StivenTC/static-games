@@ -1,7 +1,7 @@
 import { Home, RotateCw } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../../../shared/ui/Button';
+import Button from '../../../../shared/ui/Button/Button';
 import { useImpostorStore } from '../../stores/useImpostorStore';
 import styles from './ResultScreen.module.scss';
 

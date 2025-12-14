@@ -1,9 +1,9 @@
 import { Play, UserPlus, X } from 'lucide-react';
 import { useState } from 'react';
-import { usePlayerStore } from '../stores/usePlayerStore';
-import Button from './Button';
+import { usePlayerStore } from '../../stores/usePlayerStore';
+import Button from '../Button/Button';
+import Input from '../Input/Input';
 import styles from './GameSetup.module.scss';
-import Input from './Input';
 
 export default function GameSetup({
   title = 'Juego',

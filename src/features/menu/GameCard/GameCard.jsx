@@ -1,8 +1,15 @@
-import styles from './GameCard.module.scss';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
+import styles from './GameCard.module.scss';
 
-export default function GameCard({ title, icon: Icon, color, path, isExternal, className }) {
+export default function GameCard({
+  title,
+  icon: Icon,
+  color,
+  path,
+  isExternal,
+  className,
+}) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -14,7 +21,7 @@ export default function GameCard({ title, icon: Icon, color, path, isExternal, c
   };
 
   return (
-    <motion.button 
+    <motion.button
       type="button"
       className={`${styles.card} ${className || ''}`}
       whileTap={{ scale: 0.95 }}
