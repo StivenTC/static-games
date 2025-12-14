@@ -1,29 +1,14 @@
 import { create } from 'zustand';
 import { usePlayerStore } from '../../../shared/stores/usePlayerStore';
+import { BASTA_CATEGORIES } from '../data/categories';
 
-const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+export const ALPHABET = 'ABCDEFGHIJKLMNOPRSTW'.split('');
 
-const CATEGORIES = [
-  'Nombres',
-  'Paises',
-  'Frutas',
-  'Colores',
-  'Animales',
-  'Marcas',
-  'Cosas de cocina',
-  'Superhéroes',
-  'Deportes',
-  'Películas',
-  'Canciones',
-  'Ciudades',
-  'Comidas',
-  'Profesiones',
-  'Instrumentos musicales',
-];
+const CATEGORIES = BASTA_CATEGORIES;
 
 export const useBastaStore = create((set, get) => ({
   // Game Configuration
-  turnDuration: 15,
+  turnDuration: 20,
   categories: CATEGORIES,
 
   // Game State
@@ -32,21 +17,27 @@ export const useBastaStore = create((set, get) => ({
   availableLetters: [...ALPHABET],
   usedLetters: [],
   currentPlayerId: null,
-  timer: 15,
+  gamePlayers: [], // Shuffled local copy
   winnerTeam: null, // 'players' (if all letters used) or 'time' (if timer runs out)
 
   // Actions
   setTurnDuration: (seconds) => set({ turnDuration: seconds }),
 
-  startGame: (firstPlayerId) => {
-    const players = usePlayerStore.getState().players;
-    // If no specific first player, default to the first one in the list
-    const startId = firstPlayerId || players[0]?.id;
+  startGame: () => {
+    const globalPlayers = usePlayerStore.getState().players;
+    if (globalPlayers.length === 0) return;
 
-    if (!startId && players.length > 0) {
-      // fallback
+    // Shuffle Players (Fisher-Yates)
+    const shuffledPlayers = [...globalPlayers];
+    for (let i = shuffledPlayers.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledPlayers[i], shuffledPlayers[j]] = [
+        shuffledPlayers[j],
+        shuffledPlayers[i],
+      ];
     }
 
+    const startId = shuffledPlayers[0].id;
     const randomCategory =
       CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
 
@@ -55,6 +46,7 @@ export const useBastaStore = create((set, get) => ({
       currentCategory: randomCategory,
       availableLetters: [...ALPHABET],
       usedLetters: [],
+      gamePlayers: shuffledPlayers,
       currentPlayerId: startId,
       timer: state.turnDuration,
       winnerTeam: null,
@@ -62,11 +54,48 @@ export const useBastaStore = create((set, get) => ({
   },
 
   selectLetter: (letter) => {
-    const { availableLetters, usedLetters, turnDuration, currentPlayerId } =
-      get();
-    const players = usePlayerStore.getState().players;
+    const {
+      availableLetters,
+      usedLetters,
+      turnDuration,
+      currentPlayerId,
+      gamePlayers,
+    } = get();
 
-    if (!availableLetters.includes(letter)) return; // Already used
+    // Fallback if gamePlayers is empty for some reason (shouldn't happen in normal flow)
+    const players =
+      gamePlayers.length > 0 ? gamePlayers : usePlayerStore.getState().players;
+
+    // Toggle behavior: If letter is already used, make it available again (correction)
+    // Toggle behavior: Allow undoing ONLY the last selected letter
+    if (usedLetters.includes(letter)) {
+      // Check if it's the last one
+      const lastUsed = usedLetters[usedLetters.length - 1];
+      if (letter !== lastUsed) return; // Cannot undo older letters
+
+      const newUsed = usedLetters.slice(0, -1);
+      const newAvailable = [...availableLetters, letter]; // Order doesn't matter for UI mapping
+
+      // Revert player logic
+      let prevPlayerId = currentPlayerId;
+      if (players.length > 0) {
+        const currentIndex = players.findIndex((p) => p.id === currentPlayerId);
+        const idx = currentIndex === -1 ? 0 : currentIndex;
+        // Move backwards
+        const prevIndex = (idx - 1 + players.length) % players.length;
+        prevPlayerId = players[prevIndex].id;
+      }
+
+      set({
+        usedLetters: newUsed,
+        availableLetters: newAvailable,
+        currentPlayerId: prevPlayerId,
+        timer: turnDuration, // Reset timer for the player getting their turn back
+      });
+      return;
+    }
+
+    if (!availableLetters.includes(letter)) return; // Should catch this above, but safe guard
 
     const newUsed = [...usedLetters, letter];
     const newAvailable = availableLetters.filter((l) => l !== letter);

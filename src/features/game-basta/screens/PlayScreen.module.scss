@@ -65,7 +65,7 @@
 
 .letterGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
   gap: 0.8rem;
   width: 100%;
   margin-top: auto;
@@ -82,7 +82,7 @@
   background: white;
   color: #333;
   border-radius: 12px;
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   font-weight: 800;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -98,12 +98,11 @@
     box-shadow: 0 0 0 #ccc, inset 0 2px 5px rgba(0,0,0,0.2);
   }
 
-  &:disabled {
+  &.used {
     background: #444;
     color: #666;
     box-shadow: 0 0 0 #222, inset 0 2px 5px rgba(0,0,0,0.5);
     transform: translateY(4px);
-    cursor: not-allowed;
     opacity: 0.6;
   }
 }

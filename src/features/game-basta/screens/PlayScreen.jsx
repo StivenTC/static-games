@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
-import { useBastaStore } from '../stores/useBastaStore';
-import { usePlayerStore } from '../../../shared/stores/usePlayerStore';
 import classNames from 'classnames';
+import { useEffect } from 'react';
+import { usePlayerStore } from '../../../shared/stores/usePlayerStore';
+import { ALPHABET, useBastaStore } from '../stores/useBastaStore';
 import styles from './PlayScreen.module.scss';
 
 export default function PlayScreen({ themeColor }) {
@@ -24,8 +24,6 @@ export default function PlayScreen({ themeColor }) {
     }, 1000);
     return () => clearInterval(interval);
   }, [tickTimer]);
-
-  const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
   return (
     <div className={styles.container}>
@@ -62,8 +60,9 @@ export default function PlayScreen({ themeColor }) {
             <button
               key={letter}
               type="button"
-              className={styles.letterBtn}
-              disabled={!isAvailable}
+              className={classNames(styles.letterBtn, {
+                [styles.used]: !isAvailable,
+              })}
               onClick={() => selectLetter(letter)}
               style={isAvailable ? { color: themeColor } : {}}>
               {letter}
