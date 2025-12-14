@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useEffect } from 'react';
-import { usePlayerStore } from '../../../shared/stores/usePlayerStore';
-import { ALPHABET, useBastaStore } from '../stores/useBastaStore';
+import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
+import { ALPHABET, useBastaStore } from '../../stores/useBastaStore';
 import styles from './PlayScreen.module.scss';
 
 export default function PlayScreen({ themeColor }) {

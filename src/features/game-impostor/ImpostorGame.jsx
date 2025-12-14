@@ -1,12 +1,12 @@
+import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useImpostorStore } from './stores/useImpostorStore';
 import MainLayout from '../../shared/layouts/MainLayout';
 import GameSetup from '../../shared/ui/GameSetup';
-import RevealScreen from './screens/RevealScreen';
-import DebateScreen from './screens/DebateScreen';
-import VotingScreen from './screens/VotingScreen';
-import ResultScreen from './screens/ResultScreen';
-import { ArrowLeft } from 'lucide-react';
+import DebateScreen from './screens/DebateScreen/DebateScreen';
+import ResultScreen from './screens/ResultScreen/ResultScreen';
+import RevealScreen from './screens/RevealScreen/RevealScreen';
+import VotingScreen from './screens/VotingScreen/VotingScreen';
+import { useImpostorStore } from './stores/useImpostorStore';
 
 export default function ImpostorGame() {
   const navigate = useNavigate();

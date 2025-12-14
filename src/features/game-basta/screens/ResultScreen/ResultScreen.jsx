@@ -1,8 +1,7 @@
-import React from 'react';
-import { useBastaStore } from '../stores/useBastaStore';
-import { usePlayerStore } from '../../../shared/stores/usePlayerStore';
+import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
+import Button from '../../../../shared/ui/Button';
+import { useBastaStore } from '../../stores/useBastaStore';
 import styles from './ResultScreen.module.scss';
-import Button from '../../../shared/ui/Button';
 
 export default function ResultScreen({ themeColor }) {
   const { winnerTeam, resetGame, currentPlayerId } = useBastaStore();

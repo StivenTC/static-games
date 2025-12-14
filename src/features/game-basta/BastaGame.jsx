@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import MainLayout from '../../shared/layouts/MainLayout';
 import GameSetup from '../../shared/ui/GameSetup';
 import styles from './BastaGame.module.scss';
-import PlayScreen from './screens/PlayScreen';
-import ResultScreen from './screens/ResultScreen';
+import PlayScreen from './screens/PlayScreen/PlayScreen';
+import ResultScreen from './screens/ResultScreen/ResultScreen';
 import { useBastaStore } from './stores/useBastaStore';
 
 export default function BastaGame() {

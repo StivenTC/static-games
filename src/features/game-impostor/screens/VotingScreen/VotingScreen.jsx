@@ -1,9 +1,9 @@
+import { ScanFace, UserCheck } from 'lucide-react';
 import { useState } from 'react';
-import { useImpostorStore } from '../stores/useImpostorStore';
+import Button from '../../../../shared/ui/Button';
+import Timer from '../../../../shared/ui/Timer';
+import { useImpostorStore } from '../../stores/useImpostorStore';
 import styles from './VotingScreen.module.scss';
-import Button from '../../../shared/ui/Button';
-import Timer from '../../../shared/ui/Timer';
-import { UserCheck, ScanFace } from 'lucide-react';
 
 export default function VotingScreen({ themeColor }) {
   const { players, votingPlayerIndex, castVote } = useImpostorStore();

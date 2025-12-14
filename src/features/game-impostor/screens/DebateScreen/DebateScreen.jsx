@@ -1,8 +1,8 @@
-import { useImpostorStore } from '../stores/useImpostorStore';
-import styles from './DebateScreen.module.scss';
-import Button from '../../../shared/ui/Button';
-import Timer from '../../../shared/ui/Timer';
 import { Play, Vote } from 'lucide-react';
+import Button from '../../../../shared/ui/Button';
+import Timer from '../../../../shared/ui/Timer';
+import { useImpostorStore } from '../../stores/useImpostorStore';
+import styles from './DebateScreen.module.scss';
 
 export default function DebateScreen({ themeColor }) {
   const { players, currentPlayerIndex, round, nextTurn, startVoting } =

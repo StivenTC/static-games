@@ -1,9 +1,9 @@
+import { Play, UserPlus, X } from 'lucide-react';
 import { useState } from 'react';
-import { useImpostorStore } from '../stores/useImpostorStore';
+import Button from '../../../../shared/ui/Button';
+import Input from '../../../../shared/ui/Input';
+import { useImpostorStore } from '../../stores/useImpostorStore';
 import styles from './SetupScreen.module.scss';
-import Button from '../../../shared/ui/Button';
-import Input from '../../../shared/ui/Input';
-import { X, UserPlus, Play } from 'lucide-react';
 
 export default function SetupScreen({ themeColor }) {
   const [name, setName] = useState('');
