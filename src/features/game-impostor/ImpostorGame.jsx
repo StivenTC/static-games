@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useImpostorStore } from './stores/useImpostorStore';
 import MainLayout from '../../shared/layouts/MainLayout';
-import SetupScreen from './screens/SetupScreen';
+import GameSetup from '../../shared/ui/GameSetup';
 import RevealScreen from './screens/RevealScreen';
 import DebateScreen from './screens/DebateScreen';
 import VotingScreen from './screens/VotingScreen';
@@ -10,7 +10,7 @@ import { ArrowLeft } from 'lucide-react';
 
 export default function ImpostorGame() {
   const navigate = useNavigate();
-  const { phase, resetGame, players } = useImpostorStore();
+  const { phase, resetGame, players, startGame } = useImpostorStore();
 
   const handleBack = () => {
     // If game is in progress, maybe warn? For now just go back.
@@ -45,7 +45,14 @@ export default function ImpostorGame() {
         <div style={{ width: 24 }}></div> {/* Spacer */}
       </div>
 
-      {phase === 'SETUP' && <SetupScreen themeColor="#ff0055" />}
+      {phase === 'SETUP' && (
+        <GameSetup
+          title="Impostor"
+          onStart={startGame}
+          minPlayers={3}
+          themeColor="#ff0055"
+        />
+      )}
       {phase === 'REVEAL' && <RevealScreen themeColor="#ff0055" />}
       {phase === 'DEBATE' && <DebateScreen themeColor="#ff0055" />}
       {phase === 'VOTING' && <VotingScreen themeColor="#ff0055" />}
