@@ -1,14 +1,15 @@
-import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import MainLayout from '../../shared/layouts/MainLayout';
 import GameSetup from '../../shared/ui/GameSetup';
-import { useBastaStore } from './stores/useBastaStore';
+import styles from './BastaGame.module.scss';
 import PlayScreen from './screens/PlayScreen';
 import ResultScreen from './screens/ResultScreen';
+import { useBastaStore } from './stores/useBastaStore';
 
 export default function BastaGame() {
   const navigate = useNavigate();
-  const { gameStatus, resetGame, startGame } = useBastaStore();
+  const { gameStatus, resetGame, startGame, gamePlayers } = useBastaStore();
   const THEME_COLOR = '#00f3ff'; // Neon Blue from MenuPage
 
   const handleBack = () => {
@@ -18,47 +19,47 @@ export default function BastaGame() {
 
   return (
     <MainLayout>
-      {/* Top Bar */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '1rem',
-        }}>
-        <button
-          type="button"
-          onClick={handleBack}
-          style={{
-            background: 'none',
-            border: 'none',
-            color: 'white',
-            cursor: 'pointer',
-          }}>
-          <ArrowLeft />
-        </button>
-        <span style={{ fontWeight: 'bold', color: THEME_COLOR }}>
-          BASTA {gameStatus !== 'setup' && `• Juego en progreso`}
-        </span>
-        <div style={{ width: 24 }}></div>
+      <div className={styles.container}>
+        {/* Semantic Header */}
+        <header className={styles.header}>
+          <button
+            type="button"
+            onClick={handleBack}
+            className={styles.backButton}
+            aria-label="Volver al menú">
+            <ArrowLeft />
+          </button>
+
+          <h1 className={styles.title} style={{ color: THEME_COLOR }}>
+            BASTA{' '}
+            {gameStatus !== 'setup' && (
+              <span style={{ opacity: 0.8, fontSize: '0.9em' }}>
+                • {gamePlayers.length} Jugadores
+              </span>
+            )}
+          </h1>
+
+          <div className={styles.placeholder} aria-hidden="true"></div>
+        </header>
+
+        {/* Main Game Area */}
+        <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+          {gameStatus === 'setup' && (
+            <GameSetup
+              title="Basta"
+              onStart={(players) => startGame(players?.[0]?.id)}
+              minPlayers={2}
+              themeColor={THEME_COLOR}
+            />
+          )}
+
+          {gameStatus === 'playing' && <PlayScreen themeColor={THEME_COLOR} />}
+
+          {gameStatus === 'finished' && (
+            <ResultScreen themeColor={THEME_COLOR} />
+          )}
+        </main>
       </div>
-
-      {gameStatus === 'setup' && (
-        <GameSetup
-          title="Basta"
-          onStart={(players) => startGame(players?.[0]?.id)} // GameSetup doesn't pass players, store gets them from playerStore?
-          // Wait, GameSetup.onStart just triggers. The store needs to know who plays.
-          // Impostor passed `startGame` which handled it?
-          // Impostor store accesses usePlayerStore inside?
-          // Let's check ImpostorStore later. For now assume startGame fetches players.
-          minPlayers={2}
-          themeColor={THEME_COLOR}
-        />
-      )}
-
-      {gameStatus === 'playing' && <PlayScreen themeColor={THEME_COLOR} />}
-
-      {gameStatus === 'finished' && <ResultScreen themeColor={THEME_COLOR} />}
     </MainLayout>
   );
 }

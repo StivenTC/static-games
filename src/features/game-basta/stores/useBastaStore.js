@@ -62,26 +62,23 @@ export const useBastaStore = create((set, get) => ({
       gamePlayers,
     } = get();
 
-    // Fallback if gamePlayers is empty for some reason (shouldn't happen in normal flow)
+    // Fallback in case gamePlayers wasn't adequately populated (safety check)
     const players =
       gamePlayers.length > 0 ? gamePlayers : usePlayerStore.getState().players;
 
-    // Toggle behavior: If letter is already used, make it available again (correction)
-    // Toggle behavior: Allow undoing ONLY the last selected letter
+    // --- UNDO LOGIC ---
     if (usedLetters.includes(letter)) {
-      // Check if it's the last one
       const lastUsed = usedLetters[usedLetters.length - 1];
-      if (letter !== lastUsed) return; // Cannot undo older letters
+      if (letter !== lastUsed) return; // Only allow undoing the immediate last move
 
       const newUsed = usedLetters.slice(0, -1);
-      const newAvailable = [...availableLetters, letter]; // Order doesn't matter for UI mapping
+      const newAvailable = [...availableLetters, letter];
 
-      // Revert player logic
+      // Revert to previous player
       let prevPlayerId = currentPlayerId;
       if (players.length > 0) {
         const currentIndex = players.findIndex((p) => p.id === currentPlayerId);
         const idx = currentIndex === -1 ? 0 : currentIndex;
-        // Move backwards
         const prevIndex = (idx - 1 + players.length) % players.length;
         prevPlayerId = players[prevIndex].id;
       }
@@ -90,18 +87,19 @@ export const useBastaStore = create((set, get) => ({
         usedLetters: newUsed,
         availableLetters: newAvailable,
         currentPlayerId: prevPlayerId,
-        timer: turnDuration, // Reset timer for the player getting their turn back
+        timer: turnDuration,
       });
       return;
     }
 
-    if (!availableLetters.includes(letter)) return; // Should catch this above, but safe guard
+    // --- SELECTION LOGIC ---
+    if (!availableLetters.includes(letter)) return;
 
     const newUsed = [...usedLetters, letter];
     const newAvailable = availableLetters.filter((l) => l !== letter);
 
+    // WIN CONDITION: All letters used
     if (newAvailable.length === 0) {
-      // Players won!
       set({
         gameStatus: 'finished',
         winnerTeam: 'players',
@@ -111,11 +109,10 @@ export const useBastaStore = create((set, get) => ({
       return;
     }
 
-    // Next player logic
+    // NEXT PLAYER LOGIC
     let nextPlayerId = currentPlayerId;
     if (players.length > 0) {
       const currentIndex = players.findIndex((p) => p.id === currentPlayerId);
-      // If current player not found (e.g. removed?), default to 0
       const idx = currentIndex === -1 ? 0 : currentIndex;
       const nextIndex = (idx + 1) % players.length;
       nextPlayerId = players[nextIndex].id;
@@ -125,7 +122,7 @@ export const useBastaStore = create((set, get) => ({
       availableLetters: newAvailable,
       usedLetters: newUsed,
       currentPlayerId: nextPlayerId,
-      timer: turnDuration, // Reset timer for next player: "y sigue el siguiente jugador"
+      timer: turnDuration,
     });
   },
 

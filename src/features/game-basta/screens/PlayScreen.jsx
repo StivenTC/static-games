@@ -26,14 +26,16 @@ export default function PlayScreen({ themeColor }) {
   }, [tickTimer]);
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container} aria-label="Tablero de juego">
       <div className={styles.categoryCard} style={{ borderColor: themeColor }}>
         <h3>Categoría</h3>
         <h2>{currentCategory}</h2>
       </div>
 
-      <div className={styles.timerSection}>
+      <section className={styles.timerSection} aria-label="Estado del turno">
         <div
+          role="timer"
+          aria-live={timer <= 5 ? 'assertive' : 'off'}
           className={classNames(styles.timerValue, {
             [styles.pulsing]: timer <= 5,
           })}
@@ -51,9 +53,9 @@ export default function PlayScreen({ themeColor }) {
             Turno de: {currentPlayer.name}
           </div>
         )}
-      </div>
+      </section>
 
-      <div className={styles.letterGrid}>
+      <section className={styles.letterGrid} aria-label="Teclado de letras">
         {ALPHABET.map((letter) => {
           const isAvailable = availableLetters.includes(letter);
           return (
@@ -64,12 +66,18 @@ export default function PlayScreen({ themeColor }) {
                 [styles.used]: !isAvailable,
               })}
               onClick={() => selectLetter(letter)}
+              aria-pressed={!isAvailable}
+              aria-label={
+                isAvailable
+                  ? `Seleccionar letra ${letter}`
+                  : `Deshacer letra ${letter}`
+              }
               style={isAvailable ? { color: themeColor } : {}}>
               {letter}
             </button>
           );
         })}
-      </div>
-    </div>
+      </section>
+    </section>
   );
 }
