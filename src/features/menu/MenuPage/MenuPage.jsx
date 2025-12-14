@@ -35,7 +35,7 @@ const GAMES = [
   },
   {
     id: 'legacy',
-    title: 'Legacy',
+    title: 'Questionary',
     icon: MessageCircle,
     color: '#ffffff', // white
     path: 'https://questionary-9c8b1.web.app/',

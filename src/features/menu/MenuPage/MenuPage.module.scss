@@ -30,14 +30,6 @@
 .fullWidth {
   grid-column: span 2;
   aspect-ratio: auto;
-  height: 120px;
-  flex-direction: row;
-  justify-content: flex-start;
-  gap: 1.5rem;
-  padding: 0 2rem;
-
-  // Override spacing from vertical layout
-  div {
-    margin-bottom: 0;
-  }
+  height: auto;
+  min-height: 120px;
 }
