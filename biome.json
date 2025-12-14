@@ -22,6 +22,7 @@
       "correctness": {
         "noUnusedVariables": "error",
         "noUnusedImports": "error",
+        "noUndeclaredVariables": "error",
         "useHookAtTopLevel": "error"
       },
       "style": {
