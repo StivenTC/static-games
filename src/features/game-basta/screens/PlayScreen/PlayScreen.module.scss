@@ -6,9 +6,9 @@
   align-items: center;
   justify-content: flex-start;
   height: 100%;
-  padding: 1rem;
+  padding: 0.5rem; // Reduced padding
   color: white;
-  gap: 1.5rem;
+  gap: 1rem; // Reduced gap
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
@@ -67,15 +67,16 @@
 
 .letterGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-  gap: 0.8rem;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
   width: 100%;
   margin-top: auto;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   justify-content: center;
 
-  // Attempt to center the last row items if they don't fill the row
-  // This is tricky with grid, but auto-fit handles it okay-ish.
+  @media (max-width: 380px) {
+    gap: 0.3rem; // Slightly tighter gap on small screens
+  }
 }
 
 .letterBtn {
@@ -84,20 +85,29 @@
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(4px);
   color: #1a1a1a;
-  border-radius: 16px;
-  font-size: 2.5rem;
+  border-radius: 12px;
+  font-size: 2rem;
   font-weight: 800;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   box-shadow: 
     0 4px 0 #cbd5e1, 
-    0 8px 20px rgba(0,0,0,0.2), 
+    0 8px 10px rgba(0,0,0,0.2), 
     inset 0 1px 0 rgba(255,255,255,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
+
+  @media (max-width: 380px) {
+    font-size: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 
+      0 2px 0 #cbd5e1, 
+      0 4px 5px rgba(0,0,0,0.2), 
+      inset 0 1px 0 rgba(255,255,255,0.5);
+  }
 
   &:active:not(.used) {
     transform: translateY(4px);
