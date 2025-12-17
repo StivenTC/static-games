@@ -2,6 +2,7 @@ import { ScanFace, UserCheck } from 'lucide-react';
 import { useState } from 'react';
 import Button from '../../../../shared/ui/Button/Button';
 import Timer from '../../../../shared/ui/Timer/Timer';
+import { useGameFeedback } from '../../../../shared/hooks/useGameFeedback';
 import { useImpostorStore } from '../../stores/useImpostorStore';
 import styles from './VotingScreen.module.scss';
 
@@ -10,6 +11,7 @@ export default function VotingScreen({ themeColor }) {
   const [isReady, setIsReady] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [showWarning, setShowWarning] = useState(false);
+  const { triggerFeedback } = useGameFeedback();
 
   const voter = players[votingPlayerIndex];
 
@@ -24,6 +26,7 @@ export default function VotingScreen({ themeColor }) {
 
   const handleVote = () => {
     if (selectedId) {
+      triggerFeedback('success');
       castVote(selectedId);
       resetLocalState();
     }
@@ -31,11 +34,13 @@ export default function VotingScreen({ themeColor }) {
 
   const handleTimeout = () => {
     // Timeout: Vote for self
+    triggerFeedback('timeout');
     castVote(voter.id);
     resetLocalState();
   };
 
   const handleTick = (secondsLeft) => {
+    if (secondsLeft <= 5) triggerFeedback('tick');
     if (secondsLeft <= 5 && !showWarning) {
       setShowWarning(true);
     }
@@ -52,7 +57,10 @@ export default function VotingScreen({ themeColor }) {
         <div className={styles.readyArea}>
           <Button
             variant="primary"
-            onClick={() => setIsReady(true)}
+            onClick={() => {
+              triggerFeedback('select');
+              setIsReady(true);
+            }}
             style={{
               width: '200px',
               height: '200px',
@@ -111,7 +119,10 @@ export default function VotingScreen({ themeColor }) {
               <button
                 type="button"
                 className={`${styles.candidateCard} ${selectedId === candidate.id ? styles.selected : ''}`}
-                onClick={() => setSelectedId(candidate.id)}
+                onClick={() => {
+                  triggerFeedback('select');
+                  setSelectedId(candidate.id);
+                }}
                 style={{
                   borderLeft: `4px solid ${candidate.color || '#fff'}`,
                 }}>

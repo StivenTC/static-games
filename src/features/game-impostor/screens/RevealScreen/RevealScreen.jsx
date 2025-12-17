@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'; // eslint-disable-line 
 import { useEffect, useState } from 'react';
 
 import Button from '../../../../shared/ui/Button/Button';
+import { useGameFeedback } from '../../../../shared/hooks/useGameFeedback';
 import { useImpostorStore } from '../../stores/useImpostorStore';
 import styles from './RevealScreen.module.scss';
 
@@ -10,6 +11,7 @@ export default function RevealScreen({ themeColor }) {
     useImpostorStore();
   const [isRevealing, setIsRevealing] = useState(false);
   const [readyToPass, setReadyToPass] = useState(false);
+  const { triggerFeedback } = useGameFeedback();
 
   const currentPlayer = players[currentPlayerIndex];
 
@@ -19,6 +21,7 @@ export default function RevealScreen({ themeColor }) {
   const handlePointerDown = () => {
     // Prevent default to avoid scrolling/context menu issues
     //e.preventDefault();
+    triggerFeedback('success'); // Sound on reveal
     setIsRevealing(true);
     setReadyToPass(true);
   };
@@ -102,7 +105,10 @@ export default function RevealScreen({ themeColor }) {
       {readyToPass && !isRevealing && (
         <Button
           variant="primary"
-          onClick={nextPlayer}
+          onClick={() => {
+            triggerFeedback('select');
+            nextPlayer();
+          }}
           style={{ backgroundColor: themeColor, borderColor: themeColor }}>
           Listo / Siguiente
         </Button>

@@ -2,6 +2,7 @@ import { Home, RotateCw } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../../../../shared/ui/Button/Button';
+import { useGameFeedback } from '../../../../shared/hooks/useGameFeedback';
 import { useImpostorStore } from '../../stores/useImpostorStore';
 import styles from './ResultScreen.module.scss';
 
@@ -11,25 +12,35 @@ export default function ResultScreen({ themeColor }) {
   const navigate = useNavigate();
   const [countdown, setCountdown] = useState(10);
   const [showResult, setShowResult] = useState(false);
-
-  useEffect(() => {
-    if (countdown > 0) {
-      const timer = setTimeout(() => setCountdown((prev) => prev - 1), 1000);
-      return () => clearTimeout(timer);
-    } else {
-      setShowResult(true);
-    }
-  }, [countdown]);
+  const { triggerFeedback } = useGameFeedback();
 
   const mostVotedPlayer = players.find((p) => p.id === mostVotedId);
   const isImpostor = mostVotedPlayer?.role === 'IMPOSTOR';
   const actualImpostor = players.find((p) => p.role === 'IMPOSTOR');
 
+  useEffect(() => {
+    if (countdown > 0) {
+      if (countdown <= 5) triggerFeedback('tick');
+      const timer = setTimeout(() => setCountdown((prev) => prev - 1), 1000);
+      return () => clearTimeout(timer);
+    } else {
+      if (!showResult) {
+        // Only trigger once
+        if (isImpostor)
+          triggerFeedback('success'); // Players win (found impostor)
+        else triggerFeedback('gameover'); // Impostor wins (wrong person)
+      }
+      setShowResult(true);
+    }
+  }, [countdown, showResult, isImpostor, triggerFeedback]);
+
   const handleRestart = () => {
+    triggerFeedback('reroll');
     restartGame();
   };
 
   const handleHome = () => {
+    triggerFeedback('click');
     resetGame();
     navigate('/');
   };
