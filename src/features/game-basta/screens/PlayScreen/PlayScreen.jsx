@@ -1,5 +1,7 @@
 import classNames from 'classnames';
+import { RefreshCw } from 'lucide-react';
 import { useEffect } from 'react';
+import { useGameFeedback } from '../../../../shared/hooks/useGameFeedback';
 import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
 import { ALPHABET, useBastaStore } from '../../stores/useBastaStore';
 import styles from './PlayScreen.module.scss';
@@ -12,7 +14,10 @@ export default function PlayScreen({ themeColor }) {
     currentPlayerId,
     tickTimer,
     selectLetter,
+    rerollCategory,
   } = useBastaStore();
+
+  const { triggerFeedback } = useGameFeedback();
 
   const players = usePlayerStore((s) => s.players);
   const currentPlayer = players.find((p) => p.id === currentPlayerId);
@@ -25,11 +30,38 @@ export default function PlayScreen({ themeColor }) {
     return () => clearInterval(interval);
   }, [tickTimer]);
 
+  useEffect(() => {
+    if (timer > 0 && timer <= 5) {
+      triggerFeedback('tick');
+    } else if (timer === 0) {
+      triggerFeedback('gameover');
+    }
+  }, [timer, triggerFeedback]);
+
+  const handleReroll = () => {
+    triggerFeedback('reroll');
+    rerollCategory();
+  };
+
+  const handleSelectLetter = (letter) => {
+    triggerFeedback('select');
+    selectLetter(letter);
+  };
+
   return (
     <section className={styles.container} aria-label="Tablero de juego">
       <div className={styles.categoryCard} style={{ borderColor: themeColor }}>
         <h3>Categoría</h3>
-        <h2>{currentCategory}</h2>
+        <div className={styles.categoryRow}>
+          <h2>{currentCategory}</h2>
+          <button
+            type="button"
+            onClick={handleReroll}
+            className={styles.rerollButton}
+            aria-label="Cambiar categoría">
+            <RefreshCw size={20} />
+          </button>
+        </div>
       </div>
 
       <section className={styles.timerSection} aria-label="Estado del turno">
@@ -65,7 +97,7 @@ export default function PlayScreen({ themeColor }) {
               className={classNames(styles.letterBtn, {
                 [styles.used]: !isAvailable,
               })}
-              onClick={() => selectLetter(letter)}
+              onClick={() => handleSelectLetter(letter)}
               aria-pressed={!isAvailable}
               aria-label={
                 isAvailable

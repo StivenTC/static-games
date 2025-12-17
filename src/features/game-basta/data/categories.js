@@ -8,7 +8,7 @@ export const BASTA_CATEGORIES = [
   'Animales terrestres',
   'Criaturas fantásticas',
   'Países',
-  'Cosas de un día de lluvia',
+  'Cosas que haces un día de lluvia',
   'Frases "Pick Me"',
   'Partes del cuerpo',
   'Artistas famosas',

@@ -53,6 +53,16 @@ export const useBastaStore = create((set, get) => ({
     }));
   },
 
+  rerollCategory: () => {
+    const { currentCategory } = get();
+    let newCategory = currentCategory;
+    // Simple retry loop to ensure different category
+    while (newCategory === currentCategory) {
+      newCategory = CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
+    }
+    set({ currentCategory: newCategory });
+  },
+
   selectLetter: (letter) => {
     const {
       availableLetters,

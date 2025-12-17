@@ -33,11 +33,41 @@
     margin-bottom: 0.5rem;
   }
 
-  h2 {
-    margin: 0;
-    font-size: 2rem;
-    font-weight: 800;
-    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  .categoryRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    
+    h2 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 800;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .rerollButton {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      padding: 0.5rem;
+      border-radius: 50%;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        transform: rotate(15deg);
+      }
+
+      &:active {
+        transform: scale(0.9) rotate(15deg);
+      }
+    }
   }
 }
 
