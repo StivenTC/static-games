@@ -3,6 +3,7 @@ import { RefreshCw } from 'lucide-react';
 import { useEffect } from 'react';
 import { useGameFeedback } from '../../../../shared/hooks/useGameFeedback';
 import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
+import { darkenColor } from '../../../../shared/utils/colorUtils';
 import { ALPHABET, useBastaStore } from '../../stores/useBastaStore';
 import styles from './PlayScreen.module.scss';
 
@@ -90,6 +91,8 @@ export default function PlayScreen({ themeColor }) {
       <section className={styles.letterGrid} aria-label="Teclado de letras">
         {ALPHABET.map((letter) => {
           const isAvailable = availableLetters.includes(letter);
+          const baseColor = currentPlayer?.color || themeColor;
+
           return (
             <button
               key={letter}
@@ -104,7 +107,15 @@ export default function PlayScreen({ themeColor }) {
                   ? `Seleccionar letra ${letter}`
                   : `Deshacer letra ${letter}`
               }
-              style={isAvailable ? { color: themeColor } : {}}>
+              style={
+                isAvailable
+                  ? {
+                      backgroundColor: darkenColor(baseColor, 30),
+                      color: '#fff',
+                      borderColor: 'transparent',
+                    }
+                  : {}
+              }>
               {letter}
             </button>
           );
