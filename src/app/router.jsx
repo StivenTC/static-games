@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import BastaGame from '../features/game-basta/BastaGame';
 import ImpostorGame from '../features/game-impostor/ImpostorGame';
 import TabuGame from '../features/game-tabu/TabuGame';
+import MemoryGame from '../features/game-memory/MemoryGame';
 import MenuPage from '../features/menu/MenuPage/MenuPage';
 
 export const router = createBrowserRouter(
@@ -24,7 +25,7 @@ export const router = createBrowserRouter(
     },
     {
       path: '/memory',
-      element: <div style={{ color: 'white' }}>Memory Game (Coming Soon)</div>,
+      element: <MemoryGame />,
     },
   ],
   {

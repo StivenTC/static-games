@@ -1,0 +1,89 @@
+@use '../../../styles/variables' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  padding: 1rem;
+  /* Remove justify-content: center to allow top alignment */
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* Stack vertically */
+  justify-content: center;
+  align-items: center;
+  margin-bottom: auto; /* Push everything else down */
+  font-size: 1.2rem; /* Restore size */
+  font-weight: bold;
+  padding: 0;
+  text-align: center;
+}
+
+.status {
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1;
+  margin-bottom: auto; /* Center vertically with header mb-auto */
+}
+
+.pad {
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  opacity: 0.6;
+  width: 100%;
+  height: 100%;
+  
+  /* Mobile fixes */
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  touch-action: manipulation;
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.pad.active {
+  opacity: 1;
+  box-shadow: 0 0 30px currentColor; /* Revert to glowing shadow */
+  transform: scale(1.05);
+  z-index: 10;
+  filter: none; /* Remove brightness distortion */
+}
+
+.green { background-color: $neon-green; color: $neon-green; }
+.red { background-color: $neon-red; color: $neon-red; }
+.yellow { background-color: #ffd700; color: #ffd700; }
+.blue { background-color: $neon-blue; color: $neon-blue; }
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  border-radius: 20px;
+}

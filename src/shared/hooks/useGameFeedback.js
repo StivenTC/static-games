@@ -62,6 +62,40 @@ export const useGameFeedback = () => {
           osc.stop(now + 0.15);
           break;
 
+        // Simon Tones
+        case 'simon-green': // E4
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(329.63, now);
+          gainNode.gain.setValueAtTime(0.3, now);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+          osc.start(now);
+          osc.stop(now + 0.4);
+          break;
+        case 'simon-red': // A4
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(440.0, now);
+          gainNode.gain.setValueAtTime(0.3, now);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+          osc.start(now);
+          osc.stop(now + 0.4);
+          break;
+        case 'simon-yellow': // C#4
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(277.18, now);
+          gainNode.gain.setValueAtTime(0.3, now);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+          osc.start(now);
+          osc.stop(now + 0.4);
+          break;
+        case 'simon-blue': // E3
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(164.81, now);
+          gainNode.gain.setValueAtTime(0.3, now);
+          gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+          osc.start(now);
+          osc.stop(now + 0.4);
+          break;
+
         case 'success': {
           // Major chord arpeggio
           const notes = [523.25, 659.25, 783.99]; // C5, E5, G5
@@ -142,6 +176,13 @@ export const useGameFeedback = () => {
         case 'reroll':
           triggerVibration(30);
           playSound('reroll');
+          break;
+        case 'simon-green':
+        case 'simon-red':
+        case 'simon-yellow':
+        case 'simon-blue':
+          triggerVibration(50);
+          playSound(type);
           break;
         default:
           break;
