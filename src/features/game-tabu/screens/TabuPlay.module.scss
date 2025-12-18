@@ -1,0 +1,171 @@
+@use '../../../styles/variables' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+  color: white;
+  position: relative;
+  flex: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  padding: 0 0.5rem;
+  font-family: var(--font-family-mono, monospace);
+  letter-spacing: 1px;
+}
+
+.timer {
+  color: $neon-purple;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.score {
+  font-variant-numeric: tabular-nums;
+}
+
+.card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.targetWord {
+  font-size: 3.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  color: $neon-purple;
+  text-align: center;
+  line-height: 1.1;
+  text-shadow: 0 0 20px $neon-purple;
+  letter-spacing: 2px;
+}
+
+.tabuList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  align-items: center;
+}
+
+.tabuWord {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+.tabuWord::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -10%;
+  width: 120%;
+  height: 2px;
+  background: #ff3b30;
+  transform: rotate(-2deg);
+  opacity: 0.6;
+}
+
+.controls {
+  display: flex;
+  gap: 1.5rem;
+  height: 90px;
+}
+
+.btn {
+  flex: 1;
+  border: none;
+  border-radius: 16px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.skipBtn {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.skipBtn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.correctBtn {
+  background-color: $neon-purple;
+  color: black;
+  box-shadow: 0 0 15px $neon-purple;
+}
+
+.correctBtn:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 0 25px $neon-purple;
+}
+
+/* Round Over Overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  border-radius: 20px;
+}
+
+.scoreTitle {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.finalScore {
+  font-size: 6rem;
+  font-weight: 900;
+  color: $neon-purple;
+  margin-bottom: 3rem;
+  text-shadow: 0 0 30px $neon-purple;
+}

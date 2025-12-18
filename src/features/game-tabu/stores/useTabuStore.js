@@ -4,24 +4,32 @@ import { tabuWords } from '../data/tabuWords';
 const GAME_DURATION = 60;
 
 export const useTabuStore = create((set, get) => ({
-  gameState: 'setup', // setup, playing, result
+  gameState: 'setup', // setup, playing, roundOver
   deck: [],
   currentCard: null,
-  score: 0,
+  currentPlayerId: null,
+  scores: {}, // { playerId: points }
+  score: 0, // Deprecated, but keeping for compatibility if referenced, though we move to scores map
   timeLeft: GAME_DURATION,
 
-  setupGame: () => {
+  setupGame: (players) => {
     // Shuffle deck
     const shuffled = [...tabuWords].sort(() => Math.random() - 0.5);
+    // Initialize scores
+    const initialScores = {};
+    players.forEach((p) => {
+      initialScores[p.id] = 0;
+    });
+
     set({
       gameState: 'playing',
       deck: shuffled,
       currentCard: null,
-      score: 0,
+      scores: initialScores,
       timeLeft: GAME_DURATION,
     });
-    // Immediately pick first card
-    get().nextCard();
+    // Pick first player and card
+    get().nextTurn(players);
   },
 
   decrementTime: () => {
@@ -35,11 +43,14 @@ export const useTabuStore = create((set, get) => ({
     }
   },
 
-  nextTurn: () => {
+  nextTurn: (players) => {
+    // Pick random player to describe
+    const randomPlayer = players[Math.floor(Math.random() * players.length)];
+
     set({
       gameState: 'playing',
-      score: 0,
       timeLeft: GAME_DURATION,
+      currentPlayerId: randomPlayer.id,
     });
     get().nextCard();
   },
@@ -58,9 +69,14 @@ export const useTabuStore = create((set, get) => ({
     }
   },
 
-  correctGuess: () => {
-    set((state) => ({ score: state.score + 1 }));
-    get().nextCard();
+  correctGuess: (guesserId) => {
+    set((state) => ({
+      scores: {
+        ...state.scores,
+        [guesserId]: (state.scores[guesserId] || 0) + 1,
+      },
+      gameState: 'roundOver',
+    }));
   },
 
   skipCard: () => {
@@ -74,9 +90,10 @@ export const useTabuStore = create((set, get) => ({
   resetGame: () => {
     set({
       gameState: 'setup',
-      score: 0,
+      scores: {},
       timeLeft: GAME_DURATION,
       currentCard: null,
+      currentPlayerId: null,
     });
   },
 }));
