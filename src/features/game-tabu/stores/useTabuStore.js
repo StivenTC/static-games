@@ -9,6 +9,7 @@ export const useTabuStore = create((set, get) => ({
   currentCard: null,
   currentPlayerId: null,
   scores: {}, // { playerId: points }
+  playedIds: [], // Track players who have taken a turn in the current cycle
   score: 0, // Deprecated, but keeping for compatibility if referenced, though we move to scores map
   timeLeft: GAME_DURATION,
 
@@ -26,6 +27,7 @@ export const useTabuStore = create((set, get) => ({
       deck: shuffled,
       currentCard: null,
       scores: initialScores,
+      playedIds: [],
       timeLeft: GAME_DURATION,
     });
     // Pick first player and card
@@ -44,14 +46,37 @@ export const useTabuStore = create((set, get) => ({
   },
 
   nextTurn: (players) => {
-    // Pick random player to describe
-    const randomPlayer = players[Math.floor(Math.random() * players.length)];
+    const { playedIds } = get();
 
-    set({
+    // Filter out players who have already played in this cycle
+    let candidates = players.filter((p) => !playedIds.includes(p.id));
+
+    // If everyone has played, reset the cycle
+    if (candidates.length === 0) {
+      candidates = [...players];
+      // We will reset playedIds below by starting a new list with just the selected player
+      set({ playedIds: [] });
+      // Note: We need to be careful with the async set.
+      // Actually simpler: just pick from 'players' and set playedIds to [newPlayer.id]
+    }
+
+    // Pick random candidate
+    const randomPlayer =
+      candidates[Math.floor(Math.random() * candidates.length)];
+
+    // Update state
+    set((state) => ({
       gameState: 'playing',
       timeLeft: GAME_DURATION,
       currentPlayerId: randomPlayer.id,
-    });
+      // If we just reset (candidates == players), we start new list.
+      // Otherwise we append.
+      playedIds:
+        candidates.length === players.length
+          ? [randomPlayer.id]
+          : [...state.playedIds, randomPlayer.id],
+    }));
+
     get().nextCard();
   },
 
@@ -91,6 +116,7 @@ export const useTabuStore = create((set, get) => ({
     set({
       gameState: 'setup',
       scores: {},
+      playedIds: [],
       timeLeft: GAME_DURATION,
       currentCard: null,
       currentPlayerId: null,

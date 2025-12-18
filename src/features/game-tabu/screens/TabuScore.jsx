@@ -37,7 +37,10 @@ const TabuScore = () => {
           <X size={20} style={{ marginRight: 8 }} />
           Salir
         </Button>
-        <Button variant="primary" onClick={() => nextTurn(players)}>
+        <Button
+          variant="primary"
+          onClick={() => nextTurn(players)}
+          style={{ backgroundColor: '#bd00ff', borderColor: '#bd00ff' }}>
           Siguiente Ronda
           <ArrowRight size={20} style={{ marginLeft: 8 }} />
         </Button>
