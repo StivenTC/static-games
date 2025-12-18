@@ -1,4 +1,4 @@
-import { ArrowRight, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useGameFeedback } from '../../../shared/hooks/useGameFeedback';
 import { usePlayerStore } from '../../../shared/stores/usePlayerStore';
 import Button from '../../../shared/ui/Button/Button';
@@ -52,7 +52,6 @@ const TabuScore = () => {
           }}
           style={{ backgroundColor: '#bd00ff', borderColor: '#bd00ff' }}>
           Siguiente Ronda
-          <ArrowRight size={20} style={{ marginLeft: 8 }} />
         </Button>
       </footer>
     </div>

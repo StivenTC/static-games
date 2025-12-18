@@ -1,4 +1,4 @@
-import { ArrowRight, Check, RotateCcw, Timer, X } from 'lucide-react';
+import { ArrowRight, RotateCcw, Timer, X } from 'lucide-react';
 import { useEffect } from 'react';
 import { useGameFeedback } from '../../../shared/hooks/useGameFeedback';
 import { usePlayerStore } from '../../../shared/stores/usePlayerStore';
@@ -77,6 +77,23 @@ const TabuPlay = () => {
       </main>
 
       <footer className={styles.controls}>
+        {/* Chips for scoring */}
+        <div className={styles.chipContainer}>
+          {guessers.map((p) => (
+            <button
+              key={p.id}
+              type="button"
+              className={styles.chip}
+              onClick={() => {
+                triggerFeedback('success');
+                correctGuess(p.id);
+              }}
+              style={{ backgroundColor: p.color }}>
+              {p.name}
+            </button>
+          ))}
+        </div>
+
         <button
           type="button"
           className={`${styles.btn} ${styles.skipBtn}`}
@@ -84,54 +101,30 @@ const TabuPlay = () => {
             triggerFeedback('reroll');
             skipCard();
           }}
-          style={{ flex: 1, maxWidth: '30%' }}>
+          style={{ width: '100%', padding: '0.8rem' }}>
           <X size={24} />
           Pasar
         </button>
-
-        <div
-          style={{
-            flex: 2,
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))',
-            gap: '0.5rem',
-          }}>
-          {guessers.map((p) => (
-            <button
-              key={p.id}
-              type="button"
-              className={`${styles.btn}`}
-              onClick={() => {
-                triggerFeedback('success');
-                correctGuess(p.id);
-              }}
-              style={{
-                backgroundColor: p.color,
-                color: 'black',
-                fontSize: '0.9rem',
-                padding: '0.5rem',
-                height: '100%',
-                textShadow: 'none',
-              }}>
-              <Check size={16} />
-              {p.name}
-            </button>
-          ))}
-        </div>
       </footer>
 
       {gameState === 'roundOver' && (
         <div className={styles.overlay}>
           <div className={styles.scoreTitle}>¡Tiempo Agotado!</div>
 
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <Button variant="outline" onClick={resetGame}>
-              <RotateCcw size={20} style={{ marginRight: 8 }} />
-              Salir
-            </Button>
-            <Button variant="primary" onClick={() => nextTurn(players)}>
+          <div className={styles.overlayActions}>
+            <Button
+              variant="primary"
+              onClick={() => nextTurn(players)}
+              style={{ width: '100%', justifyContent: 'center' }}>
               Siguiente Ronda
               <ArrowRight size={20} style={{ marginLeft: 8 }} />
+            </Button>
+            <Button
+              variant="outline"
+              onClick={resetGame}
+              style={{ width: '100%', justifyContent: 'center' }}>
+              <RotateCcw size={20} style={{ marginRight: 8 }} />
+              Salir
             </Button>
           </div>
         </div>

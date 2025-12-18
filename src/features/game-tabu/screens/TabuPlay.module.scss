@@ -42,19 +42,20 @@
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
-  padding: 2rem;
-  margin-bottom: 2rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
+  min-height: 0; 
 }
 
 .targetWord {
-  font-size: 3.5rem;
+  font-size: 2.5rem;
   font-weight: 900;
   text-transform: uppercase;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
   color: $neon-purple;
   text-align: center;
   line-height: 1.1;
@@ -65,13 +66,12 @@
 .tabuList {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
   width: 100%;
   align-items: center;
 }
 
 .tabuWord {
-  font-size: 1.8rem;
+  font-size: 1rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.9);
   text-transform: uppercase;
@@ -93,8 +93,10 @@
 
 .controls {
   display: flex;
-  gap: 1.5rem;
-  height: 90px;
+  flex-direction: column; /* Stack vertically */
+  gap: 1rem;
+  height: auto;
+  padding-bottom: 1rem;
 }
 
 .btn {
@@ -139,6 +141,45 @@
   box-shadow: 0 0 25px $neon-purple;
 }
 
+.chipContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  max-height: 25vh; /* Limit height so it doesn't take full screen */
+  overflow-y: auto; /* Scroll chips if too many */
+  padding: 2px; /* Prevent shadow clipping */
+}
+
+.chip {
+  border: none;
+  border-radius: 12px; /* Squarer with rounded corners */
+  padding: 0.5rem 0.8rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: black;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.1s;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.chip:active {
+  transform: scale(0.95);
+}
+
+/* Round Over Overlay */
+.overlayActions {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  max-width: 300px;
+  flex-direction: column; /* Stack vertically for safety */
+}
 /* Round Over Overlay */
 .overlay {
   position: absolute;
@@ -154,6 +195,8 @@
   justify-content: center;
   z-index: 100;
   border-radius: 20px;
+  padding: 2rem; /* Ensure content doesn't touch edges */
+  text-align: center;
 }
 
 .scoreTitle {
