@@ -42,6 +42,12 @@ src/
     ├── _variables.scss   # Paleta: $neon-red, $neon-blue, $bg-dark
     ├── _mixins.scss      # Efectos de cristal, ruido
     └── main.scss         # Reset y estilos base
+
+### REGLA DE ORGANIZACIÓN DE PANTALLAS (VITAL)
+Cada pantalla debe tener su propia subcarpeta dentro de `screens/` para mantener junto el componente y su estilo:
+*   ✅ `src/features/game-tabu/screens/TabuPlay/TabuPlay.jsx`
+*   ✅ `src/features/game-tabu/screens/TabuPlay/TabuPlay.module.scss`
+*   ❌ `src/features/game-tabu/screens/TabuPlay.jsx` (Archivo suelto)
 \`\`\`
 
 ## 4. DESIGN SYSTEM: "STATIC AESTHETIC"
