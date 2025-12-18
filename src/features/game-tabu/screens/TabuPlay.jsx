@@ -1,5 +1,6 @@
 import { ArrowRight, Check, RotateCcw, Timer, X } from 'lucide-react';
 import { useEffect } from 'react';
+import { useGameFeedback } from '../../../shared/hooks/useGameFeedback';
 import { usePlayerStore } from '../../../shared/stores/usePlayerStore';
 import Button from '../../../shared/ui/Button/Button';
 import { useTabuStore } from '../stores/useTabuStore';
@@ -18,6 +19,7 @@ const TabuPlay = () => {
     nextTurn,
     resetGame,
   } = useTabuStore();
+  const { triggerFeedback } = useGameFeedback();
 
   const currentPlayer = players.find((p) => p.id === currentPlayerId);
   const guessers = players.filter((p) => p.id !== currentPlayerId);
@@ -27,10 +29,19 @@ const TabuPlay = () => {
     if (gameState === 'playing' && timeLeft > 0) {
       interval = setInterval(() => {
         decrementTime();
+        if (timeLeft <= 11 && timeLeft > 1) {
+          triggerFeedback('tick');
+        }
       }, 1000);
     }
     return () => clearInterval(interval);
-  }, [gameState, timeLeft, decrementTime]);
+  }, [gameState, timeLeft, decrementTime, triggerFeedback]);
+
+  useEffect(() => {
+    if (gameState === 'roundOver') {
+      triggerFeedback('gameover');
+    }
+  }, [gameState, triggerFeedback]);
 
   if (!currentCard) return <div className={styles.container}>Cargando...</div>;
 
@@ -69,7 +80,10 @@ const TabuPlay = () => {
         <button
           type="button"
           className={`${styles.btn} ${styles.skipBtn}`}
-          onClick={skipCard}
+          onClick={() => {
+            triggerFeedback('reroll');
+            skipCard();
+          }}
           style={{ flex: 1, maxWidth: '30%' }}>
           <X size={24} />
           Pasar
@@ -87,7 +101,10 @@ const TabuPlay = () => {
               key={p.id}
               type="button"
               className={`${styles.btn}`}
-              onClick={() => correctGuess(p.id)}
+              onClick={() => {
+                triggerFeedback('success');
+                correctGuess(p.id);
+              }}
               style={{
                 backgroundColor: p.color,
                 color: 'black',

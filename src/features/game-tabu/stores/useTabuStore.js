@@ -95,10 +95,12 @@ export const useTabuStore = create((set, get) => ({
   },
 
   correctGuess: (guesserId) => {
+    const { currentPlayerId } = get();
     set((state) => ({
       scores: {
         ...state.scores,
         [guesserId]: (state.scores[guesserId] || 0) + 1,
+        [currentPlayerId]: (state.scores[currentPlayerId] || 0) + 1,
       },
       gameState: 'roundOver',
     }));

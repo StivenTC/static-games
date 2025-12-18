@@ -1,4 +1,5 @@
 import { ArrowRight, X } from 'lucide-react';
+import { useGameFeedback } from '../../../shared/hooks/useGameFeedback';
 import { usePlayerStore } from '../../../shared/stores/usePlayerStore';
 import Button from '../../../shared/ui/Button/Button';
 import { useTabuStore } from '../stores/useTabuStore';
@@ -7,6 +8,7 @@ import styles from './TabuScore.module.scss';
 const TabuScore = () => {
   const { players } = usePlayerStore();
   const { scores, nextTurn, resetGame } = useTabuStore();
+  const { triggerFeedback } = useGameFeedback();
 
   const sortedPlayers = [...players].sort((a, b) => {
     return (scores[b.id] || 0) - (scores[a.id] || 0);
@@ -33,13 +35,21 @@ const TabuScore = () => {
       </main>
 
       <footer className={styles.footer}>
-        <Button variant="outline" onClick={resetGame}>
+        <Button
+          variant="outline"
+          onClick={() => {
+            triggerFeedback('select');
+            resetGame();
+          }}>
           <X size={20} style={{ marginRight: 8 }} />
           Salir
         </Button>
         <Button
           variant="primary"
-          onClick={() => nextTurn(players)}
+          onClick={() => {
+            triggerFeedback('select');
+            nextTurn(players);
+          }}
           style={{ backgroundColor: '#bd00ff', borderColor: '#bd00ff' }}>
           Siguiente Ronda
           <ArrowRight size={20} style={{ marginLeft: 8 }} />
