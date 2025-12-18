@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import BastaGame from '../features/game-basta/BastaGame';
 import ImpostorGame from '../features/game-impostor/ImpostorGame';
+import TabuGame from '../features/game-tabu/TabuGame';
 import MenuPage from '../features/menu/MenuPage/MenuPage';
 
 export const router = createBrowserRouter(
@@ -19,7 +20,7 @@ export const router = createBrowserRouter(
     },
     {
       path: '/tabu',
-      element: <div style={{ color: 'white' }}>Tabú Game (Coming Soon)</div>,
+      element: <TabuGame />,
     },
     {
       path: '/memory',

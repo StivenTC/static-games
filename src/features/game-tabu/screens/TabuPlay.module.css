@@ -1,0 +1,124 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem;
+  background-color: var(--background-color);
+  color: white;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.timer {
+  color: var(--color-game-tabu);
+}
+
+.card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  color: #333;
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.targetWord {
+  font-size: 3rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  color: var(--color-game-tabu);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.tabuList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  align-items: center;
+}
+
+.tabuWord {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #e63946; /* Red for forbidden */
+  text-transform: uppercase;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  height: 80px;
+}
+
+.btn {
+  flex: 1;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: transform 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.skipBtn {
+  background-color: #f1c40f;
+  color: #333;
+}
+
+.correctBtn {
+  background-color: #2ecc71;
+  color: white;
+}
+
+/* Round Over Overlay */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.scoreTitle {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.finalScore {
+  font-size: 5rem;
+  font-weight: bold;
+  color: var(--color-game-tabu);
+  margin-bottom: 3rem;
+}
