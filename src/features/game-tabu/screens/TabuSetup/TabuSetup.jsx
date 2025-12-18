@@ -1,6 +1,6 @@
-import { usePlayerStore } from '../../../shared/stores/usePlayerStore';
-import GameSetup from '../../../shared/ui/GameSetup/GameSetup';
-import { useTabuStore } from '../stores/useTabuStore';
+import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
+import GameSetup from '../../../../shared/ui/GameSetup/GameSetup';
+import { useTabuStore } from '../../stores/useTabuStore';
 
 const TabuSetup = () => {
   const { setupGame } = useTabuStore();

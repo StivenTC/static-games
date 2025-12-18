@@ -1,9 +1,9 @@
 import { RotateCcw } from 'lucide-react';
-import { usePlayerStore } from '../../../shared/stores/usePlayerStore';
-import Button from '../../../shared/ui/Button/Button';
-import { useMemoryStore } from '../stores/useMemoryStore';
-import { useGameFeedback } from '../../../shared/hooks/useGameFeedback';
-import styles from './MemoryPlay.module.scss'; // Reuse styles for overlay
+import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
+import Button from '../../../../shared/ui/Button/Button';
+import { useMemoryStore } from '../../stores/useMemoryStore';
+import { useGameFeedback } from '../../../../shared/hooks/useGameFeedback';
+import styles from '../MemoryPlay/MemoryPlay.module.scss'; // Reuse styles for overlay
 
 const MemoryScore = () => {
   const { players } = usePlayerStore();

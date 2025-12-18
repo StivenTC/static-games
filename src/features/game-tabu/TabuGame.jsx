@@ -1,9 +1,9 @@
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import MainLayout from '../../shared/layouts/MainLayout/MainLayout';
-import TabuPlay from './screens/TabuPlay';
-import TabuScore from './screens/TabuScore';
-import TabuSetup from './screens/TabuSetup';
+import TabuPlay from './screens/TabuPlay/TabuPlay';
+import TabuScore from './screens/TabuScore/TabuScore';
+import TabuSetup from './screens/TabuSetup/TabuSetup';
 import { useTabuStore } from './stores/useTabuStore';
 
 const TabuGame = () => {

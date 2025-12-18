@@ -1,9 +1,9 @@
 import { ArrowRight, RotateCcw, Timer, X } from 'lucide-react';
 import { useEffect } from 'react';
-import { useGameFeedback } from '../../../shared/hooks/useGameFeedback';
-import { usePlayerStore } from '../../../shared/stores/usePlayerStore';
-import Button from '../../../shared/ui/Button/Button';
-import { useTabuStore } from '../stores/useTabuStore';
+import { useGameFeedback } from '../../../../shared/hooks/useGameFeedback';
+import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
+import Button from '../../../../shared/ui/Button/Button';
+import { useTabuStore } from '../../stores/useTabuStore';
 import styles from './TabuPlay.module.scss';
 
 const TabuPlay = () => {
@@ -49,18 +49,14 @@ const TabuPlay = () => {
     <div className={styles.container}>
       <header className={styles.header}>
         <div
-          className={styles.timer}
-          style={{ color: timeLeft <= 10 ? '#e63946' : 'inherit' }}>
-          <Timer size={24} style={{ display: 'inline', marginRight: 8 }} />
-          {timeLeft}s
+          className={`${styles.timer} ${timeLeft <= 10 ? styles.urgent : ''}`}>
+          <Timer size={24} style={{ marginRight: 8 }} />
+          <span>{timeLeft}s</span>
         </div>
 
-        {/* Describer Indicator */}
         <div
-          style={{
-            color: currentPlayer?.color || 'white',
-            fontWeight: 'bold',
-          }}>
+          className={styles.describerName}
+          style={{ color: currentPlayer?.color }}>
           {currentPlayer?.name}
         </div>
       </header>
@@ -77,7 +73,6 @@ const TabuPlay = () => {
       </main>
 
       <footer className={styles.controls}>
-        {/* Chips for scoring */}
         <div className={styles.chipContainer}>
           {guessers.map((p) => (
             <button
@@ -88,7 +83,8 @@ const TabuPlay = () => {
                 triggerFeedback('success');
                 correctGuess(p.id);
               }}
-              style={{ backgroundColor: p.color }}>
+              style={{ backgroundColor: p.color }}
+              aria-label={`Punto para ${p.name}`}>
               {p.name}
             </button>
           ))}
@@ -100,8 +96,7 @@ const TabuPlay = () => {
           onClick={() => {
             triggerFeedback('reroll');
             skipCard();
-          }}
-          style={{ width: '100%', padding: '0.8rem' }}>
+          }}>
           <X size={24} />
           Pasar
         </button>
@@ -112,17 +107,11 @@ const TabuPlay = () => {
           <div className={styles.scoreTitle}>¡Tiempo Agotado!</div>
 
           <div className={styles.overlayActions}>
-            <Button
-              variant="primary"
-              onClick={() => nextTurn(players)}
-              style={{ width: '100%', justifyContent: 'center' }}>
+            <Button variant="primary" onClick={() => nextTurn(players)}>
               Siguiente Ronda
               <ArrowRight size={20} style={{ marginLeft: 8 }} />
             </Button>
-            <Button
-              variant="outline"
-              onClick={resetGame}
-              style={{ width: '100%', justifyContent: 'center' }}>
+            <Button variant="outline" onClick={resetGame}>
               <RotateCcw size={20} style={{ marginRight: 8 }} />
               Salir
             </Button>

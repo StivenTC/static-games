@@ -1,6 +1,6 @@
-import { usePlayerStore } from '../../../shared/stores/usePlayerStore';
-import GameSetup from '../../../shared/ui/GameSetup/GameSetup';
-import { useMemoryStore } from '../stores/useMemoryStore';
+import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
+import GameSetup from '../../../../shared/ui/GameSetup/GameSetup';
+import { useMemoryStore } from '../../stores/useMemoryStore';
 
 const MemorySetup = () => {
   const { setupGame } = useMemoryStore();

@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
 import styles from './MemoryPlay.module.scss';
-import { useMemoryStore } from '../stores/useMemoryStore';
-import { usePlayerStore } from '../../../shared/stores/usePlayerStore';
-import { useGameFeedback } from '../../../shared/hooks/useGameFeedback';
+import { useMemoryStore } from '../../stores/useMemoryStore';
+import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
+import { useGameFeedback } from '../../../../shared/hooks/useGameFeedback';
 
 const COLORS = ['green', 'red', 'yellow', 'blue'];
 

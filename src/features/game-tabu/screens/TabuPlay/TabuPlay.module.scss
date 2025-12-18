@@ -1,4 +1,4 @@
-@use '../../../styles/variables' as *;
+@use '../../../../styles/variables' as *;
 
 .container {
   display: flex;
@@ -27,6 +27,19 @@
   display: flex;
   align-items: center;
   font-weight: bold;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  
+  &.urgent {
+    color: #e63946;
+    animation: pulse 1s infinite;
+  }
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
 }
 
 .score {
@@ -59,10 +72,15 @@
   color: $neon-purple;
   text-align: center;
   line-height: 1.1;
+  line-height: 1.1;
   text-shadow: 0 0 20px $neon-purple;
   letter-spacing: 2px;
 }
 
+.describerName {
+  font-weight: bold;
+  transition: color 0.3s;
+}
 .tabuList {
   display: flex;
   flex-direction: column;
@@ -127,19 +145,11 @@
 
 .skipBtn:hover {
   background-color: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
+  width: 100%;
+  padding: 0.8rem;
 }
 
-.correctBtn {
-  background-color: $neon-purple;
-  color: black;
-  box-shadow: 0 0 15px $neon-purple;
-}
-
-.correctBtn:hover {
-  filter: brightness(1.1);
-  box-shadow: 0 0 25px $neon-purple;
-}
+/* Removed unused correctBtn styles */
 
 .chipContainer {
   display: flex;
@@ -177,9 +187,12 @@
   display: flex;
   gap: 1rem;
   width: 100%;
-  max-width: 300px;
-  flex-direction: column; /* Stack vertically for safety */
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
+
 /* Round Over Overlay */
 .overlay {
   position: absolute;

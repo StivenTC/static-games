@@ -1,8 +1,8 @@
 import { X } from 'lucide-react';
-import { useGameFeedback } from '../../../shared/hooks/useGameFeedback';
-import { usePlayerStore } from '../../../shared/stores/usePlayerStore';
-import Button from '../../../shared/ui/Button/Button';
-import { useTabuStore } from '../stores/useTabuStore';
+import { useGameFeedback } from '../../../../shared/hooks/useGameFeedback';
+import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
+import Button from '../../../../shared/ui/Button/Button';
+import { useTabuStore } from '../../stores/useTabuStore';
 import styles from './TabuScore.module.scss';
 
 const TabuScore = () => {
@@ -46,11 +46,11 @@ const TabuScore = () => {
         </Button>
         <Button
           variant="primary"
+          className={styles.nextRoundBtn}
           onClick={() => {
             triggerFeedback('select');
             nextTurn(players);
-          }}
-          style={{ backgroundColor: '#bd00ff', borderColor: '#bd00ff' }}>
+          }}>
           Siguiente Ronda
         </Button>
       </footer>

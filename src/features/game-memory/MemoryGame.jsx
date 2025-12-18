@@ -1,9 +1,9 @@
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import MainLayout from '../../shared/layouts/MainLayout/MainLayout';
-import MemoryPlay from './screens/MemoryPlay';
-import MemoryScore from './screens/MemoryScore';
-import MemorySetup from './screens/MemorySetup';
+import MemoryPlay from './screens/MemoryPlay/MemoryPlay';
+import MemoryScore from './screens/MemoryScore/MemoryScore';
+import MemorySetup from './screens/MemorySetup/MemorySetup';
 import { useMemoryStore } from './stores/useMemoryStore';
 
 const MemoryGame = () => {
