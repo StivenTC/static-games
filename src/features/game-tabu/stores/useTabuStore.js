@@ -38,10 +38,10 @@ export const useTabuStore = create((set, get) => ({
     const { timeLeft, gameState } = get();
     if (gameState !== 'playing') return;
 
-    if (timeLeft > 0) {
+    if (timeLeft > 1) {
       set({ timeLeft: timeLeft - 1 });
     } else {
-      set({ gameState: 'roundOver' });
+      set({ timeLeft: 0, gameState: 'roundOver' });
     }
   },
 
