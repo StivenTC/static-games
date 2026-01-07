@@ -1,7 +1,9 @@
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import MainLayout from '../../shared/layouts/MainLayout/MainLayout';
-import GameSetup from '../../shared/ui/GameSetup/GameSetup';
+import MainLayout from '@/shared/layouts/MainLayout/MainLayout';
+import GameSetup from '@/shared/ui/GameSetup/GameSetup';
+import theme from '@/styles/theme.module.scss';
+import styles from './ImpostorGame.module.scss';
 import DebateScreen from './screens/DebateScreen/DebateScreen';
 import ResultScreen from './screens/ResultScreen/ResultScreen';
 import RevealScreen from './screens/RevealScreen/RevealScreen';
@@ -21,28 +23,17 @@ export default function ImpostorGame() {
   return (
     <MainLayout>
       {/* Top Bar */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginBottom: '1rem',
-        }}>
+      <div className={styles.header}>
         <button
           type="button"
           onClick={handleBack}
-          style={{
-            background: 'none',
-            border: 'none',
-            color: 'white',
-            cursor: 'pointer',
-          }}>
+          className={styles.backButton}>
           <ArrowLeft />
         </button>
-        <span style={{ fontWeight: 'bold', color: '#ff0055' }}>
+        <span className={styles.title}>
           IMPOSTOR {phase !== 'SETUP' && `• ${players.length} Jugadores`}
         </span>
-        <div style={{ width: 24 }}></div> {/* Spacer */}
+        <div className={styles.spacer}></div>
       </div>
 
       {phase === 'SETUP' && (
@@ -50,13 +41,13 @@ export default function ImpostorGame() {
           title="Impostor"
           onStart={startGame}
           minPlayers={3}
-          themeColor="#ff0055"
+          themeColor={theme.neonRed}
         />
       )}
-      {phase === 'REVEAL' && <RevealScreen themeColor="#ff0055" />}
-      {phase === 'DEBATE' && <DebateScreen themeColor="#ff0055" />}
-      {phase === 'VOTING' && <VotingScreen themeColor="#ff0055" />}
-      {phase === 'RESULT' && <ResultScreen themeColor="#ff0055" />}
+      {phase === 'REVEAL' && <RevealScreen themeColor={theme.neonRed} />}
+      {phase === 'DEBATE' && <DebateScreen themeColor={theme.neonRed} />}
+      {phase === 'VOTING' && <VotingScreen themeColor={theme.neonRed} />}
+      {phase === 'RESULT' && <ResultScreen themeColor={theme.neonRed} />}
     </MainLayout>
   );
 }

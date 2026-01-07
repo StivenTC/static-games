@@ -1,7 +1,7 @@
 import { Play, UserPlus, X } from 'lucide-react';
 import { useState } from 'react';
-import Button from '../../../../shared/ui/Button/Button';
-import Input from '../../../../shared/ui/Input/Input';
+import Button from '@/shared/ui/Button/Button';
+import Input from '@/shared/ui/Input/Input';
 import { useImpostorStore } from '../../stores/useImpostorStore';
 import styles from './SetupScreen.module.scss';
 
@@ -22,7 +22,7 @@ export default function SetupScreen({ themeColor }) {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{ '--theme-color': themeColor }}>
       <div className={styles.header}>
         <h2>Impostor</h2>
         <p>Agrega jugadores (Mínimo 3)</p>
@@ -35,15 +35,13 @@ export default function SetupScreen({ themeColor }) {
             onChange={(e) => setName(e.target.value)}
             placeholder="Nombre del jugador"
             className={styles.input}
-            style={{ borderColor: themeColor }}
             focusColor={themeColor}
           />
           <Button
             type="submit"
             variant="outline"
             disabled={!name.trim()}
-            className={styles.addButton}
-            style={{ borderColor: themeColor, color: themeColor }}>
+            className={styles.addButton}>
             <UserPlus size={20} />
           </Button>
         </div>
@@ -54,7 +52,7 @@ export default function SetupScreen({ themeColor }) {
           <div
             key={p.id}
             className={styles.playerItem}
-            style={{ borderLeft: `4px solid ${p.color || '#fff'}` }}>
+            style={{ '--player-color': p.color || '#fff' }}>
             <span>{p.name}</span>
             <button
               type="button"
@@ -65,9 +63,7 @@ export default function SetupScreen({ themeColor }) {
           </div>
         ))}
         {players.length === 0 && (
-          <div style={{ textAlign: 'center', opacity: 0.5, marginTop: '2rem' }}>
-            No hay jugadores aún.
-          </div>
+          <div className={styles.emptyMessage}>No hay jugadores aún.</div>
         )}
       </div>
 
@@ -80,7 +76,7 @@ export default function SetupScreen({ themeColor }) {
             backgroundColor: players.length >= 3 ? themeColor : undefined,
             borderColor: themeColor,
           }}>
-          <Play size={20} style={{ marginRight: '8px' }} />
+          <Play size={20} className={styles.playIcon} />
           Comenzar Juego
         </Button>
       </div>

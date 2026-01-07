@@ -1,4 +1,4 @@
-@use '../../../../styles/variables' as *;
+@use '@/styles/variables' as *;
 
 .container {
   display: flex;
@@ -6,8 +6,10 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  // text-align: center; // This was here but let's keep it clean
   text-align: center;
   gap: 2rem;
+  --theme-color: #{$neon-blue};
 }
 
 .countdown {
@@ -72,6 +74,10 @@
   }
 }
 
+.votedName {
+  color: var(--player-color) !important;
+}
+
 .roleReveal {
   font-size: 2rem;
   font-weight: 800;
@@ -111,6 +117,16 @@
   gap: 1rem;
 }
 
+.restartBtn {
+  background-color: var(--theme-color) !important;
+  border-color: var(--theme-color) !important;
+}
+
+.homeBtn {
+  border-color: var(--theme-color) !important;
+  color: var(--theme-color) !important;
+}
+
 .impostorReveal {
   margin-top: 2rem;
   font-size: 1.25rem;
@@ -121,4 +137,8 @@
     display: block;
     // Color handled inline
   }
+}
+
+.impostorName {
+  color: var(--player-color) !important;
 }

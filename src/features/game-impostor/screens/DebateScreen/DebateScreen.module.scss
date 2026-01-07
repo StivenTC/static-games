@@ -1,4 +1,4 @@
-@use '../../../../styles/variables' as *;
+@use '@/styles/variables' as *;
 
 .container {
   display: flex;
@@ -8,6 +8,7 @@
   height: 100%;
   padding: 1rem 0;
   text-align: center;
+  --theme-color: #{$neon-blue};
 }
 
 .header {
@@ -21,8 +22,9 @@
 
   .currentPlayer {
     font-size: 2.5rem;
-    color: $neon-blue;
-    text-shadow: 0 0 15px rgba($neon-blue, 0.5);
+    color: var(--player-color, $neon-blue);
+    text-shadow: 0 0 15px rgba($neon-blue, 0.5); // Ideally dynamic too, but complex without js for shadow color
+    text-shadow: 0 0 15px currentColor; // Using currentColor for shadow
     font-weight: 800;
   }
 }
@@ -51,6 +53,20 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.nextTurnBtn {
+  background-color: var(--theme-color) !important;
+  border-color: var(--theme-color) !important;
+}
+
+.voteBtn {
+  color: var(--theme-color) !important;
+  border-color: var(--theme-color) !important;
+}
+
+.voteIcon {
+  margin-right: 8px;
 }
 
 .divider {

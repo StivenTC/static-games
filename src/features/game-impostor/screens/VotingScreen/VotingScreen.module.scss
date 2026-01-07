@@ -1,4 +1,4 @@
-@use '../../../../styles/variables' as *;
+@use '@/styles/variables' as *;
 
 .container {
   display: flex;
@@ -15,7 +15,7 @@
   strong {
     display: block;
     font-size: 2rem;
-    color: $neon-purple;
+    color: var(--player-color, $neon-purple); // Use var or fallback
     margin-top: 0.5rem;
   }
 }
@@ -26,6 +26,32 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+}
+
+.readyBtn {
+  width: 200px !important;
+  height: 200px !important;
+  border-radius: 50% !important;
+  font-size: 1.5rem !important;
+  padding: 0 !important;
+  border-color: var(--player-color) !important;
+  color: var(--player-color) !important;
+  box-shadow: 0 0 20px rgba(var(--player-color), 0.5); // Fallback might fail for hex in rgba, but standard css shadow is fine
+  // simplified shadow:
+  box-shadow: 0 0 20px var(--player-color) !important;
+}
+
+.voterInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.voterName {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--player-color);
 }
 
 .votingArea {
@@ -42,12 +68,15 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  list-style: none;
+  padding: 0;
 }
 
 .candidateCard {
   width: 100%;
   background: rgba($bg-card, 0.5);
   border: 1px solid rgba($white, 0.1);
+  border-left: 4px solid var(--border-color);
   border-radius: 12px;
   padding: 1rem;
   text-align: left;
@@ -72,11 +101,24 @@
     box-shadow: 0 0 15px rgba($white, 0.5);
     transform: scale(1.02);
   }
+}
 
-  span {
-    font-weight: 700;
-    font-size: 1.1rem;
-  }
+.candidateIcon {
+  opacity: 0.8;
+}
+
+.candidateName {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.footer {
+  margin-top: auto;
+}
+
+.confirmBtn {
+  background-color: var(--theme-color) !important;
+  border-color: var(--theme-color) !important;
 }
 
 .alert {

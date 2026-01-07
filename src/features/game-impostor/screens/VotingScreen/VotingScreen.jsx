@@ -1,8 +1,8 @@
 import { ScanFace, UserCheck } from 'lucide-react';
 import { useState } from 'react';
-import Button from '../../../../shared/ui/Button/Button';
-import Timer from '../../../../shared/ui/Timer/Timer';
-import { useGameFeedback } from '../../../../shared/hooks/useGameFeedback';
+import Button from '@/shared/ui/Button/Button';
+import Timer from '@/shared/ui/Timer/Timer';
+import { useGameFeedback } from '@/shared/hooks/useGameFeedback';
 import { useImpostorStore } from '../../stores/useImpostorStore';
 import styles from './VotingScreen.module.scss';
 
@@ -51,7 +51,9 @@ export default function VotingScreen({ themeColor }) {
       <div className={styles.container}>
         <div className={styles.instruction}>
           Pasa el dispositivo a:
-          <strong style={{ color: voter.color || '#fff' }}>{voter.name}</strong>
+          <strong style={{ '--player-color': voter.color || '#fff' }}>
+            {voter.name}
+          </strong>
         </div>
 
         <div className={styles.readyArea}>
@@ -61,15 +63,8 @@ export default function VotingScreen({ themeColor }) {
               triggerFeedback('select');
               setIsReady(true);
             }}
-            style={{
-              width: '200px',
-              height: '200px',
-              borderRadius: '50%',
-              fontSize: '1.5rem',
-              borderColor: voter.color || undefined,
-              boxShadow: voter.color ? `0 0 20px ${voter.color}` : undefined,
-              color: voter.color || undefined,
-            }}>
+            className={styles.readyBtn}
+            style={{ '--player-color': voter.color || '#fff' }}>
             SOY <br /> {voter.name}
           </Button>
         </div>
@@ -81,19 +76,10 @@ export default function VotingScreen({ themeColor }) {
     <main className={styles.container}>
       <h2 className={styles.instruction}>¿Quién es el Impostor?</h2>
 
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: '0.5rem',
-        }}>
+      <div className={styles.voterInfo}>
         <div
-          style={{
-            fontSize: '1.2rem',
-            fontWeight: 'bold',
-            color: voter.color,
-          }}>
+          className={styles.voterName}
+          style={{ '--player-color': voter.color }}>
           {voter.name}
         </div>
         <Timer
@@ -111,9 +97,7 @@ export default function VotingScreen({ themeColor }) {
       </div>
 
       <div className={styles.votingArea}>
-        <ul
-          className={styles.candidateList}
-          style={{ listStyle: 'none', padding: 0 }}>
+        <ul className={styles.candidateList}>
           {candidates.map((candidate) => (
             <li key={candidate.id}>
               <button
@@ -124,26 +108,24 @@ export default function VotingScreen({ themeColor }) {
                   setSelectedId(candidate.id);
                 }}
                 style={{
-                  borderLeft: `4px solid ${candidate.color || '#fff'}`,
+                  '--border-color': candidate.color || '#fff',
                 }}>
-                <ScanFace size={32} style={{ opacity: 0.8 }} />
-                <div style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>
-                  {candidate.name}
-                </div>
+                <ScanFace size={32} className={styles.candidateIcon} />
+                <div className={styles.candidateName}>{candidate.name}</div>
               </button>
             </li>
           ))}
         </ul>
       </div>
 
-      <div style={{ marginTop: 'auto' }}>
+      <div className={styles.footer}>
         <Button
           variant="primary"
           disabled={!selectedId}
           onClick={handleVote}
+          className={styles.confirmBtn}
           style={{
-            backgroundColor: selectedId ? themeColor : undefined,
-            borderColor: themeColor,
+            '--theme-color': themeColor,
           }}>
           <UserCheck size={20} />
           Confirmar Voto

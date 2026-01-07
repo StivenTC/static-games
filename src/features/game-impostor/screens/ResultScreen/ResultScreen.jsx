@@ -1,8 +1,8 @@
 import { Home, RotateCw } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '../../../../shared/ui/Button/Button';
-import { useGameFeedback } from '../../../../shared/hooks/useGameFeedback';
+import Button from '@/shared/ui/Button/Button';
+import { useGameFeedback } from '@/shared/hooks/useGameFeedback';
 import { useImpostorStore } from '../../stores/useImpostorStore';
 import styles from './ResultScreen.module.scss';
 
@@ -57,11 +57,13 @@ export default function ResultScreen({ themeColor }) {
   }
 
   return (
-    <main className={styles.container}>
+    <main className={styles.container} style={{ '--theme-color': themeColor }}>
       <div className={styles.resultBox}>
         <div className={styles.mostVoted}>
           <h2>El más votado fue:</h2>
-          <strong style={{ color: mostVotedPlayer?.color }}>
+          <strong
+            className={styles.votedName}
+            style={{ '--player-color': mostVotedPlayer?.color }}>
             {mostVotedPlayer ? mostVotedPlayer.name : 'Nadie'}
           </strong>
         </div>
@@ -76,7 +78,9 @@ export default function ResultScreen({ themeColor }) {
         {!isImpostor && (
           <div className={styles.impostorReveal}>
             El verdadero Impostor era: <br />
-            <strong style={{ color: actualImpostor?.color }}>
+            <strong
+              className={styles.impostorName}
+              style={{ '--player-color': actualImpostor?.color }}>
               {actualImpostor?.name}
             </strong>
           </div>
@@ -91,14 +95,14 @@ export default function ResultScreen({ themeColor }) {
         <Button
           variant="primary"
           onClick={handleRestart}
-          style={{ backgroundColor: themeColor, borderColor: themeColor }}>
+          className={styles.restartBtn}>
           <RotateCw size={20} />
           Jugar de Nuevo
         </Button>
         <Button
           variant="outline"
           onClick={handleHome}
-          style={{ borderColor: themeColor, color: themeColor }}>
+          className={styles.homeBtn}>
           <Home size={20} />
           Ir al Inicio
         </Button>

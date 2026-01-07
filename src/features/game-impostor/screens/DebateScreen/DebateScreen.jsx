@@ -1,7 +1,7 @@
 import { Play, Vote } from 'lucide-react';
-import Button from '../../../../shared/ui/Button/Button';
-import Timer from '../../../../shared/ui/Timer/Timer';
-import { useGameFeedback } from '../../../../shared/hooks/useGameFeedback';
+import Button from '@/shared/ui/Button/Button';
+import Timer from '@/shared/ui/Timer/Timer';
+import { useGameFeedback } from '@/shared/hooks/useGameFeedback';
 import { useImpostorStore } from '../../stores/useImpostorStore';
 import styles from './DebateScreen.module.scss';
 
@@ -13,12 +13,12 @@ export default function DebateScreen({ themeColor }) {
   const currentPlayer = players[currentPlayerIndex];
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{ '--theme-color': themeColor }}>
       <div className={styles.header}>
         <h3>Turno de</h3>
         <div
           className={styles.currentPlayer}
-          style={{ color: currentPlayer.color || '#fff' }}>
+          style={{ '--player-color': currentPlayer.color || '#fff' }}>
           {currentPlayer.name}
         </div>
       </div>
@@ -47,7 +47,7 @@ export default function DebateScreen({ themeColor }) {
             triggerFeedback('select');
             nextTurn();
           }}
-          style={{ backgroundColor: themeColor, borderColor: themeColor }}>
+          className={styles.nextTurnBtn}>
           <Play size={20} />
           Siguiente Turno
         </Button>
@@ -60,9 +60,8 @@ export default function DebateScreen({ themeColor }) {
             triggerFeedback('click');
             startVoting();
           }}
-          className={styles.voteBtn}
-          style={{ color: themeColor, borderColor: themeColor }}>
-          <Vote size={20} style={{ marginRight: '8px' }} />
+          className={styles.voteBtn}>
+          <Vote size={20} className={styles.voteIcon} />
           Ir a Votar
         </Button>
       </div>
