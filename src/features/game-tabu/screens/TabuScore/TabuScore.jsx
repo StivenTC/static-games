@@ -1,7 +1,7 @@
 import { X } from 'lucide-react';
-import { useGameFeedback } from '../../../../shared/hooks/useGameFeedback';
-import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
-import Button from '../../../../shared/ui/Button/Button';
+import { useGameFeedback } from '@/shared/hooks/useGameFeedback';
+import { usePlayerStore } from '@/shared/stores/usePlayerStore';
+import Button from '@/shared/ui/Button/Button';
 import { useTabuStore } from '../../stores/useTabuStore';
 import styles from './TabuScore.module.scss';
 
@@ -41,7 +41,7 @@ const TabuScore = () => {
             triggerFeedback('select');
             resetGame();
           }}>
-          <X size={20} style={{ marginRight: 8 }} />
+          <X size={20} className={styles.icon} />
           Salir
         </Button>
         <Button

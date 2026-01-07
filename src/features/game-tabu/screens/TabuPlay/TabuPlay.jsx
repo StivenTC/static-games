@@ -1,8 +1,8 @@
 import { ArrowRight, RotateCcw, Timer, X } from 'lucide-react';
 import { useEffect } from 'react';
-import { useGameFeedback } from '../../../../shared/hooks/useGameFeedback';
-import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
-import Button from '../../../../shared/ui/Button/Button';
+import { useGameFeedback } from '@/shared/hooks/useGameFeedback';
+import { usePlayerStore } from '@/shared/stores/usePlayerStore';
+import Button from '@/shared/ui/Button/Button';
 import { useTabuStore } from '../../stores/useTabuStore';
 import styles from './TabuPlay.module.scss';
 
