@@ -50,13 +50,13 @@ const TabuPlay = () => {
       <header className={styles.header}>
         <div
           className={`${styles.timer} ${timeLeft <= 10 ? styles.urgent : ''}`}>
-          <Timer size={24} style={{ marginRight: 8 }} />
+          <Timer size={24} className={styles.timerIcon} />
           <span>{timeLeft}s</span>
         </div>
 
         <div
           className={styles.describerName}
-          style={{ color: currentPlayer?.color }}>
+          style={{ '--player-color': currentPlayer?.color }}>
           {currentPlayer?.name}
         </div>
       </header>
@@ -83,7 +83,7 @@ const TabuPlay = () => {
                 triggerFeedback('success');
                 correctGuess(p.id);
               }}
-              style={{ backgroundColor: p.color }}
+              style={{ '--player-color': p.color }}
               aria-label={`Punto para ${p.name}`}>
               {p.name}
             </button>
@@ -109,10 +109,10 @@ const TabuPlay = () => {
           <div className={styles.overlayActions}>
             <Button variant="primary" onClick={() => nextTurn(players)}>
               Siguiente Ronda
-              <ArrowRight size={20} style={{ marginLeft: 8 }} />
+              <ArrowRight size={20} className={styles.arrowIcon} />
             </Button>
             <Button variant="outline" onClick={resetGame}>
-              <RotateCcw size={20} style={{ marginRight: 8 }} />
+              <RotateCcw size={20} className={styles.resetIcon} />
               Salir
             </Button>
           </div>

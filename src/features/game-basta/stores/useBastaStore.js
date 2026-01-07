@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { usePlayerStore } from '../../../shared/stores/usePlayerStore';
+import { usePlayerStore } from '@/shared/stores/usePlayerStore';
 import { BASTA_CATEGORIES } from '../data/categories';
 
 export const ALPHABET = 'ABCDEFGHIJKLMNOPRSTW'.split('');

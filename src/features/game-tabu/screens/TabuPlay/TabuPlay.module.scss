@@ -78,6 +78,7 @@
 .describerName {
   font-weight: bold;
   transition: color 0.3s;
+  color: var(--player-color);
 }
 
 .tabuList {
@@ -171,6 +172,7 @@
   justify-content: center;
   transition: transform 0.1s;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  background-color: var(--player-color);
 }
 
 .chip:active {
@@ -213,4 +215,16 @@
   color: $neon-purple;
   margin-bottom: 3rem;
   text-shadow: 0 0 30px $neon-purple;
+}
+
+.timerIcon {
+  margin-right: 8px;
+}
+
+.arrowIcon {
+  margin-left: 8px;
+}
+
+.resetIcon {
+  margin-right: 8px;
 }

@@ -49,9 +49,7 @@ export default function ResultScreen({ themeColor }) {
     return (
       <div className={styles.container}>
         <div className={styles.countdown}>{countdown}</div>
-        <p style={{ fontSize: '1.5rem', opacity: 0.7 }}>
-          Revelando resultados...
-        </p>
+        <p className={styles.revealingText}>Revelando resultados...</p>
       </div>
     );
   }

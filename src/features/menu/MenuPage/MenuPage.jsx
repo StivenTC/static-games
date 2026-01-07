@@ -1,9 +1,9 @@
 import { Ban, Brain, Ghost, MessageCircle, Zap } from 'lucide-react';
 
-import MainLayout from '../../../shared/layouts/MainLayout/MainLayout';
+import MainLayout from '@/shared/layouts/MainLayout/MainLayout';
 import GameCard from '../GameCard/GameCard';
-import theme from '@/styles/theme.module.scss';
 import styles from './MenuPage.module.scss';
+import theme from '@/styles/theme.module.scss';
 
 const GAMES = [
   {

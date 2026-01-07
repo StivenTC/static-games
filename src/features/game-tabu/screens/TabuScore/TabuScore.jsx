@@ -25,7 +25,9 @@ const TabuScore = () => {
           <div key={p.id} className={styles.playerRow}>
             <div className={styles.rank}>{index + 1}</div>
             <div className={styles.info}>
-              <div className={styles.name} style={{ color: p.color }}>
+              <div
+                className={styles.name}
+                style={{ '--player-color': p.color }}>
                 {p.name}
               </div>
               <div className={styles.points}>{scores[p.id] || 0} pts</div>

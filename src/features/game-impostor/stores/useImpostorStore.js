@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { usePlayerStore } from '../../../shared/stores/usePlayerStore'; // Adjust path if needed
+import { usePlayerStore } from '@/shared/stores/usePlayerStore'; // Adjust path if needed
 import { WORD_CATEGORIES } from '../data/words';
 
 const INITIAL_ROUND_STATE = {

@@ -16,10 +16,7 @@ const TabuReady = () => {
     <div className={styles.container}>
       <div
         className={styles.avatar}
-        style={{
-          backgroundColor: currentPlayer.color,
-          boxShadow: `0 0 20px ${currentPlayer.color}66`,
-        }}>
+        style={{ '--player-color': currentPlayer.color }}>
         {currentPlayer.name.charAt(0).toUpperCase()}
       </div>
 
@@ -27,7 +24,7 @@ const TabuReady = () => {
         Turno de{' '}
         <span
           className={styles.playerName}
-          style={{ color: currentPlayer.color }}>
+          style={{ '--player-color': currentPlayer.color }}>
           {currentPlayer.name}
         </span>
       </h2>

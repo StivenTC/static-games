@@ -21,6 +21,12 @@
   margin-bottom: 2rem;
   font-size: 2rem;
   font-weight: bold;
+  background-color: var(--player-color);
+  box-shadow: 0 0 20px var(--player-color);
+}
+
+.playerName {
+  color: var(--player-color);
 }
 
 .title {

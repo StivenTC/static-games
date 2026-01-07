@@ -49,7 +49,9 @@ export default function RevealScreen({ themeColor }) {
     <div className={styles.container}>
       <div className={styles.instruction}>
         Turno de:
-        <strong style={{ color: currentPlayer.color || '#fff' }}>
+        <strong
+          class={styles.playerName}
+          style={{ '--player-color': currentPlayer.color }}>
           {currentPlayer.name}
         </strong>
       </div>
@@ -85,11 +87,7 @@ export default function RevealScreen({ themeColor }) {
               onPointerDown={handlePointerDown}
               onContextMenu={(e) => e.preventDefault()} // Prevent right click
               style={{
-                touchAction: 'none',
-                borderColor: currentPlayer.color || undefined,
-                boxShadow: currentPlayer.color
-                  ? `0 0 20px ${currentPlayer.color}`
-                  : undefined,
+                '--player-color': currentPlayer.color,
               }}
               whileTap={{ scale: 0.95 }}
               key="reveal-btn"
