@@ -66,7 +66,7 @@ export const useTabuStore = create((set, get) => ({
 
     // Update state
     set((state) => ({
-      gameState: 'playing',
+      gameState: 'turnReady', // Changed from 'playing' to 'turnReady'
       timeLeft: GAME_DURATION,
       currentPlayerId: randomPlayer.id,
       // If we just reset (candidates == players), we start new list.
@@ -78,6 +78,10 @@ export const useTabuStore = create((set, get) => ({
     }));
 
     get().nextCard();
+  },
+
+  startTurn: () => {
+    set({ gameState: 'playing' });
   },
 
   nextCard: () => {

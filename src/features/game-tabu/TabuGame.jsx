@@ -4,6 +4,7 @@ import MainLayout from '../../shared/layouts/MainLayout/MainLayout';
 import TabuPlay from './screens/TabuPlay/TabuPlay';
 import TabuScore from './screens/TabuScore/TabuScore';
 import TabuSetup from './screens/TabuSetup/TabuSetup';
+import TabuReady from './screens/TabuReady/TabuReady';
 import { useTabuStore } from './stores/useTabuStore';
 
 const TabuGame = () => {
@@ -71,6 +72,7 @@ const TabuGame = () => {
             overflow: 'hidden',
           }}>
           {gameState === 'setup' && <TabuSetup />}
+          {gameState === 'turnReady' && <TabuReady />}
           {gameState === 'playing' && <TabuPlay />}
           {gameState === 'roundOver' && <TabuScore />}
         </main>
