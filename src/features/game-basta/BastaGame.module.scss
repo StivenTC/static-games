@@ -1,3 +1,5 @@
+@use '@/styles/variables' as *;
+
 .container {
   display: flex;
   flex-direction: column;
@@ -34,9 +36,22 @@
   font-size: 1.2rem;
   letter-spacing: 1px;
   text-transform: uppercase;
-  text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+  color: $neon-blue;
+  text-shadow: 0 0 10px rgba($neon-blue, 0.5);
+  margin: 0;
+}
+
+.playerCount {
+  opacity: 0.8;
+  font-size: 0.9em;
 }
 
 .placeholder {
   width: 40px; 
+}
+
+.mainContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }

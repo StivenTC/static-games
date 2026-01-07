@@ -1,4 +1,4 @@
-@use '../../../../styles/variables' as *;
+@use '@/styles/variables' as *;
 
 .container {
   display: flex;
@@ -91,7 +91,9 @@
     font-weight: 600;
     padding: 0.5rem 1rem;
     border-radius: 2rem;
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--player-color);
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
   }
 }
 
@@ -112,9 +114,13 @@
 .letterBtn {
   aspect-ratio: 1;
   border: none;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.95); // Default background if no inline var overrides
+  // If base-color is set via inline style for available state:
+  background-color: var(--darken-color, rgba(255, 255, 255, 0.95));
+  color: #fff; // forced white text when active/available
+  border-color: transparent;
+
   backdrop-filter: blur(4px);
-  color: #1a1a1a;
   border-radius: 12px;
   font-size: 2rem;
   font-weight: 800;
@@ -133,6 +139,15 @@
   position: relative;
   overflow: hidden;
 
+  // When used/disabled, override:
+  &.used {
+    background: rgba(255, 255, 255, 0.1) !important; // Override the inline style var usage via class specificty or important if needed
+    color: rgba(255, 255, 255, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.2) !important;
+    transform: translateY(4px);
+  }
+
   @media (max-width: 380px) {
     font-size: 1.5rem;
     border-radius: 8px;
@@ -147,14 +162,6 @@
     box-shadow: 
       0 0 0 #cbd5e1, 
       inset 0 2px 5px rgba(0,0,0,0.1);
-  }
-
-  &.used {
-    background: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: inset 0 2px 10px rgba(0,0,0,0.2);
-    transform: translateY(4px);
   }
 }
 

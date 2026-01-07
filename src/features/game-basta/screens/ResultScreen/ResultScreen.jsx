@@ -1,5 +1,5 @@
-import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
-import Button from '../../../../shared/ui/Button/Button';
+import { usePlayerStore } from '@/shared/stores/usePlayerStore';
+import Button from '@/shared/ui/Button/Button';
 import { useBastaStore } from '../../stores/useBastaStore';
 import styles from './ResultScreen.module.scss';
 
@@ -16,7 +16,9 @@ export default function ResultScreen({ themeColor }) {
         {winnerTeam === 'time' && loser && (
           <div className={styles.loserInfo}>
             <p>Perdió:</p>
-            <h2 style={{ color: loser.color || 'white' }}>{loser.name}</h2>
+            <h2 style={{ '--player-color': loser.color || 'white' }}>
+              {loser.name}
+            </h2>
           </div>
         )}
 

@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { RefreshCw } from 'lucide-react';
 import { useEffect } from 'react';
-import { useGameFeedback } from '../../../../shared/hooks/useGameFeedback';
-import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
-import { darkenColor } from '../../../../shared/utils/colorUtils';
+import { useGameFeedback } from '@/shared/hooks/useGameFeedback';
+import { usePlayerStore } from '@/shared/stores/usePlayerStore';
+import { darkenColor } from '@/shared/utils/colorUtils';
 import { ALPHABET, useBastaStore } from '../../stores/useBastaStore';
 import styles from './PlayScreen.module.scss';
 
@@ -50,7 +50,10 @@ export default function PlayScreen({ themeColor }) {
   };
 
   return (
-    <section className={styles.container} aria-label="Tablero de juego">
+    <section
+      className={styles.container}
+      aria-label="Tablero de juego"
+      style={{ '--theme-color': themeColor }}>
       <div className={styles.categoryCard} style={{ borderColor: themeColor }}>
         <h3>Categoría</h3>
         <div className={styles.categoryRow}>
@@ -79,9 +82,7 @@ export default function PlayScreen({ themeColor }) {
           <div
             className={styles.currentPlayer}
             style={{
-              backgroundColor: currentPlayer.color || themeColor,
-              color: '#fff',
-              textShadow: '0 1px 2px rgba(0,0,0,0.5)',
+              '--player-color': currentPlayer.color || themeColor,
             }}>
             Turno de: {currentPlayer.name}
           </div>
@@ -107,15 +108,12 @@ export default function PlayScreen({ themeColor }) {
                   ? `Seleccionar letra ${letter}`
                   : `Deshacer letra ${letter}`
               }
-              style={
-                isAvailable
-                  ? {
-                      backgroundColor: darkenColor(baseColor, 30),
-                      color: '#fff',
-                      borderColor: 'transparent',
-                    }
-                  : {}
-              }>
+              style={{
+                '--base-color': baseColor,
+                '--darken-color': isAvailable
+                  ? darkenColor(baseColor, 30)
+                  : undefined,
+              }}>
               {letter}
             </button>
           );

@@ -1,7 +1,8 @@
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import MainLayout from '../../shared/layouts/MainLayout/MainLayout';
-import GameSetup from '../../shared/ui/GameSetup/GameSetup';
+import MainLayout from '@/shared/layouts/MainLayout/MainLayout';
+import GameSetup from '@/shared/ui/GameSetup/GameSetup';
+import theme from '@/styles/theme.module.scss';
 import styles from './BastaGame.module.scss';
 import PlayScreen from './screens/PlayScreen/PlayScreen';
 import ResultScreen from './screens/ResultScreen/ResultScreen';
@@ -10,7 +11,6 @@ import { useBastaStore } from './stores/useBastaStore';
 export default function BastaGame() {
   const navigate = useNavigate();
   const { gameStatus, resetGame, startGame, gamePlayers } = useBastaStore();
-  const THEME_COLOR = '#00f3ff'; // Neon Blue from MenuPage
 
   const handleBack = () => {
     resetGame();
@@ -30,10 +30,10 @@ export default function BastaGame() {
             <ArrowLeft />
           </button>
 
-          <h1 className={styles.title} style={{ color: THEME_COLOR }}>
+          <h1 className={styles.title}>
             BASTA{' '}
             {gameStatus !== 'setup' && (
-              <span style={{ opacity: 0.8, fontSize: '0.9em' }}>
+              <span className={styles.playerCount}>
                 • {gamePlayers.length} Jugadores
               </span>
             )}
@@ -43,20 +43,22 @@ export default function BastaGame() {
         </header>
 
         {/* Main Game Area */}
-        <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <main className={styles.mainContent}>
           {gameStatus === 'setup' && (
             <GameSetup
               title="Basta"
               onStart={(players) => startGame(players?.[0]?.id)}
               minPlayers={2}
-              themeColor={THEME_COLOR}
+              themeColor={theme.neonBlue}
             />
           )}
 
-          {gameStatus === 'playing' && <PlayScreen themeColor={THEME_COLOR} />}
+          {gameStatus === 'playing' && (
+            <PlayScreen themeColor={theme.neonBlue} />
+          )}
 
           {gameStatus === 'finished' && (
-            <ResultScreen themeColor={THEME_COLOR} />
+            <ResultScreen themeColor={theme.neonBlue} />
           )}
         </main>
       </div>
