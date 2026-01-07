@@ -1,9 +1,9 @@
 import { RotateCcw } from 'lucide-react';
-import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
-import Button from '../../../../shared/ui/Button/Button';
+import { usePlayerStore } from '@/shared/stores/usePlayerStore';
+import Button from '@/shared/ui/Button/Button';
 import { useMemoryStore } from '../../stores/useMemoryStore';
-import { useGameFeedback } from '../../../../shared/hooks/useGameFeedback';
-import styles from '../MemoryPlay/MemoryPlay.module.scss'; // Reuse styles for overlay
+import { useGameFeedback } from '@/shared/hooks/useGameFeedback';
+import styles from './MemoryScore.module.scss';
 
 const MemoryScore = () => {
   const { players } = usePlayerStore();
@@ -14,34 +14,29 @@ const MemoryScore = () => {
 
   return (
     <div className={styles.container}>
-      {/* Reuse overlay style for full screen effect concept but inline for simplicity or reuse module */}
       <div className={styles.overlay}>
-        <h2
-          style={{ fontSize: '2rem', marginBottom: '1rem', color: '#ff0055' }}>
-          ¡Juego Terminado!
-        </h2>
+        <h2 className={styles.title}>¡Juego Terminado!</h2>
 
-        <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
-          <div style={{ fontSize: '1.2rem', marginBottom: '0.5rem' }}>
-            <span style={{ color: currentPlayer?.color }}>
+        <div className={styles.resultContent}>
+          <div className={styles.failMessage}>
+            <span
+              className={styles.playerName}
+              style={{ '--player-color': currentPlayer?.color }}>
               {currentPlayer?.name}
             </span>{' '}
             falló.
           </div>
-          <div
-            style={{ fontSize: '3rem', fontWeight: 'bold', color: '#00ff9f' }}>
-            Ronda {round}
-          </div>
+          <div className={styles.roundScore}>Ronda {round}</div>
         </div>
 
-        <div style={{ display: 'flex', gap: '1rem' }}>
+        <div className={styles.actions}>
           <Button
             variant="outline"
             onClick={() => {
               triggerFeedback('select');
               resetGame();
             }}>
-            <RotateCcw size={20} style={{ marginRight: 8 }} />
+            <RotateCcw size={20} className={styles.exitIcon} />
             Salir
           </Button>
 

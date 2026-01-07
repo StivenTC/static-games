@@ -1,4 +1,4 @@
-@use '../../../../styles/variables' as *;
+@use '@/styles/variables' as *;
 
 .container {
   display: flex;
@@ -22,12 +22,19 @@
   text-align: center;
 }
 
+.turnIndicator {
+  color: var(--player-color);
+  font-size: 1.5rem;
+  margin-bottom: 0.2rem;
+}
+
 .status {
   color: white;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 1rem;
   white-space: nowrap;
+  opacity: 0.8;
 }
 
 .board {

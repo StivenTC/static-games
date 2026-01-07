@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
 import styles from './MemoryPlay.module.scss';
 import { useMemoryStore } from '../../stores/useMemoryStore';
-import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
-import { useGameFeedback } from '../../../../shared/hooks/useGameFeedback';
+import { usePlayerStore } from '@/shared/stores/usePlayerStore';
+import { useGameFeedback } from '@/shared/hooks/useGameFeedback';
 
 const COLORS = ['green', 'red', 'yellow', 'blue'];
 
@@ -84,18 +84,15 @@ const MemoryPlay = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <div
+          className={styles.turnIndicator}
           style={{
-            color: currentPlayer?.color || 'white',
-            fontSize: '1.5rem',
-            marginBottom: '0.2rem',
+            '--player-color': currentPlayer?.color || 'white',
           }}>
           {gameState === 'watching'
             ? 'Memoriza...'
             : `Turno ${currentPlayer?.name}`}
         </div>
-        <div className={styles.status} style={{ opacity: 0.8 }}>
-          Secuencia: {sequence.length}
-        </div>
+        <div className={styles.status}>Secuencia: {sequence.length}</div>
       </div>
 
       <div className={styles.board}>

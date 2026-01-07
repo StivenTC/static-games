@@ -1,6 +1,7 @@
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import MainLayout from '../../shared/layouts/MainLayout/MainLayout';
+import MainLayout from '@/shared/layouts/MainLayout/MainLayout';
+import styles from './MemoryGame.module.scss';
 import MemoryPlay from './screens/MemoryPlay/MemoryPlay';
 import MemoryScore from './screens/MemoryScore/MemoryScore';
 import MemorySetup from './screens/MemorySetup/MemorySetup';
@@ -10,8 +11,6 @@ const MemoryGame = () => {
   const navigate = useNavigate();
   const { gameState, resetGame } = useMemoryStore();
 
-  const THEME_COLOR = '#00ff9f'; // Neon Green
-
   const handleBack = () => {
     resetGame();
     navigate('/');
@@ -19,58 +18,24 @@ const MemoryGame = () => {
 
   return (
     <MainLayout>
-      <div
-        style={{
-          padding: '1rem',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-        }}>
+      <div className={styles.container}>
         {/* Semantic Header */}
-        <header
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginBottom: '1rem',
-          }}>
+        <header className={styles.header}>
           <button
             type="button"
             onClick={handleBack}
             aria-label="Volver al menú"
-            style={{
-              background: 'none',
-              border: 'none',
-              color: 'white',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-            }}>
+            className={styles.backButton}>
             <ArrowLeft />
           </button>
 
-          <h1
-            style={{
-              fontSize: '1.5rem',
-              fontWeight: 'bold',
-              color: THEME_COLOR,
-              margin: 0,
-              textShadow: `0 0 10px ${THEME_COLOR}66`,
-            }}>
-            MEMORIA
-          </h1>
+          <h1 className={styles.title}>MEMORIA</h1>
 
-          <div style={{ width: 24 }} aria-hidden="true" />
+          <div className={styles.spacer} aria-hidden="true" />
         </header>
 
         {/* Main Game Content */}
-        <main
-          style={{
-            flex: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            overflow: 'hidden',
-          }}>
+        <main className={styles.mainContent}>
           {gameState === 'setup' && <MemorySetup />}
           {(gameState === 'watching' || gameState === 'playing') && (
             <MemoryPlay />

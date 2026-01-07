@@ -1,5 +1,6 @@
-import { usePlayerStore } from '../../../../shared/stores/usePlayerStore';
-import GameSetup from '../../../../shared/ui/GameSetup/GameSetup';
+import { usePlayerStore } from '@/shared/stores/usePlayerStore';
+import GameSetup from '@/shared/ui/GameSetup/GameSetup';
+import theme from '@/styles/theme.module.scss';
 import { useMemoryStore } from '../../stores/useMemoryStore';
 
 const MemorySetup = () => {
@@ -9,7 +10,7 @@ const MemorySetup = () => {
   return (
     <GameSetup
       title="Memoria"
-      themeColor="#00ff9f"
+      themeColor={theme.neonGreen}
       minPlayers={1}
       onStart={() => setupGame(players)}
     />
