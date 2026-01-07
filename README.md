@@ -1,16 +1,66 @@
-# Static Games
+# STATIC - Party Game Suite 🎮
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**STATIC** es una colección de juegos sociales tipo "Pass-and-Play" diseñada para jugarse en grupo utilizando un único dispositivo móvil. Con una estética Cyberpunk/Minimalista, ofrece una experiencia fluida y rápida para reuniones.
 
-Currently, two official plugins are available:
+## ✨ Características
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+*   📱 **Mobile First**: Diseñado específicamente para pantallas móviles (PWA Ready).
+*   🎨 **Estética Cyberpunk**: Interfaz oscura con acentos neón y micro-interacciones.
+*   ⚡ **Rendimiento**: Construido con Vite + React para máxima velocidad.
+*   📴 **Offline First**: Lógica local, sin necesidad de backend complejo.
 
-## React Compiler
+## 🕹️ Juegos Incluidos
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+| Juego | Estilo | Vibe |
+|-------|--------|------|
+| **Impostor** | Deducción Social | 🔴 Red Signal |
+| **Basta** | Vocabulario / Stop | 🔵 Blue Spark |
+| **Tabú** | Adivinanza | 🟣 Purple Haze |
+| **Memoria** | Secuencia (Simón) | 🟢 Green Echo |
 
-## Expanding the ESLint configuration
+## 🛠️ Tecnologías
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Este proyecto sigue una arquitectura estricta para mantenibilidad y escalabilidad:
+
+*   **Core**: React 18 + Vite
+*   **Estilos**: SCSS Modules (No inline styles, No Tailwind)
+*   **Estado**: Zustand
+*   **Animaciones**: Framer Motion
+*   **Iconos**: Lucide React
+*   **Estructura**: Feature-based Architecture (`src/features`)
+
+## 🚀 Comenzar
+
+1.  **Instalar dependencias:**
+    ```bash
+    npm install
+    ```
+
+2.  **Correr servidor de desarrollo:**
+    ```bash
+    npm run dev
+    ```
+
+3.  **Construir para producción:**
+    ```bash
+    npm run build
+    ```
+
+## 📂 Estructura del Proyecto
+
+```text
+src/
+├── feature/           # Módulos de juego independientes
+├── shared/            # Componentes reutilizables (UI, Layouts)
+├── styles/            # Configuración global de SCSS
+└── app/               # Configuración de routing y providers
+```
+
+## 📝 Convenciones
+
+*   **Alias (`@/`)**: Se utiliza `@/` para importar desde `src/`.
+*   **CSS Modules**: Todo estilo debe estar en archivos `.module.scss`.
+*   **Variables CSS**: Para estilos dinámicos, se usan variables CSS inyectadas vía `style` prop.
+
+---
+Desarrollado por Stiven.
