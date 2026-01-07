@@ -1,0 +1,10 @@
+@use './variables' as *;
+
+:export {
+  neonRed: $neon-red;
+  neonBlue: $neon-blue;
+  neonPurple: $neon-purple;
+  neonGreen: $neon-green;
+  neonYellow: $neon-yellow;
+  white: $white;
+}

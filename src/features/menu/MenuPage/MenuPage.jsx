@@ -2,6 +2,7 @@ import { Ban, Brain, Ghost, MessageCircle, Zap } from 'lucide-react';
 
 import MainLayout from '../../../shared/layouts/MainLayout/MainLayout';
 import GameCard from '../GameCard/GameCard';
+import theme from '@/styles/theme.module.scss';
 import styles from './MenuPage.module.scss';
 
 const GAMES = [
@@ -9,35 +10,35 @@ const GAMES = [
     id: 'impostor',
     title: 'Impostor',
     icon: Ghost,
-    color: '#ff0055', // neon-red
+    color: theme.neonRed,
     path: '/impostor',
   },
   {
     id: 'basta',
     title: 'Basta',
     icon: Zap,
-    color: '#00f3ff', // neon-blue
+    color: theme.neonBlue,
     path: '/basta',
   },
   {
     id: 'tabu',
     title: 'Tabú',
     icon: Ban,
-    color: '#bd00ff', // neon-purple
+    color: theme.neonPurple,
     path: '/tabu',
   },
   {
     id: 'memory',
     title: 'Memoria',
     icon: Brain,
-    color: '#00ff9f', // neon-green
+    color: theme.neonGreen,
     path: '/memory',
   },
   {
     id: 'legacy',
     title: 'Questionary',
     icon: MessageCircle,
-    color: '#ffffff', // white
+    color: theme.white,
     path: 'https://questionary-9c8b1.web.app/',
     isExternal: true,
     spanCols: true,
