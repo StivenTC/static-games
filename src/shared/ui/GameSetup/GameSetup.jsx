@@ -27,12 +27,9 @@ export default function GameSetup({
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{ '--theme-color': themeColor }}>
       <div className={styles.header}>
-        <h2
-          style={{ color: themeColor, textShadow: `0 0 10px ${themeColor}66` }}>
-          {title}
-        </h2>
+        <h2 className={styles.title}>{title}</h2>
         <p>Agrega jugadores (Mínimo {minPlayers})</p>
       </div>
 
@@ -43,15 +40,13 @@ export default function GameSetup({
             onChange={(e) => setName(e.target.value)}
             placeholder="Nombre del jugador"
             className={styles.input}
-            style={{ borderColor: themeColor }}
             focusColor={themeColor}
           />
           <Button
             type="submit"
             variant="outline"
             disabled={!name.trim()}
-            className={styles.addButton}
-            style={{ borderColor: themeColor, color: themeColor }}>
+            className={styles.addButton}>
             <UserPlus size={20} />
           </Button>
         </div>
@@ -62,7 +57,7 @@ export default function GameSetup({
           <div
             key={p.id}
             className={styles.playerItem}
-            style={{ borderLeft: `4px solid ${p.color || '#fff'}` }}>
+            style={{ '--player-color': p.color || '#fff' }}>
             <span>{p.name}</span>
             <button
               type="button"
@@ -73,9 +68,7 @@ export default function GameSetup({
           </div>
         ))}
         {players.length === 0 && (
-          <div style={{ textAlign: 'center', opacity: 0.5, marginTop: '2rem' }}>
-            No hay jugadores aún.
-          </div>
+          <div className={styles.emptyMessage}>No hay jugadores aún.</div>
         )}
       </div>
 
@@ -84,12 +77,13 @@ export default function GameSetup({
           variant="primary"
           onClick={onStart}
           disabled={players.length < minPlayers}
+          className={styles.startBtn}
           style={{
             backgroundColor:
               players.length >= minPlayers ? themeColor : undefined,
             borderColor: themeColor,
           }}>
-          <Play size={20} style={{ marginRight: '8px' }} />
+          <Play size={20} className={styles.playIcon} />
           Comenzar Juego
         </Button>
       </div>
