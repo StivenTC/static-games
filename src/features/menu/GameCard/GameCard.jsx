@@ -27,9 +27,9 @@ export default function GameCard({
       whileTap={{ scale: 0.95 }}
       whileHover={{ scale: 1.02 }}
       onClick={handleClick}
-      style={{ borderColor: color, color: 'inherit' }}
+      style={{ '--card-color': color }}
       aria-label={`Jugar ${title}`}>
-      <div className={styles.iconWrapper} style={{ color: color }}>
+      <div className={styles.iconWrapper}>
         <Icon size={48} />
       </div>
       <span className={styles.title}>{title}</span>

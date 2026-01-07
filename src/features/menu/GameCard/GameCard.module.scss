@@ -1,4 +1,4 @@
-@use '../../../styles/variables' as *;
+@use '@/styles/variables' as *;
 
 .card {
   display: flex;
@@ -6,16 +6,23 @@
   align-items: center;
   justify-content: center;
   background-color: $bg-card;
-  border: 1px solid rgba($white, 0.1);
+  border: 1px solid var(--card-color);
   border-radius: 16px;
   padding: 1.5rem;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: border-color $transition-fast;
+  transition: border-color $transition-fast, transform $transition-fast, box-shadow $transition-fast;
+  color: inherit;
+  --card-color: #{$white};
 
   &:hover {
-    border-color: rgba($white, 0.3);
+    border-color: var(--card-color);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  }
+
+  &:active {
+    transform: scale(0.98);
   }
 }
 
@@ -24,8 +31,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  // Neon Glow effect
+  color: var(--card-color);
   filter: drop-shadow(0 0 8px currentColor);
 }
 
