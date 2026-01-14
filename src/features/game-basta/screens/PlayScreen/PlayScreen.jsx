@@ -23,7 +23,6 @@ export default function PlayScreen({ themeColor }) {
   const players = usePlayerStore((s) => s.players);
   const currentPlayer = players.find((p) => p.id === currentPlayerId);
 
-  // Timer Effect
   useEffect(() => {
     const interval = setInterval(() => {
       tickTimer();

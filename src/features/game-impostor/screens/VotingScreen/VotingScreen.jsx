@@ -1,8 +1,8 @@
 import { ScanFace, UserCheck } from 'lucide-react';
 import { useState } from 'react';
+import { useGameFeedback } from '@/shared/hooks/useGameFeedback';
 import Button from '@/shared/ui/Button/Button';
 import Timer from '@/shared/ui/Timer/Timer';
-import { useGameFeedback } from '@/shared/hooks/useGameFeedback';
 import { useImpostorStore } from '../../stores/useImpostorStore';
 import styles from './VotingScreen.module.scss';
 
@@ -15,7 +15,6 @@ export default function VotingScreen({ themeColor }) {
 
   const voter = players[votingPlayerIndex];
 
-  // Filter out self from candidates
   const candidates = players.filter((p) => p.id !== voter.id);
 
   const resetLocalState = () => {
@@ -33,7 +32,6 @@ export default function VotingScreen({ themeColor }) {
   };
 
   const handleTimeout = () => {
-    // Timeout: Vote for self
     triggerFeedback('timeout');
     castVote(voter.id);
     resetLocalState();

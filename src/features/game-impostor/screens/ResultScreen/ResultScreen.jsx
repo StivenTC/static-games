@@ -1,8 +1,8 @@
 import { Home, RotateCw } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Button from '@/shared/ui/Button/Button';
 import { useGameFeedback } from '@/shared/hooks/useGameFeedback';
+import Button from '@/shared/ui/Button/Button';
 import { useImpostorStore } from '../../stores/useImpostorStore';
 import styles from './ResultScreen.module.scss';
 
@@ -25,10 +25,8 @@ export default function ResultScreen({ themeColor }) {
       return () => clearTimeout(timer);
     } else {
       if (!showResult) {
-        // Only trigger once
-        if (isImpostor)
-          triggerFeedback('success'); // Players win (found impostor)
-        else triggerFeedback('gameover'); // Impostor wins (wrong person)
+        if (isImpostor) triggerFeedback('success');
+        else triggerFeedback('gameover');
       }
       setShowResult(true);
     }

@@ -1,7 +1,7 @@
 import { Play, Vote } from 'lucide-react';
+import { useGameFeedback } from '@/shared/hooks/useGameFeedback';
 import Button from '@/shared/ui/Button/Button';
 import Timer from '@/shared/ui/Timer/Timer';
-import { useGameFeedback } from '@/shared/hooks/useGameFeedback';
 import { useImpostorStore } from '../../stores/useImpostorStore';
 import styles from './DebateScreen.module.scss';
 
@@ -26,7 +26,7 @@ export default function DebateScreen({ themeColor }) {
       <div className={styles.centerContent}>
         <Timer
           initialSeconds={30}
-          key={`${round}-${currentPlayerIndex}`} // Reset timer on new turn
+          key={`${round}-${currentPlayerIndex}`}
           onComplete={() => {
             triggerFeedback('timeout');
             nextTurn();

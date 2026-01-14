@@ -7,18 +7,16 @@ export default function Timer({
   isRunning = true,
   onComplete,
   onTick,
-  color, // New prop
+  color,
 }) {
   const [seconds, setSeconds] = useState(initialSeconds);
 
-  // Calculate SVG stroke offset for progress circle
   const radius = 60;
   const circumference = 2 * Math.PI * radius;
   const progress = (seconds / initialSeconds) * circumference;
   const strokeDashoffset = circumference - progress;
 
   useEffect(() => {
-    // Reset if initialSeconds change
     setSeconds(initialSeconds);
   }, [initialSeconds]);
 
@@ -31,7 +29,7 @@ export default function Timer({
     const interval = setInterval(() => {
       setSeconds((prev) => {
         const next = Math.max(0, prev - 1);
-        if (onTick) onTick(next); // Call tick with next value
+        if (onTick) onTick(next);
         return next;
       });
     }, 1000);
@@ -39,7 +37,6 @@ export default function Timer({
     return () => clearInterval(interval);
   }, [isRunning, onComplete, onTick, seconds]);
 
-  // Determine variant based on time left
   const getVariant = () => {
     if (seconds <= 5) return 'danger';
     if (seconds <= 10) return 'warning';
@@ -64,13 +61,12 @@ export default function Timer({
           r={radius}
           strokeDasharray={circumference}
           strokeDashoffset={strokeDashoffset}
-          style={{ stroke: color }} // Override with custom color
+          style={{ stroke: color }}
         />
       </svg>
       <div
         className={classNames(styles.timeDisplay, styles[variant])}
-        style={{ color: color }} // Override with custom color
-      >
+        style={{ color: color }}>
         {seconds}
       </div>
     </div>

@@ -54,10 +54,7 @@ export const useTabuStore = create((set, get) => ({
     // If everyone has played, reset the cycle
     if (candidates.length === 0) {
       candidates = [...players];
-      // We will reset playedIds below by starting a new list with just the selected player
       set({ playedIds: [] });
-      // Note: We need to be careful with the async set.
-      // Actually simpler: just pick from 'players' and set playedIds to [newPlayer.id]
     }
 
     // Pick random candidate
@@ -69,8 +66,6 @@ export const useTabuStore = create((set, get) => ({
       gameState: 'turnReady', // Changed from 'playing' to 'turnReady'
       timeLeft: GAME_DURATION,
       currentPlayerId: randomPlayer.id,
-      // If we just reset (candidates == players), we start new list.
-      // Otherwise we append.
       playedIds:
         candidates.length === players.length
           ? [randomPlayer.id]
@@ -111,10 +106,6 @@ export const useTabuStore = create((set, get) => ({
   },
 
   skipCard: () => {
-    // Usually Tabu penalizes or just skips.
-    // Simplified: Just skip, no point change? Or maybe -1?
-    // Let's assume standard "Pasapalabra" style or just next.
-    // User said "Simple". I'll just go next without point penalty for now unless specified.
     get().nextCard();
   },
 

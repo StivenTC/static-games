@@ -20,7 +20,6 @@ export default function BastaGame() {
   return (
     <MainLayout>
       <div className={styles.container}>
-        {/* Semantic Header */}
         <header className={styles.header}>
           <button
             type="button"
@@ -42,7 +41,6 @@ export default function BastaGame() {
           <div className={styles.placeholder} aria-hidden="true"></div>
         </header>
 
-        {/* Main Game Area */}
         <main className={styles.mainContent}>
           {gameStatus === 'setup' && (
             <GameSetup

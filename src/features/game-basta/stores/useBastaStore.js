@@ -7,27 +7,22 @@ export const ALPHABET = 'ABCDEFGHIJKLMNOPRSTW'.split('');
 const CATEGORIES = BASTA_CATEGORIES;
 
 export const useBastaStore = create((set, get) => ({
-  // Game Configuration
   turnDuration: 20,
   categories: CATEGORIES,
-
-  // Game State
-  gameStatus: 'setup', // setup, playing, finished
+  gameStatus: 'setup',
   currentCategory: '',
   availableLetters: [...ALPHABET],
   usedLetters: [],
   currentPlayerId: null,
-  gamePlayers: [], // Shuffled local copy
-  winnerTeam: null, // 'players' (if all letters used) or 'time' (if timer runs out)
+  gamePlayers: [],
+  winnerTeam: null,
 
-  // Actions
   setTurnDuration: (seconds) => set({ turnDuration: seconds }),
 
   startGame: () => {
     const globalPlayers = usePlayerStore.getState().players;
     if (globalPlayers.length === 0) return;
 
-    // Shuffle Players (Fisher-Yates)
     const shuffledPlayers = [...globalPlayers];
     for (let i = shuffledPlayers.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -56,7 +51,6 @@ export const useBastaStore = create((set, get) => ({
   rerollCategory: () => {
     const { currentCategory } = get();
     let newCategory = currentCategory;
-    // Simple retry loop to ensure different category
     while (newCategory === currentCategory) {
       newCategory = CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
     }
@@ -72,11 +66,9 @@ export const useBastaStore = create((set, get) => ({
       gamePlayers,
     } = get();
 
-    // Fallback in case gamePlayers wasn't adequately populated (safety check)
     const players =
       gamePlayers.length > 0 ? gamePlayers : usePlayerStore.getState().players;
 
-    // --- UNDO LOGIC ---
     if (usedLetters.includes(letter)) {
       const lastUsed = usedLetters[usedLetters.length - 1];
       if (letter !== lastUsed) return; // Only allow undoing the immediate last move
@@ -84,7 +76,6 @@ export const useBastaStore = create((set, get) => ({
       const newUsed = usedLetters.slice(0, -1);
       const newAvailable = [...availableLetters, letter];
 
-      // Revert to previous player
       let prevPlayerId = currentPlayerId;
       if (players.length > 0) {
         const currentIndex = players.findIndex((p) => p.id === currentPlayerId);
@@ -102,13 +93,11 @@ export const useBastaStore = create((set, get) => ({
       return;
     }
 
-    // --- SELECTION LOGIC ---
     if (!availableLetters.includes(letter)) return;
 
     const newUsed = [...usedLetters, letter];
     const newAvailable = availableLetters.filter((l) => l !== letter);
 
-    // WIN CONDITION: All letters used
     if (newAvailable.length === 0) {
       set({
         gameStatus: 'finished',
@@ -119,7 +108,6 @@ export const useBastaStore = create((set, get) => ({
       return;
     }
 
-    // NEXT PLAYER LOGIC
     let nextPlayerId = currentPlayerId;
     if (players.length > 0) {
       const currentIndex = players.findIndex((p) => p.id === currentPlayerId);

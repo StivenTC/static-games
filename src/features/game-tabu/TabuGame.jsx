@@ -2,9 +2,9 @@ import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import MainLayout from '@/shared/layouts/MainLayout/MainLayout';
 import TabuPlay from './screens/TabuPlay/TabuPlay';
+import TabuReady from './screens/TabuReady/TabuReady';
 import TabuScore from './screens/TabuScore/TabuScore';
 import TabuSetup from './screens/TabuSetup/TabuSetup';
-import TabuReady from './screens/TabuReady/TabuReady';
 import { useTabuStore } from './stores/useTabuStore';
 
 import styles from './TabuGame.module.scss';
@@ -21,7 +21,6 @@ const TabuGame = () => {
   return (
     <MainLayout>
       <div className={styles.container}>
-        {/* Semantic Header */}
         <header className={styles.header}>
           <button
             type="button"
@@ -36,7 +35,6 @@ const TabuGame = () => {
           <div className={styles.spacer} aria-hidden="true" />
         </header>
 
-        {/* Main Game Content */}
         <main className={styles.main}>
           {gameState === 'setup' && <TabuSetup />}
           {gameState === 'turnReady' && <TabuReady />}

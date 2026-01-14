@@ -11,7 +11,6 @@ export default function Input({
   className,
   error = false,
   focusColor,
-  // helperText, etc can be added later
 }) {
   const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
 

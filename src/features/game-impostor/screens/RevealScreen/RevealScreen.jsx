@@ -1,8 +1,8 @@
-import { AnimatePresence, motion } from 'framer-motion'; // eslint-disable-line no-unused-vars
+import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-import Button from '@/shared/ui/Button/Button';
 import { useGameFeedback } from '@/shared/hooks/useGameFeedback';
+import Button from '@/shared/ui/Button/Button';
 import { useImpostorStore } from '../../stores/useImpostorStore';
 import styles from './RevealScreen.module.scss';
 
@@ -15,13 +15,10 @@ export default function RevealScreen({ themeColor }) {
 
   const currentPlayer = players[currentPlayerIndex];
 
-  // Logic to determine what to show
   const isImpostor = currentPlayer.role === 'IMPOSTOR';
 
   const handlePointerDown = () => {
-    // Prevent default to avoid scrolling/context menu issues
-    //e.preventDefault();
-    triggerFeedback('success'); // Sound on reveal
+    triggerFeedback('success');
     setIsRevealing(true);
     setReadyToPass(true);
   };
@@ -30,7 +27,6 @@ export default function RevealScreen({ themeColor }) {
     if (isRevealing) {
       const handleEnd = () => setIsRevealing(false);
 
-      // Listen globally to catch release anywhere
       window.addEventListener('pointerup', handleEnd);
       window.addEventListener('pointercancel', handleEnd);
       window.addEventListener('touchend', handleEnd);
@@ -43,14 +39,12 @@ export default function RevealScreen({ themeColor }) {
     }
   }, [isRevealing]);
 
-  // Removed handlePointerUp as it is handled by effect
-
   return (
     <div className={styles.container}>
       <div className={styles.instruction}>
         Turno de:
         <strong
-          class={styles.playerName}
+          className={styles.playerName}
           style={{ '--player-color': currentPlayer.color }}>
           {currentPlayer.name}
         </strong>
@@ -66,8 +60,7 @@ export default function RevealScreen({ themeColor }) {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
               transition={{ duration: 0.2 }}
-              style={{ pointerEvents: 'auto' }} // Re-enable pointer events for specific content if needed, strictly to block pass-through
-            >
+              style={{ pointerEvents: 'auto' }}>
               {isImpostor ? (
                 <>
                   <h3 className={styles.impostor}>IMPOSTOR</h3>
@@ -85,7 +78,7 @@ export default function RevealScreen({ themeColor }) {
               type="button"
               className={styles.holdButton}
               onPointerDown={handlePointerDown}
-              onContextMenu={(e) => e.preventDefault()} // Prevent right click
+              onContextMenu={(e) => e.preventDefault()}
               style={{
                 '--player-color': currentPlayer.color,
               }}
