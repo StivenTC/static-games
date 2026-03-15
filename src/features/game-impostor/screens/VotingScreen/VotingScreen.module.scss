@@ -3,7 +3,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   gap: 1.5rem;
 }
 
@@ -11,12 +12,15 @@
   text-align: center;
   font-size: 1.25rem;
   color: rgba($white, 0.8);
+  width: 100%;
 
   strong {
     display: block;
-    font-size: 2rem;
-    color: var(--player-color, $neon-purple); // Use var or fallback
+    font-size: clamp(1.2rem, 5vw, 2rem);
+    color: var(--player-color, $neon-purple);
     margin-top: 0.5rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 }
 
@@ -32,12 +36,13 @@
   width: 200px !important;
   height: 200px !important;
   border-radius: 50% !important;
-  font-size: 1.5rem !important;
-  padding: 0 !important;
+  font-size: clamp(1rem, 4vw, 1.5rem) !important;
+  padding: 1rem !important;
   border-color: var(--player-color) !important;
   color: var(--player-color) !important;
-  box-shadow: 0 0 20px rgba(var(--player-color), 0.5); // Fallback might fail for hex in rgba, but standard css shadow is fine
-  // simplified shadow:
+  word-break: break-word;
+  overflow-wrap: break-word;
+  overflow: hidden;
   box-shadow: 0 0 20px var(--player-color) !important;
 }
 

@@ -22,32 +22,36 @@ export default function ImpostorGame() {
 
   return (
     <MainLayout>
-      {/* Top Bar */}
-      <div className={styles.header}>
-        <button
-          type="button"
-          onClick={handleBack}
-          className={styles.backButton}>
-          <ArrowLeft />
-        </button>
-        <span className={styles.title}>
-          IMPOSTOR {phase !== 'SETUP' && `• ${players.length} Jugadores`}
-        </span>
-        <div className={styles.spacer}></div>
-      </div>
+      <div className={styles.container}>
+        {/* Top Bar */}
+        <div className={styles.header}>
+          <button
+            type="button"
+            onClick={handleBack}
+            className={styles.backButton}>
+            <ArrowLeft />
+          </button>
+          <span className={styles.title}>
+            IMPOSTOR {phase !== 'SETUP' && `• ${players.length} Jugadores`}
+          </span>
+          <div className={styles.spacer}></div>
+        </div>
 
-      {phase === 'SETUP' && (
-        <GameSetup
-          title="Impostor"
-          onStart={startGame}
-          minPlayers={3}
-          themeColor={theme.neonRed}
-        />
-      )}
-      {phase === 'REVEAL' && <RevealScreen themeColor={theme.neonRed} />}
-      {phase === 'DEBATE' && <DebateScreen themeColor={theme.neonRed} />}
-      {phase === 'VOTING' && <VotingScreen themeColor={theme.neonRed} />}
-      {phase === 'RESULT' && <ResultScreen themeColor={theme.neonRed} />}
+        <main className={styles.mainContent}>
+          {phase === 'SETUP' && (
+            <GameSetup
+              title="Impostor"
+              onStart={startGame}
+              minPlayers={3}
+              themeColor={theme.neonRed}
+            />
+          )}
+          {phase === 'REVEAL' && <RevealScreen themeColor={theme.neonRed} />}
+          {phase === 'DEBATE' && <DebateScreen themeColor={theme.neonRed} />}
+          {phase === 'VOTING' && <VotingScreen themeColor={theme.neonRed} />}
+          {phase === 'RESULT' && <ResultScreen themeColor={theme.neonRed} />}
+        </main>
+      </div>
     </MainLayout>
   );
 }
