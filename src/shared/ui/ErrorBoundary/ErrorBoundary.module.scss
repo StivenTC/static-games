@@ -1,0 +1,52 @@
+@use '@/styles/variables' as *;
+
+.container {
+  position: fixed;
+  inset: 0;
+  background: $bg-dark;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  text-align: center;
+  max-width: 300px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 900;
+  color: $neon-red;
+  text-shadow: 0 0 15px $neon-red;
+  letter-spacing: 4px;
+  margin: 0;
+}
+
+.message {
+  color: rgba($white, 0.7);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.btn {
+  margin-top: 0.5rem;
+  background: none;
+  border: 1px solid $neon-red;
+  color: $neon-red;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background: rgba($neon-red, 0.1);
+  }
+}
