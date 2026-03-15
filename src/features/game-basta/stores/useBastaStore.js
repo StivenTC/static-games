@@ -6,6 +6,12 @@ export const ALPHABET = 'ABCDEFGHIJKLMNOPRSTW'.split('');
 
 const CATEGORIES = BASTA_CATEGORIES;
 
+const pickCategory = (seenCategories) => {
+  const pool = CATEGORIES.filter((c) => !seenCategories.includes(c));
+  const source = pool.length > 0 ? pool : CATEGORIES;
+  return source[Math.floor(Math.random() * source.length)];
+};
+
 export const useBastaStore = create((set, get) => ({
   turnDuration: 20,
   categories: CATEGORIES,
@@ -16,6 +22,7 @@ export const useBastaStore = create((set, get) => ({
   currentPlayerId: null,
   gamePlayers: [],
   winnerTeam: null,
+  seenCategories: [],
 
   setTurnDuration: (seconds) => set({ turnDuration: seconds }),
 
@@ -33,28 +40,33 @@ export const useBastaStore = create((set, get) => ({
     }
 
     const startId = shuffledPlayers[0].id;
-    const randomCategory =
-      CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
+    const { seenCategories, turnDuration } = get();
+    const randomCategory = pickCategory(seenCategories);
 
-    set((state) => ({
+    set({
       gameStatus: 'playing',
       currentCategory: randomCategory,
+      seenCategories: [...seenCategories, randomCategory],
       availableLetters: [...ALPHABET],
       usedLetters: [],
       gamePlayers: shuffledPlayers,
       currentPlayerId: startId,
-      timer: state.turnDuration,
+      timer: turnDuration,
       winnerTeam: null,
-    }));
+    });
   },
 
   rerollCategory: () => {
-    const { currentCategory } = get();
-    let newCategory = currentCategory;
-    while (newCategory === currentCategory) {
-      newCategory = CATEGORIES[Math.floor(Math.random() * CATEGORIES.length)];
-    }
-    set({ currentCategory: newCategory });
+    const { currentCategory, seenCategories, turnDuration } = get();
+    const newSeen = [...seenCategories, currentCategory];
+    const newCategory = pickCategory(newSeen);
+    set({
+      currentCategory: newCategory,
+      seenCategories: [...newSeen, newCategory],
+      availableLetters: [...ALPHABET],
+      usedLetters: [],
+      timer: turnDuration,
+    });
   },
 
   selectLetter: (letter) => {

@@ -1,5 +1,6 @@
 import { ArrowLeft } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useBlocker, useNavigate } from 'react-router-dom';
+import Button from '@/shared/ui/Button/Button';
 import MainLayout from '@/shared/layouts/MainLayout/MainLayout';
 import GameSetup from '@/shared/ui/GameSetup/GameSetup';
 import theme from '@/styles/theme.module.scss';
@@ -14,11 +15,9 @@ export default function ImpostorGame() {
   const navigate = useNavigate();
   const { phase, resetGame, players, startGame } = useImpostorStore();
 
-  const handleBack = () => {
-    // If game is in progress, maybe warn? For now just go back.
-    resetGame();
-    navigate('/');
-  };
+  const blocker = useBlocker(phase !== 'SETUP');
+
+  const handleBack = () => navigate('/');
 
   return (
     <MainLayout>
@@ -52,6 +51,28 @@ export default function ImpostorGame() {
           {phase === 'RESULT' && <ResultScreen themeColor={theme.neonRed} />}
         </main>
       </div>
+
+      {blocker.state === 'blocked' && (
+        <div className={styles.confirmOverlay}>
+          <div className={styles.confirmDialog}>
+            <p>¿Salir del juego? Se perderá el progreso.</p>
+            <div className={styles.confirmActions}>
+              <Button variant="outline" onClick={() => blocker.reset()}>
+                Seguir jugando
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  resetGame();
+                  blocker.proceed();
+                }}
+                style={{ backgroundColor: theme.neonRed, borderColor: theme.neonRed }}>
+                Salir
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </MainLayout>
   );
 }

@@ -1,5 +1,6 @@
 import { ArrowLeft } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useBlocker, useNavigate } from 'react-router-dom';
+import Button from '@/shared/ui/Button/Button';
 import MainLayout from '@/shared/layouts/MainLayout/MainLayout';
 import GameSetup from '@/shared/ui/GameSetup/GameSetup';
 import theme from '@/styles/theme.module.scss';
@@ -12,10 +13,9 @@ export default function BastaGame() {
   const navigate = useNavigate();
   const { gameStatus, resetGame, startGame, gamePlayers } = useBastaStore();
 
-  const handleBack = () => {
-    resetGame();
-    navigate('/');
-  };
+  const blocker = useBlocker(gameStatus === 'playing');
+
+  const handleBack = () => navigate('/');
 
   return (
     <MainLayout>
@@ -60,6 +60,27 @@ export default function BastaGame() {
           )}
         </main>
       </div>
+
+      {blocker.state === 'blocked' && (
+        <div className={styles.confirmOverlay}>
+          <div className={styles.confirmDialog}>
+            <p>¿Salir del juego? Se perderá el progreso.</p>
+            <div className={styles.confirmActions}>
+              <Button variant="outline" onClick={() => blocker.reset()}>
+                Seguir jugando
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  resetGame();
+                  blocker.proceed();
+                }}>
+                Salir
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </MainLayout>
   );
 }
